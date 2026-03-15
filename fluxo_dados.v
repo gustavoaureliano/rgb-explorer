@@ -11,14 +11,24 @@ module fluxo_dados (
 	input        registra_pontuacao,
 	input        conta_nivel,
 	input        conta_modo,
-	output [2:0] rgb_alvo,
-	output [2:0] rgb_jogada,
+	output [5:0] s_rgb_alvo,
+	output [5:0] s_rgb_jogada,
 	output [2:0] leds_nivel,
 	output [2:0] s_modo
 );
-	wire [1:0] q_led_r, q_led_g, q_led_b;
+	localparam rgb_leds_modulus = 3;
+	localparam rgb_num_bits = $clog2(rgb_leds_modulus);
+	localparam mode_modulus = 4;
+	localparam mode_num_bits = $clog2(mode_modulus);
+	localparam rgb_reg_num_bits = rgb_num_bits*3;
+	localparam rgb_reg_modulus = 2**(rgb_num_bits*3) - 1;
 
-	assign rgb_jogada = {q_led_r, q_led_g, q_led_b};
+	wire [rgb_num_bits-1:0] q_led_r, q_led_g, q_led_b;
+
+	wire [rgb_reg_num_bits-1:0] random;
+	assign random = 6'b0; // temp fix until i create the random module
+
+	assign s_rgb_jogada = {q_led_r, q_led_g, q_led_b};
 
 	full_counter #( .M(4), .N(3) ) counter_modo  (
 		.clock  (clock),
@@ -29,7 +39,7 @@ module fluxo_dados (
 		.fim    (fim_timeout)
 	);
 
-	full_counter #( .M(3), .N(2) ) counter_led_r  (
+	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_r  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
 		.conta  (add_rgb_jogada[2] | sub_rgb_jogada[2]),
@@ -37,7 +47,7 @@ module fluxo_dados (
 		.Q      (q_led_r),
 		.fim    (fim_timeout)
 	);
-	full_counter #( .M(3), .N(2) ) counter_led_g  (
+	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_g  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
 		.conta  (add_rgb_jogada[1] | sub_rgb_jogada[1]),
@@ -45,13 +55,21 @@ module fluxo_dados (
 		.Q      (q_led_g),
 		.fim    (fim_timeout)
 	);
-	full_counter #( .M(3), .N(2) ) counter_led_b  (
+	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_b  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
 		.conta  (add_rgb_jogada[0] | sub_rgb_jogada[0]),
 		.neg    (sub_rgb_jogada[0] && !add_rgb_jogada[0]),
 		.Q      (q_led_b),
 		.fim    (fim_timeout)
+	);
+	
+	register_m # ( .M(rgb_reg_modulus), .N(rgb_reg_num_bits) ) reg_rgb_target (
+		.clock(clock),
+		.clear(1'b0),
+		.enable(registra_rgb_alvo),
+		.D(random),
+		.Q(s_rgb_alvo)
 	);
 
 endmodule
