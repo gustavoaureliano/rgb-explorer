@@ -13,13 +13,13 @@ module rgb_explorer (
 	output [6:0] hex7seg_modo,
 	output       buzzer
 );
-	wire zera_rgb_jogada;
-	wire [2:0] add_rgb_jogada, sub_rgb_jogada;
+	wire zera_rgb_jogada, registra_jogada;
 	wire zera_rgb_alvo, registra_rgb_alvo;
 	wire zera_pontuacao, registra_pontuacao;
 	wire zera_nivel, conta_nivel;
 	wire zera_modo, conta_modo;
-
+	wire jogada_feita;
+	wire mudar_rgb;
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
 	wire [2:0] s_modo;
@@ -29,17 +29,17 @@ module rgb_explorer (
 		.btn_reset(btn_reset),
 		.btn_modo(btn_modo),
 		.btn_jogar(btn_jogar),
-		.jogada(jogada),
+		.jogada(jogada_feita),
 		.s_modo(s_modo),
 		.zera_rgb_jogada(zera_rgb_jogada),
 		.zera_rgb_alvo(zera_rgb_alvo),
 		.zera_pontuacao(zera_pontuacao),
 		.zera_nivel(zera_nivel),
 		.zera_modo(zera_modo),
-		.add_rgb_jogada(add_rgb_jogada),
-		.sub_rgb_jogada(sub_rgb_jogada),
+		.registra_jogada(registra_jogada),
 		.registra_rgb_alvo(registra_rgb_alvo),
 		.registra_pontuacao(registra_pontuacao),
+		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
 		.conta_modo(conta_modo)
 	);
@@ -51,12 +51,14 @@ module rgb_explorer (
 		.zera_pontuacao(zera_pontuacao),
 		.zera_nivel(zera_nivel),
 		.zera_modo(zera_modo),
-		.add_rgb_jogada(add_rgb_jogada),
-		.sub_rgb_jogada(sub_rgb_jogada),
+		.btns_plus_minus_rgb({btns_plus_rgb, btns_minus_rgb}),
+		.registra_jogada(registra_jogada),
 		.registra_rgb_alvo(registra_rgb_alvo),
 		.registra_pontuacao(registra_pontuacao),
+		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
 		.conta_modo(conta_modo),
+		.jogada_feita(jogada_feita),
 		.s_rgb_jogada(s_rgb_jogada),
 		.s_rgb_alvo(s_rgb_alvo)
 	);

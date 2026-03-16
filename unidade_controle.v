@@ -10,10 +10,10 @@ module unidade_controle (
 	output reg       zera_pontuacao,
 	output reg       zera_nivel,
 	output reg       zera_modo,
-	output reg [2:0] add_rgb_jogada,
-	output reg [2:0] sub_rgb_jogada,
+	output reg       registra_jogada,
 	output reg       registra_rgb_alvo,
 	output reg       registra_pontuacao,
+	output reg       mudar_rgb,
 	output reg       conta_nivel,
 	output reg       conta_modo
 );
@@ -23,13 +23,8 @@ parameter sel_modo    = 8'h1;
 parameter reg_modo    = 8'h2;
 parameter espera_btn  = 8'h3;
 parameter reg_rgb_btn = 8'h4;
-parameter add_led_r   = 8'h5;
-parameter add_led_g   = 8'h6;
-parameter add_led_b   = 8'h7;
-parameter sub_led_r   = 8'h8;
-parameter sub_led_g   = 8'h9;
-parameter sub_led_b   = 8'hA;
-parameter rst_pontos  = 8'hB;
+parameter muda_rgb    = 8'h5;
+parameter rst_pontos  = 8'h6;
 
 reg [7:0] Eatual, Eprox;
 
@@ -55,9 +50,10 @@ always @* begin
 							Eprox = sel_modo;
 					end
 		reg_modo :   Eprox = sel_modo;
-		espera_btn:  Eprox = reg_rgb_btn;
-		reg_rgb_btn: Eprox = espera_btn;
-		rst_pontos: Eprox = sel_modo; // temp sol until mode 2 added
+		espera_btn:  Eprox = jogada ? reg_rgb_btn : espera_btn;
+		reg_rgb_btn: Eprox = muda_rgb;
+		muda_rgb:    Eprox = espera_btn;
+		rst_pontos:  Eprox = sel_modo; // temp. sol. until mode 2 added
 		default: Eprox = inicial;
 	endcase
 end
@@ -68,17 +64,7 @@ always @* begin
 	zera_rgb_alvo = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_pontuacao = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_nivel = (Eatual == inicial) ? 1'b1 : 1'b0;
-	case (Eatual)
-		add_led_r: add_rgb_jogada = 3'b100;
-		add_led_g: add_rgb_jogada = 3'b010;
-		add_led_b: add_rgb_jogada = 3'b001;
-		sub_led_r: sub_rgb_jogada = 3'b100;
-		sub_led_g: sub_rgb_jogada = 3'b010;
-		sub_led_b: sub_rgb_jogada = 3'b001;
-		default: begin
-			add_rgb_jogada = 3'b000;
-			sub_rgb_jogada = 3'b000;
-		end
-	endcase
+	registra_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
+	mudar_rgb = (Eatual == muda_rgb) ? 1'b1 : 1'b0;
 end
 endmodule

@@ -5,12 +5,14 @@ module fluxo_dados (
 	input        zera_pontuacao,
 	input        zera_nivel,
 	input        zera_modo,
-	input  [2:0] add_rgb_jogada,
-	input  [2:0] sub_rgb_jogada,
+	input  [5:0] btns_plus_minus_rgb,
+	input        registra_jogada,
 	input        registra_rgb_alvo,
 	input        registra_pontuacao,
+	input        mudar_rgb,
 	input        conta_nivel,
 	input        conta_modo,
+	output       jogada_feita,
 	output [5:0] s_rgb_alvo,
 	output [5:0] s_rgb_jogada,
 	output [2:0] leds_nivel,
@@ -21,7 +23,6 @@ module fluxo_dados (
 	localparam mode_modulus = 4;
 	localparam mode_num_bits = $clog2(mode_modulus);
 	localparam rgb_reg_num_bits = rgb_num_bits*3;
-	localparam rgb_reg_modulus = 2**(rgb_num_bits*3) - 1;
 
 	wire [rgb_num_bits-1:0] q_led_r, q_led_g, q_led_b;
 
@@ -30,19 +31,44 @@ module fluxo_dados (
 
 	assign s_rgb_jogada = {q_led_r, q_led_g, q_led_b};
 
+	wire [5:0] s_jogada;
+	wire [2:0] add_rgb_jogada;
+	wire [2:0] sub_rgb_jogada;
+	assign add_rgb_jogada = s_jogada[5:3];
+	assign sub_rgb_jogada = s_jogada[2:0];
+
+	wire sinal_btn, reset_detector;
+
+	assign sinal = |btns_plus_minus_rgb;
+	assign reset = ~|btns_plus_minus_rgb;
+
+	edge_detector detector (
+		.clock(clock),
+		.reset(reset_detector),
+		.sinal(sinal),
+		.pulso(jogada_feita)
+	);
+
+	register_n # ( .N(6) ) reg_jogada (
+		.clock(clock),
+		.clear(1'b0),
+		.enable(registra_jogada),
+		.D(btns_plus_minus_rgb),
+		.Q(s_jogada)
+	);
+
 	full_counter #( .M(4), .N(3) ) counter_modo  (
 		.clock  (clock),
 		.zera_as(zera_modo),
 		.conta  (conta_modo),
 		.neg    (1'b0),
-		.Q      (s_modo),
-		.fim    (fim_timeout)
+		.Q      (s_modo)
 	);
 
 	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_r  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
-		.conta  (add_rgb_jogada[2] | sub_rgb_jogada[2]),
+		.conta  ((add_rgb_jogada[2] || sub_rgb_jogada[2]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[2] && !add_rgb_jogada[2]),
 		.Q      (q_led_r),
 		.fim    (fim_timeout)
@@ -50,7 +76,7 @@ module fluxo_dados (
 	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_g  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
-		.conta  (add_rgb_jogada[1] | sub_rgb_jogada[1]),
+		.conta  ((add_rgb_jogada[1] || sub_rgb_jogada[1]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[1] && !add_rgb_jogada[1]),
 		.Q      (q_led_g),
 		.fim    (fim_timeout)
@@ -58,13 +84,13 @@ module fluxo_dados (
 	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_b  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
-		.conta  (add_rgb_jogada[0] | sub_rgb_jogada[0]),
+		.conta  ((add_rgb_jogada[0] || sub_rgb_jogada[0]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[0] && !add_rgb_jogada[0]),
 		.Q      (q_led_b),
 		.fim    (fim_timeout)
 	);
 	
-	register_m # ( .M(rgb_reg_modulus), .N(rgb_reg_num_bits) ) reg_rgb_target (
+	register_n # ( .N(rgb_reg_num_bits) ) reg_rgb_target (
 		.clock(clock),
 		.clear(1'b0),
 		.enable(registra_rgb_alvo),

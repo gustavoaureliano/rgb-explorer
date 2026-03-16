@@ -1,5 +1,4 @@
-module register_m # (
-	parameter M = 16,
+module register_n # (
 	parameter N = 4
 ) (
     input          clock,
