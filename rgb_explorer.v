@@ -60,7 +60,21 @@ module rgb_explorer (
 		.conta_modo(conta_modo),
 		.jogada_feita(jogada_feita),
 		.s_rgb_jogada(s_rgb_jogada),
-		.s_rgb_alvo(s_rgb_alvo)
+		.s_rgb_alvo(s_rgb_alvo),
+		.leds_nivel(leds_nivel),
+		.s_modo(s_modo)
+	);
+
+	rgb_cod cod_rgb_jogada (
+		.clk(clock),
+		.jogada(s_rgb_jogada),
+		.display(rgb_jogada)
+	);
+
+	rgb_cod cod_rgb_alvo (
+		.clk(clock),
+		.jogada(s_rgb_alvo),
+		.display(rgb_alvo)
 	);
 
 	hexa7seg display_modo (
