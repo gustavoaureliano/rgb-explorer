@@ -18,7 +18,7 @@ module rgb_explorer (
 	wire zera_pontuacao, registra_pontuacao;
 	wire zera_nivel, conta_nivel;
 	wire zera_modo, conta_modo;
-	wire jogada_feita;
+	wire jogada_feita, pulso_modo;
 	wire mudar_rgb;
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
@@ -27,7 +27,7 @@ module rgb_explorer (
 	unidade_controle uc (
 		.clock(clock),
 		.btn_reset(btn_reset),
-		.btn_modo(btn_modo),
+		.pulso_modo(pulso_modo),
 		.btn_jogar(btn_jogar),
 		.jogada(jogada_feita),
 		.s_modo(s_modo),
@@ -52,12 +52,14 @@ module rgb_explorer (
 		.zera_nivel(zera_nivel),
 		.zera_modo(zera_modo),
 		.btns_plus_minus_rgb({btns_plus_rgb, btns_minus_rgb}),
+		.btn_modo(btn_modo),
 		.registra_jogada(registra_jogada),
 		.registra_rgb_alvo(registra_rgb_alvo),
 		.registra_pontuacao(registra_pontuacao),
 		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
 		.conta_modo(conta_modo),
+		.pulso_modo(pulso_modo),
 		.jogada_feita(jogada_feita),
 		.s_rgb_jogada(s_rgb_jogada),
 		.s_rgb_alvo(s_rgb_alvo),

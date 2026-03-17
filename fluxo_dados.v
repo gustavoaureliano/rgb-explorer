@@ -6,12 +6,14 @@ module fluxo_dados (
 	input        zera_nivel,
 	input        zera_modo,
 	input  [5:0] btns_plus_minus_rgb,
+	input        btn_modo,
 	input        registra_jogada,
 	input        registra_rgb_alvo,
 	input        registra_pontuacao,
 	input        mudar_rgb,
 	input        conta_nivel,
 	input        conta_modo,
+	output       pulso_modo,
 	output       jogada_feita,
 	output [5:0] s_rgb_alvo,
 	output [5:0] s_rgb_jogada,
@@ -37,21 +39,33 @@ module fluxo_dados (
 	assign add_rgb_jogada = s_jogada[5:3];
 	assign sub_rgb_jogada = s_jogada[2:0];
 
-	wire sinal_btn, reset_detector;
+	wire sinal_btn_rgb, rst_detect_rgb;
 
-	assign sinal = |btns_plus_minus_rgb;
-	assign reset = ~|btns_plus_minus_rgb;
+	assign sinal_btn_rgb = |btns_plus_minus_rgb;
+	assign rst_detect_rgb = ~|btns_plus_minus_rgb;
 
-	edge_detector detector (
+	wire sinal_btn_modo, rst_detect_modo;
+
+	assign sinal_btn_modo = |btn_modo;
+	assign rst_detect_modo = ~|btn_modo;
+
+	edge_detector detect_btn_rgb (
 		.clock(clock),
-		.reset(reset_detector),
-		.sinal(sinal),
+		.reset(rst_detect_rgb),
+		.sinal(sinal_btn_rgb),
 		.pulso(jogada_feita)
+	);
+
+	edge_detector detect_btn_modo (
+		.clock(clock),
+		.reset(rst_detect_modo),
+		.sinal(sinal_btn_modo),
+		.pulso(pulso_modo)
 	);
 
 	register_n # ( .N(6) ) reg_jogada (
 		.clock(clock),
-		.clear(1'b0),
+		.clear(zera_rgb_jogada),
 		.enable(registra_jogada),
 		.D(btns_plus_minus_rgb),
 		.Q(s_jogada)
@@ -90,9 +104,9 @@ module fluxo_dados (
 		.fim    (fim_timeout)
 	);
 	
-	register_n # ( .N(rgb_reg_num_bits) ) reg_rgb_target (
+	register_n # ( .N(rgb_reg_num_bits) ) reg_rgb_alvo (
 		.clock(clock),
-		.clear(1'b0),
+		.clear(zera_rgb_alvo),
 		.enable(registra_rgb_alvo),
 		.D(random),
 		.Q(s_rgb_alvo)

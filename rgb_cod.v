@@ -8,7 +8,7 @@ module rgb_pwm (
     output wire led_b
 );
 
-reg [1:0] counter;
+reg [1:0] counter = 0;
 
 always @(posedge clk)
     counter <= counter + 1;
@@ -24,7 +24,6 @@ module rgb_cod (
 	input  [5:0] jogada,
 	output [2:0] display
 );
-	reg [1:0] pwm_r, pwm_g, pwm_b;
 	rgb_pwm led_pwm (
 		.clk(clk),
 		.r(jogada[5:4]),

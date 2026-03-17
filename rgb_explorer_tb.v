@@ -35,68 +35,85 @@ module tb_rgb_explorer;
     );
 
     // Clock 50 MHz (20ns período)
-    initial begin
-        clock = 0;
-        forever #10 clock = ~clock;
-    end
+    parameter clockPeriod = 1_000_000; // in ns, f=1KHz
+    always #((clockPeriod / 2)) clock = ~clock;
 
     // Estímulos
     initial begin
         // Inicialização
-        btn_reset = 1;
+		clock = 1;
+        btn_reset = 0;
         btn_modo = 0;
         btn_jogar = 0;
         btn_confirma = 0;
-        btns_plus_rgb = 0;
-        btns_minus_rgb = 0;
+        btns_plus_rgb = 3'b000;
+        btns_minus_rgb = 3'b000;
 
         #50;
-        btn_reset = 0;
+		@(negedge clock);
+        btn_reset = 1;
+		#(clockPeriod);
+		btn_reset = 0;
+		#(10*clockPeriod);
 
         // --- Selecionar modo ---
-        #50;
+		@(negedge clock);
         btn_modo = 1;
-        #20;
+		#(10*clockPeriod);
         btn_modo = 0;
+		#(10*clockPeriod);
 
-        #100;
+		@(negedge clock);
+        btn_modo = 1;
+		#(10*clockPeriod);
+        btn_modo = 0;
+		#(10*clockPeriod);
+
+		@(negedge clock);
+        btn_modo = 1;
+		#(10*clockPeriod);
+        btn_modo = 0;
+		#(10*clockPeriod);
+
+		@(negedge clock);
+        btn_modo = 1;
+		#(10*clockPeriod);
+        btn_modo = 0;
+		#(10*clockPeriod);
 
         // --- Iniciar jogo ---
+		@(negedge clock);
         btn_jogar = 1;
-        #20;
+		#(10*clockPeriod);
         btn_jogar = 0;
+		#(10*clockPeriod);
 
-        #100;
 
         // --- Simular jogada ---
         // Aumentar R
         btns_plus_rgb = 3'b100;
-        #20;
-        btns_plus_rgb = 0;
-
-        #100;
+		#(10*clockPeriod);
+        btns_plus_rgb = 3'b000;
+		#(10*clockPeriod);
 
         // Aumentar G
         btns_plus_rgb = 3'b010;
-        #20;
-        btns_plus_rgb = 0;
-
-        #100;
+		#(10*clockPeriod);
+        btns_plus_rgb = 3'b000;
+		#(10*clockPeriod);
 
         // Diminuir B
-        btns_minus_rgb = 3'b001;
-        #20;
-        btns_minus_rgb = 0;
+        btns_minus_rgb = 3'b010;
+		#(10*clockPeriod);
+        btns_minus_rgb = 3'b000;
+		#(10*clockPeriod);
 
-        #200;
-
-        // Outra jogada
+        // jogada inválida
         btns_plus_rgb = 3'b111;
-        #20;
-        btns_plus_rgb = 0;
-
-        #300;
-
+		#(10*clockPeriod);
+        btns_plus_rgb = 3'b000;
+		#(10*clockPeriod);
+		$display("Fim da simulacao");
         $stop;
     end
 

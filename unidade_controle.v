@@ -1,7 +1,7 @@
 module unidade_controle (
 	input            clock,
 	input            btn_reset,
-	input            btn_modo,
+	input            pulso_modo,
 	input            btn_jogar,
 	input            jogada,
 	input      [2:0] s_modo,
@@ -39,7 +39,7 @@ always @* begin
 	case (Eatual)
 		inicial:     Eprox = sel_modo;
 		sel_modo:	begin
-						if (btn_modo)
+						if (pulso_modo)
 							Eprox = reg_modo;
 						else if (btn_jogar) begin
 							case (s_modo)
