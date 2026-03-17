@@ -64,6 +64,7 @@ always @* begin
 	zera_rgb_alvo = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_pontuacao = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_nivel = (Eatual == inicial) ? 1'b1 : 1'b0;
+	conta_modo = (Eatual == reg_modo) ? 1'b1 : 1'b0;
 	registra_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
 	mudar_rgb = (Eatual == muda_rgb) ? 1'b1 : 1'b0;
 end
