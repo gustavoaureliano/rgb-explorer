@@ -20,7 +20,7 @@ module fluxo_dados (
 	output [2:0] leds_nivel,
 	output [2:0] s_modo
 );
-	localparam rgb_leds_modulus = 3;
+	localparam rgb_leds_modulus = 4;
 	localparam rgb_num_bits = $clog2(rgb_leds_modulus);
 	localparam mode_modulus = 4;
 	localparam mode_num_bits = $clog2(mode_modulus);
@@ -42,8 +42,8 @@ module fluxo_dados (
 
 	wire sinal_btn_rgb, rst_detect_rgb;
 
-	assign sinal_btn_rgb = |btns_plus_minus_rgb;
-	assign rst_detect_rgb = ~|btns_plus_minus_rgb;
+	assign sinal_btn_rgb = ~&btns_plus_minus_rgb;
+	assign rst_detect_rgb = &btns_plus_minus_rgb;
 
 	wire sinal_btn_modo, rst_detect_modo;
 
@@ -68,7 +68,7 @@ module fluxo_dados (
 		.clock(clock),
 		.clear(zera_rgb_jogada),
 		.enable(registra_jogada),
-		.D(btns_plus_minus_rgb),
+		.D(~btns_plus_minus_rgb),
 		.Q(s_jogada)
 	);
 

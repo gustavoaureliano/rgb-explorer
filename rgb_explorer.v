@@ -16,6 +16,9 @@ module rgb_explorer (
 	output [6:0] db_jogada_b,
 	output [6:0] db_estado_lsb,
 	output [6:0] db_estado_msb,
+	output [2:0] db_btns_plus_rgb,
+	output [2:0] db_btns_minus_rgb,
+	output       db_btn_modo,
 	output       db_clock,
 	output       buzzer
 );
@@ -32,6 +35,10 @@ module rgb_explorer (
 	wire [7:0] s_estado;
 
 	assign db_clock = clock;
+
+	assign db_btns_plus_rgb = btns_plus_rgb;
+	assign db_btns_minus_rgb = btns_minus_rgb;
+	assign db_btn_modo = btn_modo;
 
 	unidade_controle uc (
 		.clock(clock),

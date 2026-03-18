@@ -17,11 +17,19 @@ module full_counter #(parameter M=100, N=7)
       if (zera_s) begin
         Q <= 0;
       end else if (conta) begin
-        if (Q == M-1) begin
-          Q <= 0;
-        end else begin
-          Q <= Q + (neg ? -1'b1 : 1'b1);
-        end
+		if (neg) begin
+			if (Q == 0) begin
+				Q <= 3;
+			end else begin
+				Q <= Q - 1'b1;
+			end
+		end else begin
+			if (Q == M-1) begin
+				Q <= 0;
+			end else begin
+				Q <= Q +  1'b1;
+			end
+		end
       end
     end
   end
