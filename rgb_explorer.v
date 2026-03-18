@@ -11,6 +11,12 @@ module rgb_explorer (
 	output [2:0] leds_nivel,
 	output [6:0] hex7seg_pontuacao,
 	output [6:0] hex7seg_modo,
+	output [6:0] db_jogada_r,
+	output [6:0] db_jogada_g,
+	output [6:0] db_jogada_b,
+	output [6:0] db_estado_lsb,
+	output [6:0] db_estado_msb,
+	output       db_clock,
 	output       buzzer
 );
 	wire zera_rgb_jogada, registra_jogada;
@@ -23,6 +29,9 @@ module rgb_explorer (
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
 	wire [2:0] s_modo;
+	wire [7:0] s_estado;
+
+	assign db_clock = clock;
 
 	unidade_controle uc (
 		.clock(clock),
@@ -41,7 +50,8 @@ module rgb_explorer (
 		.registra_pontuacao(registra_pontuacao),
 		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
-		.conta_modo(conta_modo)
+		.conta_modo(conta_modo),
+		.db_estado(s_estado)
 	);
 
 	fluxo_dados fd (
@@ -79,8 +89,33 @@ module rgb_explorer (
 		.display(rgb_alvo)
 	);
 
+	hexa7seg display_jogada_r (
+		.hexa({2'b0, s_rgb_jogada[5:4]}),
+		.display(db_jogada_r)
+	);
+
+	hexa7seg display_jogada_g (
+		.hexa({2'b0, s_rgb_jogada[3:2]}),
+		.display(db_jogada_g)
+	);
+
+	hexa7seg display_jogada_b (
+		.hexa({2'b0, s_rgb_jogada[1:0]}),
+		.display(db_jogada_b)
+	);
+
 	hexa7seg display_modo (
 		.hexa({1'b0, s_modo}),
 		.display(hex7seg_modo)
+	);
+
+	hexa7seg display_estado_msb (
+		.hexa(s_estado[7:4]),
+		.display(db_estado_msb)
+	);
+
+	hexa7seg display_estado_lsb (
+		.hexa(s_estado[3:0]),
+		.display(db_estado_lsb)
 	);
 endmodule

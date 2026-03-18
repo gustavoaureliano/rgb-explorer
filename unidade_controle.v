@@ -15,7 +15,8 @@ module unidade_controle (
 	output reg       registra_pontuacao,
 	output reg       mudar_rgb,
 	output reg       conta_nivel,
-	output reg       conta_modo
+	output reg       conta_modo,
+	output reg [7:0] db_estado
 );
 
 parameter inicial     = 8'h0;
@@ -67,5 +68,15 @@ always @* begin
 	conta_modo = (Eatual == reg_modo) ? 1'b1 : 1'b0;
 	registra_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
 	mudar_rgb = (Eatual == muda_rgb) ? 1'b1 : 1'b0;
+
+	case (Eatual)
+		inicial:     db_estado = 8'h0;
+		sel_modo:    db_estado = 8'h1;
+		reg_modo:    db_estado = 8'h2;
+		espera_btn:  db_estado = 8'h3;
+		reg_rgb_btn: db_estado = 8'h4;
+		muda_rgb:    db_estado = 8'h5;
+		rst_pontos:  db_estado = 8'h6;
+	endcase
 end
 endmodule

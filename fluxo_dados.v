@@ -27,6 +27,7 @@ module fluxo_dados (
 	localparam rgb_reg_num_bits = rgb_num_bits*3;
 
 	wire [rgb_num_bits-1:0] q_led_r, q_led_g, q_led_b;
+	wire fim_led_r, fim_led_g, fim_led_b;
 
 	wire [rgb_reg_num_bits-1:0] random;
 	assign random = 6'b0; // temp fix until i create the random module
@@ -85,7 +86,7 @@ module fluxo_dados (
 		.conta  ((add_rgb_jogada[2] || sub_rgb_jogada[2]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[2] && !add_rgb_jogada[2]),
 		.Q      (q_led_r),
-		.fim    (fim_timeout)
+		.fim    (fim_led_r)
 	);
 	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_g  (
 		.clock  (clock),
@@ -93,7 +94,7 @@ module fluxo_dados (
 		.conta  ((add_rgb_jogada[1] || sub_rgb_jogada[1]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[1] && !add_rgb_jogada[1]),
 		.Q      (q_led_g),
-		.fim    (fim_timeout)
+		.fim    (fim_led_g)
 	);
 	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_b  (
 		.clock  (clock),
@@ -101,7 +102,7 @@ module fluxo_dados (
 		.conta  ((add_rgb_jogada[0] || sub_rgb_jogada[0]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[0] && !add_rgb_jogada[0]),
 		.Q      (q_led_b),
-		.fim    (fim_timeout)
+		.fim    (fim_led_b)
 	);
 	
 	register_n # ( .N(rgb_reg_num_bits) ) reg_rgb_alvo (
