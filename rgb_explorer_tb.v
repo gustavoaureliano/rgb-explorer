@@ -17,6 +17,51 @@ module tb_rgb_explorer;
     wire [6:0] hex7seg_modo;
     wire buzzer;
 
+    // Clock 50 MHz (20ns período)
+    parameter clockPeriod = 1_000_000; // in ns, f=1KHz
+    always #((clockPeriod / 2)) clock = ~clock;
+
+	task reset;
+		begin
+			@(negedge clock);
+			btn_reset = 1;
+			#(clockPeriod);
+			btn_reset = 0;
+			#(10*clockPeriod);
+		end
+	endtask
+
+	task select_mode;
+		begin
+			@(negedge clock);
+			btn_modo = 1;
+			#(10*clockPeriod);
+			btn_modo = 0;
+			#(10*clockPeriod);
+		end
+	endtask
+
+	task start;
+		begin
+			@(negedge clock);
+			btn_jogar = 1;
+			#(10*clockPeriod);
+			btn_jogar = 0;
+			#(10*clockPeriod);
+		end
+	endtask
+
+	task jogada(input reg [5:0] btns_plus_minus_rgb);
+		begin
+			btns_plus_rgb = ~btns_plus_minus_rgb[5:3];
+			btns_minus_rgb = ~btns_plus_minus_rgb[2:0];
+			#(10*clockPeriod);
+			btns_plus_rgb = 3'b111;
+			btns_minus_rgb = 3'b111;
+			#(10*clockPeriod);
+		end
+	endtask
+
     // Instância do DUT (Device Under Test)
     rgb_explorer dut (
         .clock(clock),
@@ -34,10 +79,6 @@ module tb_rgb_explorer;
         .buzzer(buzzer)
     );
 
-    // Clock 50 MHz (20ns período)
-    parameter clockPeriod = 1_000_000; // in ns, f=1KHz
-    always #((clockPeriod / 2)) clock = ~clock;
-
     // Estímulos
     initial begin
         // Inicialização
@@ -46,73 +87,32 @@ module tb_rgb_explorer;
         btn_modo = 0;
         btn_jogar = 0;
         btn_confirma = 0;
-        btns_plus_rgb = 3'b000;
-        btns_minus_rgb = 3'b000;
+        btns_plus_rgb = 3'b111;
+        btns_minus_rgb = 3'b111;
 
-        #50;
-		@(negedge clock);
-        btn_reset = 1;
-		#(clockPeriod);
-		btn_reset = 0;
-		#(10*clockPeriod);
+		reset();
 
         // --- Selecionar modo ---
-		@(negedge clock);
-        btn_modo = 1;
-		#(10*clockPeriod);
-        btn_modo = 0;
-		#(10*clockPeriod);
-
-		@(negedge clock);
-        btn_modo = 1;
-		#(10*clockPeriod);
-        btn_modo = 0;
-		#(10*clockPeriod);
-
-		@(negedge clock);
-        btn_modo = 1;
-		#(10*clockPeriod);
-        btn_modo = 0;
-		#(10*clockPeriod);
-
-		@(negedge clock);
-        btn_modo = 1;
-		#(10*clockPeriod);
-        btn_modo = 0;
-		#(10*clockPeriod);
+		select_mode();
+		select_mode();
+		select_mode();
+		select_mode();
 
         // --- Iniciar jogo ---
-		@(negedge clock);
-        btn_jogar = 1;
-		#(10*clockPeriod);
-        btn_jogar = 0;
-		#(10*clockPeriod);
-
+		start();
 
         // --- Simular jogada ---
         // Aumentar R
-        btns_plus_rgb = 3'b100;
-		#(10*clockPeriod);
-        btns_plus_rgb = 3'b000;
-		#(10*clockPeriod);
+		jogada(6'b100_000);
 
         // Aumentar G
-        btns_plus_rgb = 3'b010;
-		#(10*clockPeriod);
-        btns_plus_rgb = 3'b000;
-		#(10*clockPeriod);
+		jogada(6'b010_000);
 
         // Diminuir B
-        btns_minus_rgb = 3'b010;
-		#(10*clockPeriod);
-        btns_minus_rgb = 3'b000;
-		#(10*clockPeriod);
+		jogada(6'b000_001);
 
         // jogada inválida
-        btns_plus_rgb = 3'b111;
-		#(10*clockPeriod);
-        btns_plus_rgb = 3'b000;
-		#(10*clockPeriod);
+		jogada(6'b111_000);
 		$display("Fim da simulacao");
         $stop;
     end

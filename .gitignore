@@ -6,7 +6,6 @@ simulation/
 work/
 transcript
 c5_pin_model_dump.txt
-simul-rgb-explorer.mpf
 simul-rgb-explorer.cr.mti
 rgb_explorer.qws
 rgb_explorer_nativelink_simulation.rpt
