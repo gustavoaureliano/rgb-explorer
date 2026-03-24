@@ -161,7 +161,7 @@ module fluxo_dados (
 		.clock(clock),
 		.clear(zera_pontuacao),
 		.enable(registra_pontuacao),
-		.D(pontuacao),
+		.D(s_pontuacao + pontuacao),
 		.Q(s_pontuacao)
 	);
 

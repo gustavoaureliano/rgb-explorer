@@ -79,9 +79,9 @@ always @* begin
 				else
 					Eprox = fim_longe;
 			end
-		fim_exato: Eprox = sel_modo;
-		fim_perto: Eprox = sel_modo;
-		fim_longe: Eprox = sel_modo;
+		fim_exato: Eprox = reg_cor_alvo;
+		fim_perto: Eprox = reg_cor_alvo;
+		fim_longe: Eprox = reg_cor_alvo;
 		default: Eprox = inicial;
 	endcase
 end
