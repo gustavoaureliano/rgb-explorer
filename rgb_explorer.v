@@ -27,12 +27,14 @@ module rgb_explorer (
 	wire zera_pontuacao, registra_pontuacao;
 	wire zera_nivel, conta_nivel;
 	wire zera_modo, conta_modo;
-	wire jogada_feita, pulso_modo;
+	wire jogada_feita, pulso_modo, confirmar;
 	wire mudar_rgb;
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
+	wire [3:0] s_pontuacao;
 	wire [2:0] s_modo;
 	wire [7:0] s_estado;
+	wire [3:0] erro;
 
 	assign db_clock = clock;
 
@@ -46,12 +48,15 @@ module rgb_explorer (
 		.pulso_modo(pulso_modo),
 		.btn_jogar(btn_jogar),
 		.jogada(jogada_feita),
+		.confirmar(confirmar),
 		.s_modo(s_modo),
+		.erro(erro),
 		.zera_rgb_jogada(zera_rgb_jogada),
 		.zera_rgb_alvo(zera_rgb_alvo),
 		.zera_pontuacao(zera_pontuacao),
 		.zera_nivel(zera_nivel),
 		.zera_modo(zera_modo),
+		.zera_rnd(zera_rnd),
 		.registra_jogada(registra_jogada),
 		.registra_rgb_alvo(registra_rgb_alvo),
 		.registra_pontuacao(registra_pontuacao),
@@ -68,8 +73,10 @@ module rgb_explorer (
 		.zera_pontuacao(zera_pontuacao),
 		.zera_nivel(zera_nivel),
 		.zera_modo(zera_modo),
+		.zera_rnd(zera_rnd),
 		.btns_plus_minus_rgb({btns_plus_rgb, btns_minus_rgb}),
 		.btn_modo(btn_modo),
+		.btn_confirma(btn_confirma),
 		.registra_jogada(registra_jogada),
 		.registra_rgb_alvo(registra_rgb_alvo),
 		.registra_pontuacao(registra_pontuacao),
@@ -78,10 +85,13 @@ module rgb_explorer (
 		.conta_modo(conta_modo),
 		.pulso_modo(pulso_modo),
 		.jogada_feita(jogada_feita),
+		.confirmar(confirmar),
 		.s_rgb_jogada(s_rgb_jogada),
 		.s_rgb_alvo(s_rgb_alvo),
+		.s_pontuacao(s_pontuacao),
 		.leds_nivel(leds_nivel),
-		.s_modo(s_modo)
+		.s_modo(s_modo),
+		.erro(erro)
 	);
 
 	rgb_cod cod_rgb_jogada (
@@ -114,6 +124,11 @@ module rgb_explorer (
 	hexa7seg display_modo (
 		.hexa({1'b0, s_modo}),
 		.display(hex7seg_modo)
+	);
+
+	hexa7seg display_pontuacao (
+		.hexa(s_pontuacao),
+		.display(hex7seg_pontuacao)
 	);
 
 	hexa7seg display_estado_msb (
