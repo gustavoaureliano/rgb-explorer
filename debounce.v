@@ -1,4 +1,4 @@
-module debounce (
+module debounce #(parameter interval = 16'hFFFF;) (
     input pb1,
     input clk,
     output reg pb1_debounced
@@ -17,7 +17,7 @@ module debounce (
         if (pb1_sync_1 == 0) begin
             counter <= 0; // Resetar contador se o botão estiver pressionado
             pb1_debounced <= 0; // Botão pressionado
-        end else if (counter < 16'hFFFF) begin
+        end else if (counter < interval) begin
             counter <= counter + 1; // Incrementar contador se o botão não estiver pressionado
         end else begin
             pb1_debounced <= 1; // Botão liberado após debounce

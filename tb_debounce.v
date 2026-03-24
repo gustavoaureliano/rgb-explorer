@@ -16,7 +16,7 @@ module debounce_tb;
         .pb1_debounced(pb1_debounced)
     );
 
-    // Geração de clock (100 MHz → período = 10ns)
+    // Geração de clock (50 MHz → período = 20ns)
     initial begin
         clk = 0;
         forever #10 clk = ~clk;
