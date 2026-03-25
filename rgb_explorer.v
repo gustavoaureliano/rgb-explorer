@@ -9,6 +9,7 @@ module rgb_explorer (
 	output [2:0] rgb_alvo,
 	output [2:0] rgb_jogada,
 	output [2:0] leds_nivel,
+	output [2:0] leds_erro,
 	output [6:0] hex7seg_pontuacao,
 	output [6:0] hex7seg_modo,
 	output [6:0] db_jogada_r,
@@ -29,6 +30,7 @@ module rgb_explorer (
 	wire zera_modo, conta_modo;
 	wire jogada_feita, pulso_modo, confirmar;
 	wire mudar_rgb;
+	wire enable_cod_erro;
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
 	wire [3:0] s_pontuacao;
@@ -63,6 +65,7 @@ module rgb_explorer (
 		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
 		.conta_modo(conta_modo),
+		.enable_cod_erro(enable_cod_erro),
 		.db_estado(s_estado)
 	);
 
@@ -83,6 +86,7 @@ module rgb_explorer (
 		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
 		.conta_modo(conta_modo),
+		.enable_cod_erro(enable_cod_erro),
 		.pulso_modo(pulso_modo),
 		.jogada_feita(jogada_feita),
 		.confirmar(confirmar),
@@ -90,6 +94,7 @@ module rgb_explorer (
 		.s_rgb_alvo(s_rgb_alvo),
 		.s_pontuacao(s_pontuacao),
 		.leds_nivel(leds_nivel),
+		.leds_erro(leds_erro),
 		.s_modo(s_modo),
 		.erro(erro)
 	);

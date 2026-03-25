@@ -15,6 +15,7 @@ module fluxo_dados (
 	input        mudar_rgb,
 	input        conta_nivel,
 	input        conta_modo,
+	input        enable_cod_erro,
 	output       pulso_modo,
 	output       jogada_feita,
 	output       confirmar,
@@ -22,6 +23,7 @@ module fluxo_dados (
 	output [5:0] s_rgb_jogada,
 	output [3:0] s_pontuacao,
 	output [2:0] leds_nivel,
+	output [2:0] leds_erro,
 	output [2:0] s_modo,
 	output [3:0] erro
 );
@@ -92,6 +94,12 @@ module fluxo_dados (
 		.reset(zera_nivel),
 		.error(erro),
 		.level(leds_nivel)
+	);
+
+	cod_erro coderro (
+		.erro(erro),
+		.enable(1'b1),
+		.leds_erro(leds_erro)
 	);
 
 	edge_detector detect_btn_rgb (
