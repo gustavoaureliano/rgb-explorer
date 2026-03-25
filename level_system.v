@@ -2,7 +2,7 @@ module level_system (
     input clk,
     input reset,
     input [3:0]error,      // entrada de erro do sistema
-    output reg [1:0] level
+    output reg [2:0] level
 );
 
 reg [7:0] score;  // contador de acertos
