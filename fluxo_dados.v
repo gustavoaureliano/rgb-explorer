@@ -92,7 +92,7 @@ module fluxo_dados (
 	level_system level_sys (
 		.clk(clock),
 		.reset(zera_nivel),
-		.error(erro),
+		.jogada(sinal_confirmar),  // usando o sinal de confirmação como "jogada feita"
 		.level(leds_nivel)
 	);
 
