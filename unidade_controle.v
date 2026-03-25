@@ -16,11 +16,10 @@ module unidade_controle (
 	output reg       registra_jogada,
 	output reg       registra_rgb_alvo,
 	output reg       registra_pontuacao,
-	output reg       display_erro,
 	output reg       mudar_rgb,
 	output reg       conta_nivel,
 	output reg       conta_modo,
-	output reg       enable_cod_erro,
+	output reg       foi_jogada,
 	output reg [7:0] db_estado
 );
 
@@ -81,9 +80,9 @@ always @* begin
 				else
 					Eprox = fim_longe;
 			end
-		fim_exato: Eprox = btn_jogar ? reg_cor_alvo : fim_exato;
-		fim_perto: Eprox = btn_jogar ? reg_cor_alvo : fim_perto;
-		fim_longe: Eprox = btn_jogar ? reg_cor_alvo : fim_longe;
+		fim_exato: Eprox = reg_cor_alvo;
+		fim_perto: Eprox = reg_cor_alvo;
+		fim_longe: Eprox = reg_cor_alvo;
 		default: Eprox = inicial;
 	endcase
 end
@@ -100,7 +99,7 @@ always @* begin
 	mudar_rgb = (Eatual == muda_rgb) ? 1'b1 : 1'b0;
 	registra_rgb_alvo = (Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
 	registra_pontuacao = (Eatual == compara_cor) ? 1'b1 : 1'b0;
-	enable_cod_erro = (Eatual == fim_exato || Eatual == fim_perto || Eatual == fim_longe) ? 1'b1 : 1'b0;
+	foi_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
 
 	case (Eatual)
 		inicial:      db_estado = 8'h0;

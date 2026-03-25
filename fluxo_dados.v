@@ -16,6 +16,7 @@ module fluxo_dados (
 	input        conta_nivel,
 	input        conta_modo,
 	input        enable_cod_erro,
+	input		 foi_jogada,
 	output       pulso_modo,
 	output       jogada_feita,
 	output       confirmar,
@@ -92,7 +93,7 @@ module fluxo_dados (
 	level_system level_sys (
 		.clk(clock),
 		.reset(zera_nivel),
-		.jogada(sinal_confirmar),  // usando o sinal de confirmação como "jogada feita"
+		.jogada(foi_jogada),  // usando o sinal de confirmação como "jogada feita"
 		.level(leds_nivel)
 	);
 
