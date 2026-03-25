@@ -59,7 +59,7 @@ module fluxo_dados (
 	assign rst_detect_modo = ~|btn_modo;
 
 	wire sinal_confirmar, rst_detect_confirmar;
-	wire nivel;
+	wire [1:0]nivel;
 
 	assign sinal_confirmar = |btn_confirma;
 	assign rst_detect_confirmar = ~|btn_confirma;

@@ -20,6 +20,7 @@ module unidade_controle (
 	output reg       conta_nivel,
 	output reg       conta_modo,
 	output reg       foi_jogada,
+	output reg       enable_cod_erro,
 	output reg [7:0] db_estado
 );
 
