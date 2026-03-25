@@ -87,6 +87,13 @@ module fluxo_dados (
 		.error(erro)
 	);
 
+	level_system level_sys (
+		.clk(clock),
+		.reset(zera_nivel),
+		.error(erro),
+		.level(leds_nivel)
+	);
+
 	edge_detector detect_btn_rgb (
 		.clock(clock),
 		.reset(rst_detect_rgb),
