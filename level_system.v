@@ -1,7 +1,7 @@
 module level_system (
     input clk,
     input reset,
-    input [3:0]error,      // entrada de erro do sistema
+    input jogada,      // entrada de erro do sistema
     output reg [1:0] level
 );
 
@@ -18,7 +18,7 @@ always @(posedge clk or posedge reset) begin
         else if (error >= 3 && error < 9)  // considerando erro >= 3 como erro
             score <= score;  // mantém o score (ou poderia decrementar)
         else score <= score;  // para outros casos, mantém o score
-        
+
         // lógica de mudança de nível
         if (score < 5)
             level <= 1;
