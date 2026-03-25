@@ -59,6 +59,7 @@ module fluxo_dados (
 	assign rst_detect_modo = ~|btn_modo;
 
 	wire sinal_confirmar, rst_detect_confirmar;
+	wire nivel;
 
 	assign sinal_confirmar = |btn_confirma;
 	assign rst_detect_confirmar = ~|btn_confirma;
@@ -94,13 +95,18 @@ module fluxo_dados (
 		.clk(clock),
 		.reset(zera_nivel),
 		.jogada(foi_jogada),  // usando o sinal de confirmação como "jogada feita"
-		.level(leds_nivel)
+		.level(nivel)
 	);
 
 	cod_erro coderro (
 		.erro(erro),
 		.enable(1'b1),
 		.leds_erro(leds_erro)
+	);
+
+	cod_leds_nivel codnivel (
+		.level(nivel),
+		.leds(leds_nivel)
 	);
 
 	edge_detector detect_btn_rgb (
