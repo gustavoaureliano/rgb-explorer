@@ -20,6 +20,8 @@ module rgb_explorer (
 	output [2:0] db_btns_plus_rgb,
 	output [2:0] db_btns_minus_rgb,
 	output       db_btn_modo,
+	output       db_btn_confirma,
+	output       db_btn_jogar,
 	output       db_clock,
 	output       buzzer
 );
@@ -28,7 +30,7 @@ module rgb_explorer (
 	wire zera_pontuacao, registra_pontuacao;
 	wire zera_nivel, conta_nivel;
 	wire zera_modo, conta_modo;
-	wire jogada_feita, pulso_modo, confirmar;
+	wire jogada_feita, pulso_modo, confirmar, pulso_jogar;
 	wire mudar_rgb;
 	wire enable_cod_erro;
 	wire [5:0] s_rgb_jogada;
@@ -43,12 +45,14 @@ module rgb_explorer (
 	assign db_btns_plus_rgb = btns_plus_rgb;
 	assign db_btns_minus_rgb = btns_minus_rgb;
 	assign db_btn_modo = btn_modo;
+	assign db_btn_confirma = btn_confirma;
+	assign db_btn_jogar = btn_jogar;
 
 	unidade_controle uc (
 		.clock(clock),
 		.btn_reset(btn_reset),
 		.pulso_modo(pulso_modo),
-		.btn_jogar(btn_jogar),
+		.pulso_jogar(pulso_jogar),
 		.jogada(jogada_feita),
 		.confirmar(confirmar),
 		.s_modo(s_modo),
@@ -80,6 +84,7 @@ module rgb_explorer (
 		.btns_plus_minus_rgb({btns_plus_rgb, btns_minus_rgb}),
 		.btn_modo(btn_modo),
 		.btn_confirma(btn_confirma),
+		.btn_jogar(btn_jogar),
 		.registra_jogada(registra_jogada),
 		.registra_rgb_alvo(registra_rgb_alvo),
 		.registra_pontuacao(registra_pontuacao),
@@ -88,6 +93,7 @@ module rgb_explorer (
 		.conta_modo(conta_modo),
 		.enable_cod_erro(enable_cod_erro),
 		.pulso_modo(pulso_modo),
+		.pulso_jogar(pulso_jogar),
 		.jogada_feita(jogada_feita),
 		.confirmar(confirmar),
 		.s_rgb_jogada(s_rgb_jogada),

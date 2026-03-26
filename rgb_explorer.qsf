@@ -123,9 +123,9 @@ set_location_assignment PIN_B16 -to clock
 set_location_assignment PIN_W9 -to btns_plus_rgb[0]
 set_location_assignment PIN_M7 -to btns_plus_rgb[1]
 set_location_assignment PIN_M6 -to btns_plus_rgb[2]
-set_location_assignment PIN_K22 -to btns_minus_rgb[0]
-set_location_assignment PIN_M21 -to btns_minus_rgb[1]
-set_location_assignment PIN_R22 -to btns_minus_rgb[2]
+set_location_assignment PIN_M21 -to btns_minus_rgb[0]
+set_location_assignment PIN_R22 -to btns_minus_rgb[1]
+set_location_assignment PIN_T22 -to btns_minus_rgb[2]
 set_location_assignment PIN_AA2 -to db_btn_modo
 set_location_assignment PIN_AA1 -to db_btns_plus_rgb[0]
 set_location_assignment PIN_W2 -to db_btns_plus_rgb[1]
@@ -133,4 +133,10 @@ set_location_assignment PIN_Y3 -to db_btns_plus_rgb[2]
 set_location_assignment PIN_N2 -to db_btns_minus_rgb[0]
 set_location_assignment PIN_N1 -to db_btns_minus_rgb[1]
 set_location_assignment PIN_U2 -to db_btns_minus_rgb[2]
+set_location_assignment PIN_K22 -to btn_confirma
+set_location_assignment PIN_U1 -to db_btn_confirma
+set_location_assignment PIN_L2 -to db_btn_jogar
+set_location_assignment PIN_J11 -to rgb_alvo[0]
+set_location_assignment PIN_A15 -to rgb_alvo[1]
+set_location_assignment PIN_L8 -to rgb_alvo[2]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

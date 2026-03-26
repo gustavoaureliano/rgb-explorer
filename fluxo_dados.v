@@ -9,6 +9,7 @@ module fluxo_dados (
 	input  [5:0] btns_plus_minus_rgb,
 	input        btn_modo,
 	input        btn_confirma,
+	input        btn_jogar,
 	input        registra_jogada,
 	input        registra_rgb_alvo,
 	input        registra_pontuacao,
@@ -18,6 +19,7 @@ module fluxo_dados (
 	input        enable_cod_erro,
 	input		 foi_jogada,
 	output       pulso_modo,
+	output       pulso_jogar,
 	output       jogada_feita,
 	output       confirmar,
 	output [5:0] s_rgb_alvo,
@@ -55,14 +57,19 @@ module fluxo_dados (
 
 	wire sinal_btn_modo, rst_detect_modo;
 
-	assign sinal_btn_modo = |btn_modo;
-	assign rst_detect_modo = ~|btn_modo;
+	assign sinal_btn_modo = ~btn_modo;
+	assign rst_detect_modo = btn_modo;
 
 	wire sinal_confirmar, rst_detect_confirmar;
 	wire [1:0]nivel;
 
-	assign sinal_confirmar = |btn_confirma;
-	assign rst_detect_confirmar = ~|btn_confirma;
+	assign sinal_confirmar = ~btn_confirma;
+	assign rst_detect_confirmar = btn_confirma;
+
+	wire sinal_jogar, rst_detect_jogar;
+
+	assign sinal_jogar = ~btn_jogar;
+	assign rst_detect_jogar = btn_jogar;
 
 	// create module later
 	reg [3:0] pontuacao;
@@ -114,6 +121,13 @@ module fluxo_dados (
 		.reset(rst_detect_rgb),
 		.sinal(sinal_btn_rgb),
 		.pulso(jogada_feita)
+	);
+
+	edge_detector detect_btn_jogar (
+		.clock(clock),
+		.reset(rst_detect_jogar),
+		.sinal(sinal_jogar),
+		.pulso(pulso_jogar)
 	);
 
 	edge_detector detect_btn_modo (

@@ -10,7 +10,7 @@ z2
 cModel Technology
 d/home/gustavo
 vcolor_error
-Z0 !s110 1774363919
+Z0 !s110 1774482569
 !i10b 1
 !s100 zVGUT0?^EKnUnPn4MZcdM2
 Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -20,20 +20,20 @@ Z3 d/home/gustavo/Documentos/USP/PCS3635/rgb-explorer
 w1774311711
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/color_error.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/color_error.v
-!i122 318
+!i122 235
 Z4 L0 1 18
 Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1774363919.000000
+Z6 !s108 1774482569.000000
 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/color_error.v|
 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/color_error.v|
 !i113 1
 Z7 o-work work
 Z8 tCvgOpt 0
 vcontador_m_tb
-Z9 !s110 1774363918
+R0
 !i10b 1
 !s100 N4:^mcMBZJ`g1JbG1;12?1
 R1
@@ -43,13 +43,13 @@ R3
 w1773508214
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter_tb.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter_tb.v
-!i122 311
+!i122 228
 L0 20 89
 R5
 r1
 !s85 0
 31
-Z10 !s108 1774363918.000000
+R6
 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter_tb.v|
 !i113 1
@@ -66,7 +66,7 @@ R3
 w1773847566
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/debounce.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/debounce.v
-!i122 319
+!i122 236
 L0 1 27
 R5
 r1
@@ -79,7 +79,7 @@ R6
 R7
 R8
 vedge_detector
-R9
+R0
 !i10b 1
 !s100 b=6PQ:nFojW4z?d;AGW=D0
 R1
@@ -89,43 +89,43 @@ R3
 w1773697867
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/edge_detector.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/edge_detector.v
-!i122 308
+!i122 225
 L0 21 23
 R5
 r1
 !s85 0
 31
-R10
+R6
 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/edge_detector.v|
 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/edge_detector.v|
 !i113 1
 R7
 R8
 vfluxo_dados
-R9
+R0
 !i10b 1
-!s100 PX?kzHDlAW@OB:YkK<`:b1
+!s100 I;cW8O<`XLV@6HeelRZlU3
 R1
-I3Sn=Z^L4OW=cKh?:aRi`T1
+Ij<WzQ<iB`jHe8jlhc9LIi1
 R2
 R3
-w1774358920
+w1774315041
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/fluxo_dados.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/fluxo_dados.v
-!i122 309
+!i122 226
 L0 1 168
 R5
 r1
 !s85 0
 31
-R10
+R6
 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/fluxo_dados.v|
 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/fluxo_dados.v|
 !i113 1
 R7
 R8
 vfull_counter
-R9
+R0
 !i10b 1
 !s100 <Vbe13ZFe6Q5iVoZeFj:n1
 R1
@@ -135,20 +135,20 @@ R3
 w1773847572
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter.v
-!i122 310
+!i122 227
 L0 1 46
 R5
 r1
 !s85 0
 31
-R10
+R6
 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter.v|
 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter.v|
 !i113 1
 R7
 R8
 vhexa7seg
-R9
+R0
 !i10b 1
 !s100 ^ldcN:Zl`^?4Tnh8I@Z332
 R1
@@ -158,13 +158,13 @@ R3
 w1773510545
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/hexa7seg.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/hexa7seg.v
-!i122 312
+!i122 229
 L0 23 38
 R5
 r1
 !s85 0
 31
-R10
+R6
 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/hexa7seg.v|
 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/hexa7seg.v|
 !i113 1
@@ -181,7 +181,7 @@ R3
 w1774313376
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/lfsr_random.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/lfsr_random.v
-!i122 320
+!i122 237
 R4
 R5
 r1
@@ -204,13 +204,13 @@ R3
 w1773697240
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/register_n.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/register_n.v
-!i122 313
+!i122 230
 L0 1 22
 R5
 r1
 !s85 0
 31
-R10
+R6
 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/register_n.v|
 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/register_n.v|
 !i113 1
@@ -224,18 +224,18 @@ R1
 I9i4IC^U36D_P9>UPfzA7o0
 R2
 R3
-Z11 w1773773161
-Z12 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v
-Z13 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v
-!i122 314
+Z9 w1773773161
+Z10 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v
+Z11 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v
+!i122 231
 L0 22 15
 R5
 r1
 !s85 0
 31
 R6
-Z14 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v|
-Z15 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v|
+Z12 !s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v|
+Z13 !s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v|
 !i113 1
 R7
 R8
@@ -247,10 +247,10 @@ R1
 I2j:B>1iFzBO^VS7RFzLnj2
 R2
 R3
-w1774361048
+w1774314600
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer.v
-!i122 315
+!i122 232
 L0 1 143
 R5
 r1
@@ -262,29 +262,6 @@ R6
 !i113 1
 R7
 R8
-vrgb_explorer_tb_modo2
-R0
-!i10b 1
-!s100 4<2c[0a@oM;k<j_UbN>DF0
-R1
-I[R>TocP:k1KXB0]@XhJ>U3
-R2
-R3
-w1774357599
-8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer_tb_modo2.v
-F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer_tb_modo2.v
-!i122 321
-L0 3 128
-R5
-r1
-!s85 0
-31
-R6
-!s107 /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer_tb_modo2.v|
-!s90 -reportprogress|300|-work|work|-stats=none|/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer_tb_modo2.v|
-!i113 1
-R7
-R8
 vrgb_pwm
 R0
 !i10b 1
@@ -293,18 +270,18 @@ R1
 I^GAYXQd4]K^1keg]SPH6a3
 R2
 R3
+R9
+R10
 R11
-R12
-R13
-!i122 314
+!i122 231
 L0 1 20
 R5
 r1
 !s85 0
 31
 R6
-R14
-R15
+R12
+R13
 !i113 1
 R7
 R8
@@ -319,7 +296,7 @@ R3
 w1773880946
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer_tb.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer_tb.v
-!i122 316
+!i122 233
 L0 3 118
 R5
 r1
@@ -334,15 +311,15 @@ R8
 vunidade_controle
 R0
 !i10b 1
-!s100 @CR98CaKi4nREjWMS87Bo3
+!s100 [5]<`@=5<TSG[6_zB3N_E2
 R1
-IdF3?5j7DzQn4P2J1I::eK0
+IdJ5`g[=7k;440dH;EA0f`1
 R2
 R3
-w1774359274
+w1774315214
 8/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/unidade_controle.v
 F/home/gustavo/Documentos/USP/PCS3635/rgb-explorer/unidade_controle.v
-!i122 317
+!i122 234
 L0 1 117
 R5
 r1

@@ -2,7 +2,7 @@ module unidade_controle (
 	input            clock,
 	input            btn_reset,
 	input            pulso_modo,
-	input            btn_jogar,
+	input            pulso_jogar,
 	input            jogada ,
 	input            confirmar,
 	input      [2:0] s_modo,
@@ -52,7 +52,7 @@ always @* begin
 		sel_modo:	begin
 						if (pulso_modo)
 							Eprox = reg_modo;
-						else if (btn_jogar) begin
+						else if (pulso_jogar) begin
 							case (s_modo)
 								8'b0:    Eprox = espera_btn;
 								default: Eprox = rst_pontos;
@@ -81,9 +81,9 @@ always @* begin
 				else
 					Eprox = fim_longe;
 			end
-		fim_exato: Eprox = reg_cor_alvo;
-		fim_perto: Eprox = reg_cor_alvo;
-		fim_longe: Eprox = reg_cor_alvo;
+		fim_exato: Eprox = pulso_jogar ? reg_cor_alvo : fim_exato;
+		fim_perto: Eprox = pulso_jogar ? reg_cor_alvo : fim_perto;
+		fim_longe: Eprox = pulso_jogar ? reg_cor_alvo : fim_longe;
 		default: Eprox = inicial;
 	endcase
 end
