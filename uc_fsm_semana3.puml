@@ -1,0 +1,73 @@
+@startuml
+hide empty description
+top to bottom direction
+
+skinparam state {
+  BackgroundColor #F8F9FA
+  BorderColor #2F3B52
+  ArrowColor #2F3B52
+  FontName Arial
+
+  BackgroundColor<<base>> #ECEFF1
+  BackgroundColor<<m23>>  #E3F2FD
+  BackgroundColor<<m3>>   #FFF3E0
+  BackgroundColor<<fim>>  #FCE4EC
+}
+
+state inicial <<base>>
+state "selecao modo" as sel_modo <<base>>
+state "registra modo" as reg_modo <<base>>
+
+state "reset pontuacao" as rst_pontos <<m23>>
+state "registra cor alvo" as reg_cor_alvo <<m23>>
+state "espera timeout" as espera_timeout <<m3>>
+
+state "espera botao" as espera_btn <<base>>
+state "registra botao RGB" as reg_rgb_btn <<base>>
+state "muda LED RGB" as muda_rgb <<base>>
+state "compara cor" as compara_cor <<base>>
+
+state "fim exato" as fim_exato <<fim>>
+state "fim perto" as fim_perto <<fim>>
+state "fim longe" as fim_longe <<fim>>
+
+state d_modo <<choice>>
+state d_timeout <<choice>>
+state d_erro <<choice>>
+state proxima_rodada <<choice>>
+
+[*] --> inicial : reset
+inicial --> sel_modo
+
+sel_modo --> reg_modo : pulso_modo
+reg_modo --> sel_modo
+
+sel_modo --> d_modo : pulso_jogar
+d_modo --> espera_btn : s_modo = 0
+d_modo --> rst_pontos : s_modo != 0
+
+rst_pontos --> reg_cor_alvo
+reg_cor_alvo --> d_timeout
+
+d_timeout --> espera_timeout : s_modo = 2
+d_timeout --> espera_btn : s_modo != 2
+
+espera_timeout --> espera_timeout : timeout = 0
+espera_timeout --> espera_btn : timeout = 1
+
+espera_btn --> reg_rgb_btn : jogada
+reg_rgb_btn --> muda_rgb
+muda_rgb --> espera_btn
+
+espera_btn --> compara_cor : confirmar
+compara_cor --> d_erro
+
+d_erro --> fim_exato : erro == 0
+d_erro --> fim_perto : erro < 3
+d_erro --> fim_longe : erro >= 3
+
+fim_exato --> proxima_rodada : pulso_jogar
+fim_perto --> proxima_rodada : pulso_jogar
+fim_longe --> proxima_rodada : pulso_jogar
+proxima_rodada --> reg_cor_alvo
+@enduml
