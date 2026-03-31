@@ -97,6 +97,17 @@ module rgb_explorer_tb_modo3;
         end
     endtask
 
+    task jogada(input reg [5:0] btns_plus_minus_rgb);
+        begin
+            btns_plus_rgb = ~btns_plus_minus_rgb[5:3];
+            btns_minus_rgb = ~btns_plus_minus_rgb[2:0];
+            #(10*clockPeriod);
+            btns_plus_rgb = 3'b111;
+            btns_minus_rgb = 3'b111;
+            #(10*clockPeriod);
+        end
+    endtask
+
     initial begin
         clock = 1'b1;
         btn_reset = 1'b0;
@@ -141,6 +152,13 @@ module rgb_explorer_tb_modo3;
         if (dut.s_rgb_alvo_vis !== 6'b0)
             $fatal(1, "s_rgb_alvo_vis deve ser zero apos timeout em modo 3");
 
+        // Jogada real: R=01, G=00 e B=01
+        jogada(6'b101_000);
+        #(5*clockPeriod);
+
+        if (dut.s_rgb_jogada !== 6'b010001)
+            $fatal(1, "Jogada esperada R=01 G=00 B=01 (010001), obtido=%b", dut.s_rgb_jogada);
+
         // Fluxo pos-timeout deve seguir igual ao modo 2
         press_confirma();
         #(5*clockPeriod);
@@ -149,7 +167,7 @@ module rgb_explorer_tb_modo3;
             $fatal(1, "Apos confirmar, estado final esperado (9/A/B), obtido=%h", dut.s_estado);
 
         $display("tb_modo3: OK");
-        $finish;
+        $stop;
     end
 
 endmodule

@@ -220,7 +220,7 @@ module tb_rgb_explorer_level;
         assert_alvo_bounds();
 
         $display("TB nivel/debounce concluido com sucesso.");
-        $finish;
+        $stop;
     end
 
 endmodule

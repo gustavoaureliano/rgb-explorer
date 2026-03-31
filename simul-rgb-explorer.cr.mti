@@ -5,6 +5,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	tb_rgb_explorer
 
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/fluxo_dados.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/fluxo_dados.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module fluxo_dados
+
+Top level modules:
+	fluxo_dados
+
 } {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/register_n.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/register_n.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module register_n
@@ -12,12 +19,54 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	register_n
 
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_explorer.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module rgb_explorer
+
+Top level modules:
+	rgb_explorer
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/level_system.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/level_system.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module level_system
+
+Top level modules:
+	level_system
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/debounce.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/debounce.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module debounce
+
+Top level modules:
+	debounce
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/timeout_counter.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/timeout_counter.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module timeout_counter
+
+Top level modules:
+	timeout_counter
+
 } {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/edge_detector.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/edge_detector.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module edge_detector
 
 Top level modules:
 	edge_detector
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/unidade_controle.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/unidade_controle.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module unidade_controle
+
+Top level modules:
+	unidade_controle
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_level_limit.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_level_limit.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module rgb_level_limit
+
+Top level modules:
+	rgb_level_limit
 
 } {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_cod.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
@@ -34,6 +83,20 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 Top level modules:
 	color_error
 
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_level_counter.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/rgb_level_counter.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module rgb_level_counter
+
+Top level modules:
+	rgb_level_counter
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/cod_leds_nivel.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/cod_leds_nivel.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module cod_leds_nivel
+
+Top level modules:
+	cod_leds_nivel
+
 } {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
 -- Compiling module full_counter
@@ -47,6 +110,20 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 
 
 Top level modules:
 	hexa7seg
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/cod_erro.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/cod_erro.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module cod_erro
+
+Top level modules:
+	cod_erro
+
+} {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/score_calc.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/score_calc.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module score_calc
+
+Top level modules:
+	score_calc
 
 } {} {}} /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter_tb.v {1 {vlog -work work -stats=none /home/gustavo/Documentos/USP/PCS3635/rgb-explorer/full_counter_tb.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
