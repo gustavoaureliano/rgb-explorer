@@ -54,7 +54,7 @@ always @* begin
 							Eprox = reg_modo;
 						else if (pulso_jogar) begin
 							case (s_modo)
-								8'b0:    Eprox = espera_btn;
+								3'b0:    Eprox = espera_btn;
 								default: Eprox = rst_pontos;
 							endcase
 						end else
@@ -95,12 +95,14 @@ always @* begin
 	zera_rgb_alvo = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_pontuacao = (Eatual == inicial || Eatual == rst_pontos) ? 1'b1 : 1'b0;
 	zera_nivel = (Eatual == inicial || Eatual == rst_pontos) ? 1'b1 : 1'b0;
+	conta_nivel = (Eatual == compara_cor) ? 1'b1 : 1'b0;
 	conta_modo = (Eatual == reg_modo) ? 1'b1 : 1'b0;
 	registra_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
 	mudar_rgb = (Eatual == muda_rgb) ? 1'b1 : 1'b0;
 	registra_rgb_alvo = (Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
 	registra_pontuacao = (Eatual == compara_cor) ? 1'b1 : 1'b0;
 	foi_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
+	enable_cod_erro = 1'b1;
 
 	case (Eatual)
 		inicial:      db_estado = 8'h0;

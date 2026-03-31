@@ -32,15 +32,20 @@ module fluxo_dados (
 );
 	localparam rgb_leds_modulus = 4;
 	localparam rgb_num_bits = $clog2(rgb_leds_modulus);
+	localparam debounce_interval = 4; // 1 KHz -> 4 ms
+	// localparam debounce_interval = 200000; // 50 MHz -> 4 ms
 	localparam mode_modulus = 4;
 	localparam mode_num_bits = $clog2(mode_modulus);
 	localparam rgb_reg_num_bits = rgb_num_bits*3;
 	localparam pontuacao_num_bits = 4;
 
 	wire [rgb_num_bits-1:0] q_led_r, q_led_g, q_led_b;
-	wire fim_led_r, fim_led_g, fim_led_b;
 
 	wire [rgb_reg_num_bits-1:0] random;
+	wire [rgb_reg_num_bits-1:0] random_limitado;
+	wire [5:0] db_btns_plus_minus_rgb;
+	wire db_btn_modo, db_btn_confirma, db_btn_jogar;
+	wire [1:0] max_rgb;
 
 	assign s_rgb_jogada = {q_led_r, q_led_g, q_led_b};
 
@@ -52,40 +57,69 @@ module fluxo_dados (
 
 	wire sinal_btn_rgb, rst_detect_rgb;
 
-	assign sinal_btn_rgb = ~&btns_plus_minus_rgb;
-	assign rst_detect_rgb = &btns_plus_minus_rgb;
+	assign sinal_btn_rgb = ~&db_btns_plus_minus_rgb;
+	assign rst_detect_rgb = &db_btns_plus_minus_rgb;
 
 	wire sinal_btn_modo, rst_detect_modo;
 
-	assign sinal_btn_modo = ~btn_modo;
-	assign rst_detect_modo = btn_modo;
+	assign sinal_btn_modo = ~db_btn_modo;
+	assign rst_detect_modo = db_btn_modo;
 
 	wire sinal_confirmar, rst_detect_confirmar;
 	wire [1:0]nivel;
 
-	assign sinal_confirmar = ~btn_confirma;
-	assign rst_detect_confirmar = btn_confirma;
+	assign sinal_confirmar = ~db_btn_confirma;
+	assign rst_detect_confirmar = db_btn_confirma;
 
 	wire sinal_jogar, rst_detect_jogar;
 
-	assign sinal_jogar = ~btn_jogar;
-	assign rst_detect_jogar = btn_jogar;
+	assign sinal_jogar = ~db_btn_jogar;
+	assign rst_detect_jogar = db_btn_jogar;
 
-	// create module later
-	reg [3:0] pontuacao;
-	always @(posedge clock) begin
-		if (erro == 0)
-			pontuacao = 4;
-		else if (erro < 3)
-			pontuacao = 2;
-		else
-			pontuacao = 0;
-	end
+	assign max_rgb = (nivel == 2'd0) ? 2'd1 :
+	                 (nivel == 2'd1) ? 2'd2 : 2'd3;
+
+	genvar i;
+	generate
+		for (i = 0; i < 6; i = i + 1) begin : gen_debounce_rgb
+			debounce #(.INTERVAL(debounce_interval)) db_btn_rgb (
+				.pb1(btns_plus_minus_rgb[i]),
+				.clk(clock),
+				.pb1_debounced(db_btns_plus_minus_rgb[i])
+			);
+		end
+	endgenerate
+
+	debounce #(.INTERVAL(debounce_interval)) db_modo (
+		.pb1(btn_modo),
+		.clk(clock),
+		.pb1_debounced(db_btn_modo)
+	);
+
+	debounce #(.INTERVAL(debounce_interval)) db_confirma (
+		.pb1(btn_confirma),
+		.clk(clock),
+		.pb1_debounced(db_btn_confirma)
+	);
+
+	debounce #(.INTERVAL(debounce_interval)) db_jogar (
+		.pb1(btn_jogar),
+		.clk(clock),
+		.pb1_debounced(db_btn_jogar)
+	);
+
+	wire [3:0] pontuacao;
 
 	lfsr_random rnd (
 		.clk(clock),
 		.reset(zera_rnd),
 		.random(random)
+	);
+
+	rgb_level_limit limitador_rgb_alvo (
+		.nivel(nivel),
+		.rgb_in(random),
+		.rgb_out(random_limitado)
 	);
 
 	color_error diff_color (
@@ -101,8 +135,14 @@ module fluxo_dados (
 	level_system level_sys (
 		.clk(clock),
 		.reset(zera_nivel),
-		.jogada(foi_jogada),  // usando o sinal de confirmação como "jogada feita"
+		.jogada(conta_nivel),
 		.level(nivel)
+	);
+
+	score_calc calc_pontuacao (
+		.clock(clock),
+		.erro(erro),
+		.pontos(pontuacao)
 	);
 
 	cod_erro coderro (
@@ -148,7 +188,7 @@ module fluxo_dados (
 		.clock(clock),
 		.clear(zera_rgb_jogada),
 		.enable(registra_jogada),
-		.D(~btns_plus_minus_rgb),
+		.D(~db_btns_plus_minus_rgb),
 		.Q(s_jogada)
 	);
 
@@ -160,36 +200,36 @@ module fluxo_dados (
 		.Q      (s_modo)
 	);
 
-	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_r  (
+	rgb_level_counter counter_led_r  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
 		.conta  ((add_rgb_jogada[2] || sub_rgb_jogada[2]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[2] && !add_rgb_jogada[2]),
-		.Q      (q_led_r),
-		.fim    (fim_led_r)
+		.max_val(max_rgb),
+		.Q      (q_led_r)
 	);
-	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_g  (
+	rgb_level_counter counter_led_g  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
 		.conta  ((add_rgb_jogada[1] || sub_rgb_jogada[1]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[1] && !add_rgb_jogada[1]),
-		.Q      (q_led_g),
-		.fim    (fim_led_g)
+		.max_val(max_rgb),
+		.Q      (q_led_g)
 	);
-	full_counter #( .M(rgb_leds_modulus), .N(rgb_num_bits) ) counter_led_b  (
+	rgb_level_counter counter_led_b  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
 		.conta  ((add_rgb_jogada[0] || sub_rgb_jogada[0]) && mudar_rgb),
 		.neg    (sub_rgb_jogada[0] && !add_rgb_jogada[0]),
-		.Q      (q_led_b),
-		.fim    (fim_led_b)
+		.max_val(max_rgb),
+		.Q      (q_led_b)
 	);
 	
 	register_n # ( .N(rgb_reg_num_bits) ) reg_rgb_alvo (
 		.clock(clock),
 		.clear(zera_rgb_alvo),
 		.enable(registra_rgb_alvo),
-		.D(random),
+		.D(random_limitado),
 		.Q(s_rgb_alvo)
 	);
 
