@@ -5,6 +5,7 @@ module unidade_controle (
 	input            pulso_jogar,
 	input            jogada ,
 	input            confirmar,
+	input            timeout,
 	input      [2:0] s_modo,
 	input      [3:0] erro,
 	output reg       zera_rgb_jogada,
@@ -19,7 +20,10 @@ module unidade_controle (
 	output reg       mudar_rgb,
 	output reg       conta_nivel,
 	output reg       conta_modo,
+	output reg       zera_timeout,
+	output reg       conta_timeout,
 	output reg       foi_jogada,
+	output reg       mostra_rgb_alvo,
 	output reg       enable_cod_erro,
 	output reg [7:0] db_estado
 );
@@ -36,6 +40,7 @@ parameter compara_cor  = 8'h8;
 parameter fim_exato    = 8'h9;
 parameter fim_perto    = 8'hA;
 parameter fim_longe    = 8'hB;
+parameter espera_timeout = 8'hC;
 
 reg [7:0] Eatual, Eprox;
 
@@ -72,7 +77,8 @@ always @* begin
 		reg_rgb_btn: Eprox = muda_rgb;
 		muda_rgb:    Eprox = espera_btn;
 		rst_pontos:  Eprox = reg_cor_alvo;
-		reg_cor_alvo: Eprox = espera_btn;
+		reg_cor_alvo: Eprox = (s_modo == 3'd2) ? espera_timeout : espera_btn;
+		espera_timeout: Eprox = timeout ? espera_btn : espera_timeout;
 		compara_cor: begin
 				if (erro == 0)
 					Eprox = fim_exato;
@@ -95,6 +101,8 @@ always @* begin
 	zera_rgb_alvo = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_pontuacao = (Eatual == inicial || Eatual == rst_pontos) ? 1'b1 : 1'b0;
 	zera_nivel = (Eatual == inicial || Eatual == rst_pontos) ? 1'b1 : 1'b0;
+	zera_timeout = (Eatual == inicial || Eatual == rst_pontos || Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
+	conta_timeout = (Eatual == espera_timeout) ? 1'b1 : 1'b0;
 	conta_nivel = (Eatual == compara_cor) ? 1'b1 : 1'b0;
 	conta_modo = (Eatual == reg_modo) ? 1'b1 : 1'b0;
 	registra_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
@@ -102,6 +110,7 @@ always @* begin
 	registra_rgb_alvo = (Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
 	registra_pontuacao = (Eatual == compara_cor) ? 1'b1 : 1'b0;
 	foi_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
+	mostra_rgb_alvo = (s_modo == 3'd1) || ((s_modo == 3'd2) && (Eatual == espera_timeout));
 	enable_cod_erro = 1'b1;
 
 	case (Eatual)
@@ -117,6 +126,7 @@ always @* begin
 		fim_exato:    db_estado = 8'h9;
 		fim_perto:    db_estado = 8'hA;
 		fim_longe:    db_estado = 8'hB;
+		espera_timeout: db_estado = 8'hC;
 	endcase
 end
 endmodule

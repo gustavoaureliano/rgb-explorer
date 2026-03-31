@@ -30,11 +30,15 @@ module rgb_explorer (
 	wire zera_pontuacao, registra_pontuacao;
 	wire zera_nivel, conta_nivel;
 	wire zera_modo, conta_modo;
+	wire zera_timeout, conta_timeout;
 	wire jogada_feita, pulso_modo, confirmar, pulso_jogar;
+	wire timeout;
 	wire mudar_rgb;
+	wire mostra_rgb_alvo;
 	wire enable_cod_erro;
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
+	wire [5:0] s_rgb_alvo_vis;
 	wire [3:0] s_pontuacao;
 	wire [2:0] s_modo;
 	wire [7:0] s_estado;
@@ -48,6 +52,8 @@ module rgb_explorer (
 	assign db_btn_confirma = btn_confirma;
 	assign db_btn_jogar = btn_jogar;
 
+	assign s_rgb_alvo_vis = mostra_rgb_alvo ? s_rgb_alvo : 6'b0;
+
 	unidade_controle uc (
 		.clock(clock),
 		.btn_reset(btn_reset),
@@ -55,6 +61,7 @@ module rgb_explorer (
 		.pulso_jogar(pulso_jogar),
 		.jogada(jogada_feita),
 		.confirmar(confirmar),
+		.timeout(timeout),
 		.s_modo(s_modo),
 		.erro(erro),
 		.zera_rgb_jogada(zera_rgb_jogada),
@@ -69,6 +76,9 @@ module rgb_explorer (
 		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
 		.conta_modo(conta_modo),
+		.zera_timeout(zera_timeout),
+		.conta_timeout(conta_timeout),
+		.mostra_rgb_alvo(mostra_rgb_alvo),
 		.enable_cod_erro(enable_cod_erro),
 		.db_estado(s_estado)
 	);
@@ -91,6 +101,8 @@ module rgb_explorer (
 		.mudar_rgb(mudar_rgb),
 		.conta_nivel(conta_nivel),
 		.conta_modo(conta_modo),
+		.zera_timeout(zera_timeout),
+		.conta_timeout(conta_timeout),
 		.enable_cod_erro(enable_cod_erro),
 		.pulso_modo(pulso_modo),
 		.pulso_jogar(pulso_jogar),
@@ -102,6 +114,7 @@ module rgb_explorer (
 		.leds_nivel(leds_nivel),
 		.leds_erro(leds_erro),
 		.s_modo(s_modo),
+		.timeout(timeout),
 		.erro(erro)
 	);
 
@@ -113,7 +126,7 @@ module rgb_explorer (
 
 	rgb_cod cod_rgb_alvo (
 		.clk(clock),
-		.jogada(s_rgb_alvo),
+		.jogada(s_rgb_alvo_vis),
 		.display(rgb_alvo)
 	);
 

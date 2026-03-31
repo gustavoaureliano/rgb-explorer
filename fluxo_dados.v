@@ -16,6 +16,8 @@ module fluxo_dados (
 	input        mudar_rgb,
 	input        conta_nivel,
 	input        conta_modo,
+	input        zera_timeout,
+	input        conta_timeout,
 	input        enable_cod_erro,
 	input		 foi_jogada,
 	output       pulso_modo,
@@ -28,12 +30,15 @@ module fluxo_dados (
 	output [2:0] leds_nivel,
 	output [2:0] leds_erro,
 	output [2:0] s_modo,
+	output       timeout,
 	output [3:0] erro
 );
 	localparam rgb_leds_modulus = 4;
 	localparam rgb_num_bits = $clog2(rgb_leds_modulus);
 	localparam debounce_interval = 4; // 1 KHz -> 4 ms
 	// localparam debounce_interval = 200000; // 50 MHz -> 4 ms
+	localparam timeout_cycles = 5000; // 1 KHz -> 5 s
+	// localparam timeout_cycles = 250000000; // 50 MHz -> 5 s
 	localparam mode_modulus = 4;
 	localparam mode_num_bits = $clog2(mode_modulus);
 	localparam rgb_reg_num_bits = rgb_num_bits*3;
@@ -143,6 +148,13 @@ module fluxo_dados (
 		.clock(clock),
 		.erro(erro),
 		.pontos(pontuacao)
+	);
+
+	timeout_counter #(.TIMEOUT_CYCLES(timeout_cycles)) counter_timeout (
+		.clock(clock),
+		.zera(zera_timeout),
+		.conta(conta_timeout),
+		.timeout(timeout)
 	);
 
 	cod_erro coderro (
