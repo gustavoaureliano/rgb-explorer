@@ -161,7 +161,7 @@ module fluxo_dados (
 
 	cod_erro coderro (
 		.erro(erro),
-		.enable(1'b1),
+		.enable(enable_cod_erro),
 		.leds_erro(leds_erro)
 	);
 

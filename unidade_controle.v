@@ -109,7 +109,7 @@ always @* begin
 	registra_rgb_alvo = (Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
 	registra_pontuacao = (Eatual == compara_cor) ? 1'b1 : 1'b0;
 	mostra_rgb_alvo = (s_modo == 3'd1) || ((s_modo == 3'd2) && (Eatual == espera_timeout));
-	enable_cod_erro = 1'b1;
+	enable_cod_erro = (Eatual == fim_exato) || (Eatual == fim_perto) || (Eatual == fim_longe);
 
 	case (Eatual)
 		inicial:      db_estado = 8'h0;
