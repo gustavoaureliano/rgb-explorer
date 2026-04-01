@@ -13,6 +13,9 @@ module tb_rgb_explorer;
     wire [2:0] rgb_alvo;
     wire [2:0] rgb_jogada;
     wire [2:0] leds_nivel;
+    wire [3:0] intensidade_r;
+    wire [3:0] intensidade_g;
+    wire [3:0] intensidade_b;
     wire [6:0] hex7seg_pontuacao;
     wire [6:0] hex7seg_modo;
     wire buzzer;
@@ -74,6 +77,9 @@ module tb_rgb_explorer;
         .rgb_alvo(rgb_alvo),
         .rgb_jogada(rgb_jogada),
         .leds_nivel(leds_nivel),
+        .intensidade_r(intensidade_r),
+        .intensidade_g(intensidade_g),
+        .intensidade_b(intensidade_b),
         .hex7seg_pontuacao(hex7seg_pontuacao),
         .hex7seg_modo(hex7seg_modo),
         .buzzer(buzzer)

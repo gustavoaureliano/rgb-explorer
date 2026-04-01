@@ -17,6 +17,9 @@ module rgb_explorer (
 	output [6:0] db_jogada_b,
 	output [6:0] db_estado_lsb,
 	output [6:0] db_estado_msb,
+	output [3:0] intensidade_r,
+	output [3:0] intensidade_g,
+	output [3:0] intensidade_b,
 	output [2:0] db_btns_plus_rgb,
 	output [2:0] db_btns_minus_rgb,
 	output       db_btn_modo,
@@ -144,6 +147,13 @@ module rgb_explorer (
 		.clk(clock),
 		.jogada(s_rgb_alvo_vis_pwm),
 		.display(rgb_alvo)
+	);
+
+	rgb_intensity_bar intensidade_jogada (
+		.rgb_in(s_rgb_jogada),
+		.intensidade_r(intensidade_r),
+		.intensidade_g(intensidade_g),
+		.intensidade_b(intensidade_b)
 	);
 
 	hexa7seg display_jogada_r (

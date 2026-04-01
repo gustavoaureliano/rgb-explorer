@@ -21,6 +21,9 @@ module tb_rgb_explorer_level;
     wire [6:0] db_jogada_b;
     wire [6:0] db_estado_lsb;
     wire [6:0] db_estado_msb;
+    wire [3:0] intensidade_r;
+    wire [3:0] intensidade_g;
+    wire [3:0] intensidade_b;
     wire [2:0] db_btns_plus_rgb;
     wire [2:0] db_btns_minus_rgb;
     wire db_btn_modo;
@@ -51,6 +54,9 @@ module tb_rgb_explorer_level;
         .db_jogada_b(db_jogada_b),
         .db_estado_lsb(db_estado_lsb),
         .db_estado_msb(db_estado_msb),
+        .intensidade_r(intensidade_r),
+        .intensidade_g(intensidade_g),
+        .intensidade_b(intensidade_b),
         .db_btns_plus_rgb(db_btns_plus_rgb),
         .db_btns_minus_rgb(db_btns_minus_rgb),
         .db_btn_modo(db_btn_modo),
