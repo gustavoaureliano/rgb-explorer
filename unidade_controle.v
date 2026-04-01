@@ -41,6 +41,13 @@ parameter fim_perto    = 8'hA;
 parameter fim_longe    = 8'hB;
 parameter espera_timeout = 8'hC;
 
+localparam [2:0] MODO_LIVRE = 3'd0;
+localparam [2:0] MODO_REPRODUZIR = 3'd1;
+localparam [2:0] MODO_MEMORIA = 3'd2;
+
+localparam [3:0] ERRO_EXATO = 4'd0;
+localparam [3:0] ERRO_PERTO_LIMITE = 4'd3;
+
 reg [7:0] Eatual, Eprox;
 
 always @(posedge clock or posedge btn_reset) begin
@@ -58,7 +65,7 @@ always @* begin
 							Eprox = reg_modo;
 						else if (pulso_jogar) begin
 							case (s_modo)
-								3'b0:    Eprox = espera_btn;
+								MODO_LIVRE:    Eprox = espera_btn;
 								default: Eprox = rst_pontos;
 							endcase
 						end else
@@ -76,12 +83,12 @@ always @* begin
 		reg_rgb_btn: Eprox = muda_rgb;
 		muda_rgb:    Eprox = espera_btn;
 		rst_pontos:  Eprox = reg_cor_alvo;
-		reg_cor_alvo: Eprox = (s_modo == 3'd2) ? espera_timeout : espera_btn;
+		reg_cor_alvo: Eprox = (s_modo == MODO_MEMORIA) ? espera_timeout : espera_btn;
 		espera_timeout: Eprox = timeout ? espera_btn : espera_timeout;
 		compara_cor: begin
-				if (erro == 0)
+				if (erro == ERRO_EXATO)
 					Eprox = fim_exato;
-				else if (erro < 3)
+				else if (erro < ERRO_PERTO_LIMITE)
 					Eprox = fim_perto;
 				else
 					Eprox = fim_longe;
@@ -108,7 +115,7 @@ always @* begin
 	mudar_rgb = (Eatual == muda_rgb) ? 1'b1 : 1'b0;
 	registra_rgb_alvo = (Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
 	registra_pontuacao = (Eatual == compara_cor) ? 1'b1 : 1'b0;
-	mostra_rgb_alvo = (s_modo == 3'd1) || ((s_modo == 3'd2) && (Eatual == espera_timeout));
+	mostra_rgb_alvo = (s_modo == MODO_REPRODUZIR) || ((s_modo == MODO_MEMORIA) && (Eatual == espera_timeout));
 	enable_cod_erro = (Eatual == fim_exato) || (Eatual == fim_perto) || (Eatual == fim_longe);
 
 	case (Eatual)

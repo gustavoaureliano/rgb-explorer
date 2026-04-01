@@ -4,14 +4,17 @@ module lfsr_random (
     output [5:0] random
 );
 
+localparam [7:0] LFSR_SEED = 8'h01;
+
 reg [7:0] rnd;
 
 assign random = rnd[5:0];
 
 always @(posedge clk or posedge reset) begin
     if (reset)
-        rnd <= 8'h1;  // seed inicial
+        rnd <= LFSR_SEED;
     else
+        // Taps: [7], [5], [4], [3]
         rnd <= {rnd[6:0], rnd[7] ^ rnd[5] ^ rnd[4] ^ rnd[3]};
 end
 

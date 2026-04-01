@@ -33,21 +33,30 @@ module fluxo_dados (
 	output       timeout,
 	output [3:0] erro
 );
-	localparam rgb_leds_modulus = 4;
-	localparam rgb_num_bits = $clog2(rgb_leds_modulus);
-	localparam debounce_interval = 4; // 1 KHz -> 4 ms
-	// localparam debounce_interval = 200000; // 50 MHz -> 4 ms
-	localparam timeout_cycles = 5000; // 1 KHz -> 5 s
-	// localparam timeout_cycles = 250000000; // 50 MHz -> 5 s
-	localparam mode_modulus = 4;
-	localparam mode_num_bits = $clog2(mode_modulus);
-	localparam rgb_reg_num_bits = rgb_num_bits*3;
-	localparam pontuacao_num_bits = 4;
+	localparam RGB_LEDS_MODULUS = 4;
+	localparam RGB_NUM_BITS = $clog2(RGB_LEDS_MODULUS);
+	localparam DEBOUNCE_INTERVAL = 4; // 1 KHz -> 4 ms
+	// localparam DEBOUNCE_INTERVAL = 200000; // 50 MHz -> 4 ms
+	localparam TIMEOUT_CYCLES = 5000; // 1 KHz -> 5 s
+	// localparam TIMEOUT_CYCLES = 250000000; // 50 MHz -> 5 s
+	localparam MODE_MODULUS = 4;
+	localparam MODE_COUNTER_NUM_BITS = 3;
+	localparam RGB_REG_NUM_BITS = RGB_NUM_BITS*3;
+	localparam JOGADA_BITS = 6;
+	localparam PONTUACAO_NUM_BITS = 4;
+	localparam IDX_R = 2;
+	localparam IDX_G = 1;
+	localparam IDX_B = 0;
+	localparam [1:0] NIVEL_FACIL = 2'd0;
+	localparam [1:0] NIVEL_NORMAL = 2'd1;
+	localparam [1:0] MAX_RGB_FACIL = 2'd1;
+	localparam [1:0] MAX_RGB_NORMAL = 2'd2;
+	localparam [1:0] MAX_RGB_DIFICIL = 2'd3;
 
-	wire [rgb_num_bits-1:0] q_led_r, q_led_g, q_led_b;
+	wire [RGB_NUM_BITS-1:0] q_led_r, q_led_g, q_led_b;
 
-	wire [rgb_reg_num_bits-1:0] random;
-	wire [rgb_reg_num_bits-1:0] random_limitado;
+	wire [RGB_REG_NUM_BITS-1:0] random;
+	wire [RGB_REG_NUM_BITS-1:0] random_limitado;
 	wire [5:0] db_btns_plus_minus_rgb;
 	wire db_btn_modo, db_btn_confirma, db_btn_jogar;
 	wire [1:0] max_rgb;
@@ -72,7 +81,7 @@ module fluxo_dados (
 	assign rst_detect_modo = db_btn_modo;
 
 	wire sinal_confirmar, rst_detect_confirmar;
-	wire [1:0]nivel;
+	wire [1:0] nivel;
 
 	assign sinal_confirmar = ~db_btn_confirma;
 	assign rst_detect_confirmar = db_btn_confirma;
@@ -82,14 +91,14 @@ module fluxo_dados (
 	assign sinal_jogar = ~db_btn_jogar;
 	assign rst_detect_jogar = db_btn_jogar;
 
-	assign max_rgb = (nivel == 2'd0) ? 2'd1 :
-	                 (nivel == 2'd1) ? 2'd2 : 2'd3;
+	assign max_rgb = (nivel == NIVEL_FACIL) ? MAX_RGB_FACIL :
+	                 (nivel == NIVEL_NORMAL) ? MAX_RGB_NORMAL : MAX_RGB_DIFICIL;
 	assign nivel_atual = nivel;
 
 	genvar i;
 	generate
-		for (i = 0; i < 6; i = i + 1) begin : gen_debounce_rgb
-			debounce #(.INTERVAL(debounce_interval)) db_btn_rgb (
+		for (i = 0; i < JOGADA_BITS; i = i + 1) begin : gen_debounce_rgb
+			debounce #(.INTERVAL(DEBOUNCE_INTERVAL)) db_btn_rgb (
 				.pb1(btns_plus_minus_rgb[i]),
 				.clk(clock),
 				.pb1_debounced(db_btns_plus_minus_rgb[i])
@@ -97,19 +106,19 @@ module fluxo_dados (
 		end
 	endgenerate
 
-	debounce #(.INTERVAL(debounce_interval)) db_modo (
+	debounce #(.INTERVAL(DEBOUNCE_INTERVAL)) db_modo (
 		.pb1(btn_modo),
 		.clk(clock),
 		.pb1_debounced(db_btn_modo)
 	);
 
-	debounce #(.INTERVAL(debounce_interval)) db_confirma (
+	debounce #(.INTERVAL(DEBOUNCE_INTERVAL)) db_confirma (
 		.pb1(btn_confirma),
 		.clk(clock),
 		.pb1_debounced(db_btn_confirma)
 	);
 
-	debounce #(.INTERVAL(debounce_interval)) db_jogar (
+	debounce #(.INTERVAL(DEBOUNCE_INTERVAL)) db_jogar (
 		.pb1(btn_jogar),
 		.clk(clock),
 		.pb1_debounced(db_btn_jogar)
@@ -152,7 +161,7 @@ module fluxo_dados (
 		.pontos(pontuacao)
 	);
 
-	timeout_counter #(.TIMEOUT_CYCLES(timeout_cycles)) counter_timeout (
+	timeout_counter #(.TIMEOUT_CYCLES(TIMEOUT_CYCLES)) counter_timeout (
 		.clock(clock),
 		.zera(zera_timeout),
 		.conta(conta_timeout),
@@ -198,7 +207,7 @@ module fluxo_dados (
 		.pulso(confirmar)
 	);
 
-	register_n # ( .N(6) ) reg_jogada (
+	register_n # ( .N(JOGADA_BITS) ) reg_jogada (
 		.clock(clock),
 		.clear(zera_rgb_jogada),
 		.enable(registra_jogada),
@@ -206,7 +215,7 @@ module fluxo_dados (
 		.Q(s_jogada)
 	);
 
-	full_counter #( .M(4), .N(3) ) counter_modo  (
+	full_counter #( .M(MODE_MODULUS), .N(MODE_COUNTER_NUM_BITS) ) counter_modo  (
 		.clock  (clock),
 		.zera_as(zera_modo),
 		.zera_s (1'b0),
@@ -220,29 +229,29 @@ module fluxo_dados (
 	rgb_level_counter counter_led_r  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
-		.conta  ((add_rgb_jogada[2] || sub_rgb_jogada[2]) && mudar_rgb),
-		.neg    (sub_rgb_jogada[2] && !add_rgb_jogada[2]),
+		.conta  ((add_rgb_jogada[IDX_R] || sub_rgb_jogada[IDX_R]) && mudar_rgb),
+		.neg    (sub_rgb_jogada[IDX_R] && !add_rgb_jogada[IDX_R]),
 		.max_val(max_rgb),
 		.Q      (q_led_r)
 	);
 	rgb_level_counter counter_led_g  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
-		.conta  ((add_rgb_jogada[1] || sub_rgb_jogada[1]) && mudar_rgb),
-		.neg    (sub_rgb_jogada[1] && !add_rgb_jogada[1]),
+		.conta  ((add_rgb_jogada[IDX_G] || sub_rgb_jogada[IDX_G]) && mudar_rgb),
+		.neg    (sub_rgb_jogada[IDX_G] && !add_rgb_jogada[IDX_G]),
 		.max_val(max_rgb),
 		.Q      (q_led_g)
 	);
 	rgb_level_counter counter_led_b  (
 		.clock  (clock),
 		.zera_as(zera_rgb_jogada),
-		.conta  ((add_rgb_jogada[0] || sub_rgb_jogada[0]) && mudar_rgb),
-		.neg    (sub_rgb_jogada[0] && !add_rgb_jogada[0]),
+		.conta  ((add_rgb_jogada[IDX_B] || sub_rgb_jogada[IDX_B]) && mudar_rgb),
+		.neg    (sub_rgb_jogada[IDX_B] && !add_rgb_jogada[IDX_B]),
 		.max_val(max_rgb),
 		.Q      (q_led_b)
 	);
 	
-	register_n # ( .N(rgb_reg_num_bits) ) reg_rgb_alvo (
+	register_n # ( .N(RGB_REG_NUM_BITS) ) reg_rgb_alvo (
 		.clock(clock),
 		.clear(zera_rgb_alvo),
 		.enable(registra_rgb_alvo),
@@ -250,7 +259,7 @@ module fluxo_dados (
 		.Q(s_rgb_alvo)
 	);
 
-	register_n # ( .N(pontuacao_num_bits) ) reg_pontuacao (
+	register_n # ( .N(PONTUACAO_NUM_BITS) ) reg_pontuacao (
 		.clock(clock),
 		.clear(zera_pontuacao),
 		.enable(registra_pontuacao),

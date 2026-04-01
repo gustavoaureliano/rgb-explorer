@@ -1,17 +1,19 @@
-module rgb_pwm (
+module rgb_pwm #(
+    parameter integer PWM_BITS = 2
+) (
     input wire clk,
-    input wire [1:0] r,
-    input wire [1:0] g,
-    input wire [1:0] b,
+    input wire [PWM_BITS-1:0] r,
+    input wire [PWM_BITS-1:0] g,
+    input wire [PWM_BITS-1:0] b,
     output wire led_r,
     output wire led_g,
     output wire led_b
 );
 
-reg [1:0] counter = 0;
+reg [PWM_BITS-1:0] counter = {PWM_BITS{1'b0}};
 
 always @(posedge clk)
-    counter <= counter + 1;
+    counter <= counter + 1'b1;
 
 assign led_r = counter < r;
 assign led_g = counter < g;
