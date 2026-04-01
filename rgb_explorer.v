@@ -39,8 +39,11 @@ module rgb_explorer (
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
 	wire [5:0] s_rgb_alvo_vis;
+	wire [5:0] s_rgb_jogada_pwm;
+	wire [5:0] s_rgb_alvo_vis_pwm;
 	wire [3:0] s_pontuacao;
 	wire [2:0] s_modo;
+	wire [1:0] nivel_atual;
 	wire [7:0] s_estado;
 	wire [3:0] erro;
 
@@ -114,19 +117,32 @@ module rgb_explorer (
 		.leds_nivel(leds_nivel),
 		.leds_erro(leds_erro),
 		.s_modo(s_modo),
+		.nivel_atual(nivel_atual),
 		.timeout(timeout),
 		.erro(erro)
 	);
 
+	rgb_level_scale escala_jogada_pwm (
+		.nivel(nivel_atual),
+		.rgb_in(s_rgb_jogada),
+		.rgb_out(s_rgb_jogada_pwm)
+	);
+
+	rgb_level_scale escala_alvo_pwm (
+		.nivel(nivel_atual),
+		.rgb_in(s_rgb_alvo_vis),
+		.rgb_out(s_rgb_alvo_vis_pwm)
+	);
+
 	rgb_cod cod_rgb_jogada (
 		.clk(clock),
-		.jogada(s_rgb_jogada),
+		.jogada(s_rgb_jogada_pwm),
 		.display(rgb_jogada)
 	);
 
 	rgb_cod cod_rgb_alvo (
 		.clk(clock),
-		.jogada(s_rgb_alvo_vis),
+		.jogada(s_rgb_alvo_vis_pwm),
 		.display(rgb_alvo)
 	);
 

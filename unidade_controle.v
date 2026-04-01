@@ -22,7 +22,6 @@ module unidade_controle (
 	output reg       conta_modo,
 	output reg       zera_timeout,
 	output reg       conta_timeout,
-	output reg       foi_jogada,
 	output reg       mostra_rgb_alvo,
 	output reg       enable_cod_erro,
 	output reg [7:0] db_estado
@@ -109,7 +108,6 @@ always @* begin
 	mudar_rgb = (Eatual == muda_rgb) ? 1'b1 : 1'b0;
 	registra_rgb_alvo = (Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
 	registra_pontuacao = (Eatual == compara_cor) ? 1'b1 : 1'b0;
-	foi_jogada = (Eatual == reg_rgb_btn) ? 1'b1 : 1'b0;
 	mostra_rgb_alvo = (s_modo == 3'd1) || ((s_modo == 3'd2) && (Eatual == espera_timeout));
 	enable_cod_erro = 1'b1;
 

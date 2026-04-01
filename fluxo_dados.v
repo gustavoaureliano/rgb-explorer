@@ -19,7 +19,6 @@ module fluxo_dados (
 	input        zera_timeout,
 	input        conta_timeout,
 	input        enable_cod_erro,
-	input		 foi_jogada,
 	output       pulso_modo,
 	output       pulso_jogar,
 	output       jogada_feita,
@@ -30,6 +29,7 @@ module fluxo_dados (
 	output [2:0] leds_nivel,
 	output [2:0] leds_erro,
 	output [2:0] s_modo,
+	output [1:0] nivel_atual,
 	output       timeout,
 	output [3:0] erro
 );
@@ -51,6 +51,7 @@ module fluxo_dados (
 	wire [5:0] db_btns_plus_minus_rgb;
 	wire db_btn_modo, db_btn_confirma, db_btn_jogar;
 	wire [1:0] max_rgb;
+	wire modo_fim, modo_meio;
 
 	assign s_rgb_jogada = {q_led_r, q_led_g, q_led_b};
 
@@ -83,6 +84,7 @@ module fluxo_dados (
 
 	assign max_rgb = (nivel == 2'd0) ? 2'd1 :
 	                 (nivel == 2'd1) ? 2'd2 : 2'd3;
+	assign nivel_atual = nivel;
 
 	genvar i;
 	generate
@@ -207,9 +209,12 @@ module fluxo_dados (
 	full_counter #( .M(4), .N(3) ) counter_modo  (
 		.clock  (clock),
 		.zera_as(zera_modo),
+		.zera_s (1'b0),
 		.conta  (conta_modo),
 		.neg    (1'b0),
-		.Q      (s_modo)
+		.Q      (s_modo),
+		.fim    (modo_fim),
+		.meio   (modo_meio)
 	);
 
 	rgb_level_counter counter_led_r  (
