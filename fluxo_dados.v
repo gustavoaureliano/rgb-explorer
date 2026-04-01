@@ -52,6 +52,7 @@ module fluxo_dados (
 	localparam [1:0] MAX_RGB_FACIL = 2'd1;
 	localparam [1:0] MAX_RGB_NORMAL = 2'd2;
 	localparam [1:0] MAX_RGB_DIFICIL = 2'd3;
+	localparam [2:0] MODO_LIVRE = 3'd0;
 
 	wire [RGB_NUM_BITS-1:0] q_led_r, q_led_g, q_led_b;
 
@@ -60,6 +61,7 @@ module fluxo_dados (
 	wire [5:0] db_btns_plus_minus_rgb;
 	wire db_btn_modo, db_btn_confirma, db_btn_jogar;
 	wire [1:0] max_rgb;
+	wire [1:0] nivel_efetivo;
 	wire modo_fim, modo_meio;
 
 	assign s_rgb_jogada = {q_led_r, q_led_g, q_led_b};
@@ -91,9 +93,10 @@ module fluxo_dados (
 	assign sinal_jogar = ~db_btn_jogar;
 	assign rst_detect_jogar = db_btn_jogar;
 
-	assign max_rgb = (nivel == NIVEL_FACIL) ? MAX_RGB_FACIL :
-	                 (nivel == NIVEL_NORMAL) ? MAX_RGB_NORMAL : MAX_RGB_DIFICIL;
-	assign nivel_atual = nivel;
+	assign nivel_efetivo = (s_modo == MODO_LIVRE) ? MAX_RGB_DIFICIL : nivel;
+	assign max_rgb = (nivel_efetivo == NIVEL_FACIL) ? MAX_RGB_FACIL :
+	                 (nivel_efetivo == NIVEL_NORMAL) ? MAX_RGB_NORMAL : MAX_RGB_DIFICIL;
+	assign nivel_atual = nivel_efetivo;
 
 	genvar i;
 	generate
