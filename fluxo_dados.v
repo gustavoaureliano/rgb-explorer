@@ -50,7 +50,8 @@ module fluxo_dados (
 	output [2:0] s_modo,
 	output [1:0] nivel_atual,
 	output       timeout,
-	output [3:0] erro
+	output [3:0] erro,
+	output [5:0] db_rgb_alvo
 );
 	localparam RGB_LEDS_MODULUS = 4;
 	localparam RGB_NUM_BITS = $clog2(RGB_LEDS_MODULUS);
@@ -128,6 +129,8 @@ module fluxo_dados (
 
 	assign m4_rgb_show = seq_show_word;
 	assign alvo_comp = (m4_ativo && usa_alvo_seq) ? seq_input_word : s_rgb_alvo;
+
+	assign db_rgb_alvo = (s_modo == 3) ? seq_input_word : s_rgb_alvo;
 
 	genvar i;
 	generate

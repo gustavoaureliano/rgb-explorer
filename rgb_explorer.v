@@ -46,6 +46,7 @@ module rgb_explorer (
 	wire mostra_rgb_alvo;
 	wire enable_cod_erro;
 	wire [5:0] s_rgb_jogada;
+	wire [5:0] db_rgb_alvo;
 	wire [5:0] s_rgb_alvo;
 	wire [5:0] m4_rgb_show;
 	wire [5:0] s_rgb_alvo_vis;
@@ -161,6 +162,7 @@ module rgb_explorer (
 		.m4_rgb_show(m4_rgb_show),
 		.s_rgb_jogada(s_rgb_jogada),
 		.s_rgb_alvo(s_rgb_alvo),
+		.db_rgb_alvo(db_rgb_alvo),
 		.s_pontuacao(s_pontuacao),
 		.leds_nivel(leds_nivel),
 		.leds_erro(leds_erro),
@@ -202,17 +204,17 @@ module rgb_explorer (
 	);
 
 	hexa7seg display_jogada_r (
-		.hexa({2'b0, s_rgb_alvo[5:4]}),
+		.hexa({2'b0, db_rgb_alvo[5:4]}),
 		.display(db_jogada_r)
 	);
 
 	hexa7seg display_jogada_g (
-		.hexa({2'b0, s_rgb_alvo[3:2]}),
+		.hexa({2'b0, db_rgb_alvo[3:2]}),
 		.display(db_jogada_g)
 	);
 
 	hexa7seg display_jogada_b (
-		.hexa({2'b0, s_rgb_alvo[1:0]}),
+		.hexa({2'b0, db_rgb_alvo[1:0]}),
 		.display(db_jogada_b)
 	);
 
