@@ -157,17 +157,17 @@ module rgb_explorer (
 	);
 
 	hexa7seg display_jogada_r (
-		.hexa({2'b0, s_rgb_jogada[5:4]}),
+		.hexa({2'b0, s_rgb_alvo[5:4]}),
 		.display(db_jogada_r)
 	);
 
 	hexa7seg display_jogada_g (
-		.hexa({2'b0, s_rgb_jogada[3:2]}),
+		.hexa({2'b0, s_rgb_alvo[3:2]}),
 		.display(db_jogada_g)
 	);
 
 	hexa7seg display_jogada_b (
-		.hexa({2'b0, s_rgb_jogada[1:0]}),
+		.hexa({2'b0, s_rgb_alvo[1:0]}),
 		.display(db_jogada_b)
 	);
 
