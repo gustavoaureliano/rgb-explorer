@@ -83,6 +83,8 @@ module fluxo_dados (
 
 	wire [RGB_REG_NUM_BITS-1:0] random;
 	wire [RGB_REG_NUM_BITS-1:0] random_limitado;
+	wire [RGB_REG_NUM_BITS-1:0] random_limitado_nonzero;
+	wire [RGB_REG_NUM_BITS-1:0] random_nonzero;
 	wire [RGB_REG_NUM_BITS-1:0] alvo_comp;
 	wire [5:0] db_btns_plus_minus_rgb;
 	wire db_btn_modo, db_btn_confirma, db_btn_jogar;
@@ -169,13 +171,18 @@ module fluxo_dados (
 		.random(random)
 	);
 
+	rgb_nonzero_guard guard_seq_nonzero (
+		.rgb_in(random),
+		.rgb_out(random_nonzero)
+	);
+
 	mode4_seq_engine #(
 		.MAX_SEQ_LEN(4),
 		.SHOW_CYCLES(SHOW_CYCLES),
 		.GAP_CYCLES(GAP_CYCLES)
 	) seq_mode4 (
 		.clock(clock),
-		.rnd_step(random),
+		.rnd_step(random_nonzero),
 		.registra_seq(registra_seq),
 		.zera_seq_len(zera_seq_len),
 		.conta_seq_len(conta_seq_len),
@@ -200,6 +207,11 @@ module fluxo_dados (
 		.nivel(nivel),
 		.rgb_in(random),
 		.rgb_out(random_limitado)
+	);
+
+	rgb_nonzero_guard guard_alvo_nonzero (
+		.rgb_in(random_limitado),
+		.rgb_out(random_limitado_nonzero)
 	);
 
 	color_error diff_color (
@@ -319,7 +331,7 @@ module fluxo_dados (
 		.clock(clock),
 		.clear(zera_rgb_alvo),
 		.enable(registra_rgb_alvo),
-		.D(random_limitado),
+		.D(random_limitado_nonzero),
 		.Q(s_rgb_alvo)
 	);
 

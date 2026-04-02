@@ -158,6 +158,7 @@ set_location_assignment PIN_J17 -to leds_nivel[2]
 set_global_assignment -name VERILOG_FILE rgb_level_scale.v
 set_global_assignment -name VERILOG_FILE rgb_intensity_bar.v
 set_global_assignment -name VERILOG_FILE mode4_seq_engine.v
+set_global_assignment -name VERILOG_FILE rgb_nonzero_guard.v
 set_global_assignment -name VERILOG_FILE rgb_level_counter.v
 set_global_assignment -name VERILOG_FILE cod_leds_nivel.v
 set_global_assignment -name VERILOG_FILE cod_erro.v
