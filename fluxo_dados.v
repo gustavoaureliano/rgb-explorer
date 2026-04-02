@@ -19,10 +19,29 @@ module fluxo_dados (
 	input        zera_timeout,
 	input        conta_timeout,
 	input        enable_cod_erro,
+	input        m4_ativo,
+	input        registra_seq,
+	input        zera_seq_len,
+	input        conta_seq_len,
+	input        zera_idx_show,
+	input        conta_idx_show,
+	input        zera_idx_input,
+	input        conta_idx_input,
+	input        zera_t_show,
+	input        conta_t_show,
+	input        zera_t_gap,
+	input        conta_t_gap,
+	input        usa_alvo_seq,
 	output       pulso_modo,
 	output       pulso_jogar,
 	output       jogada_feita,
 	output       confirmar,
+	output       fim_t_show,
+	output       fim_t_gap,
+	output       fim_show_seq,
+	output       fim_input_seq,
+	output       seq_no_max,
+	output [5:0] m4_rgb_show,
 	output [5:0] s_rgb_alvo,
 	output [5:0] s_rgb_jogada,
 	output [3:0] s_pontuacao,
@@ -54,15 +73,24 @@ module fluxo_dados (
 	localparam [1:0] MAX_RGB_DIFICIL = 2'd3;
 	localparam [2:0] MODO_LIVRE = 3'd0;
 
+	localparam SHOW_CYCLES = 2000; // 1 KHz -> 2 s
+	// localparam SHOW_CYCLES = 100000000; // 50 MHz -> 2 s
+	localparam GAP_CYCLES = 500; // 1 KHz -> 500 ms
+	// localparam GAP_CYCLES = 25000000; // 50 MHz -> 500 ms
+
 	wire [RGB_NUM_BITS-1:0] q_led_r, q_led_g, q_led_b;
 
 	wire [RGB_REG_NUM_BITS-1:0] random;
 	wire [RGB_REG_NUM_BITS-1:0] random_limitado;
+	wire [RGB_REG_NUM_BITS-1:0] alvo_comp;
 	wire [5:0] db_btns_plus_minus_rgb;
 	wire db_btn_modo, db_btn_confirma, db_btn_jogar;
 	wire [1:0] max_rgb;
 	wire [1:0] nivel_efetivo;
 	wire modo_fim, modo_meio;
+
+	wire [5:0] seq_show_word;
+	wire [5:0] seq_input_word;
 
 	assign s_rgb_jogada = {q_led_r, q_led_g, q_led_b};
 
@@ -93,10 +121,13 @@ module fluxo_dados (
 	assign sinal_jogar = ~db_btn_jogar;
 	assign rst_detect_jogar = db_btn_jogar;
 
-	assign nivel_efetivo = (s_modo == MODO_LIVRE) ? MAX_RGB_DIFICIL : nivel;
+	assign nivel_efetivo = (s_modo == MODO_LIVRE || m4_ativo) ? MAX_RGB_DIFICIL : nivel;
 	assign max_rgb = (nivel_efetivo == NIVEL_FACIL) ? MAX_RGB_FACIL :
 	                 (nivel_efetivo == NIVEL_NORMAL) ? MAX_RGB_NORMAL : MAX_RGB_DIFICIL;
 	assign nivel_atual = nivel_efetivo;
+
+	assign m4_rgb_show = seq_show_word;
+	assign alvo_comp = (m4_ativo && usa_alvo_seq) ? seq_input_word : s_rgb_alvo;
 
 	genvar i;
 	generate
@@ -135,6 +166,33 @@ module fluxo_dados (
 		.random(random)
 	);
 
+	mode4_seq_engine #(
+		.MAX_SEQ_LEN(4),
+		.SHOW_CYCLES(SHOW_CYCLES),
+		.GAP_CYCLES(GAP_CYCLES)
+	) seq_mode4 (
+		.clock(clock),
+		.rnd_step(random),
+		.registra_seq(registra_seq),
+		.zera_seq_len(zera_seq_len),
+		.conta_seq_len(conta_seq_len),
+		.zera_idx_show(zera_idx_show),
+		.conta_idx_show(conta_idx_show),
+		.zera_idx_input(zera_idx_input),
+		.conta_idx_input(conta_idx_input),
+		.zera_t_show(zera_t_show),
+		.conta_t_show(conta_t_show),
+		.zera_t_gap(zera_t_gap),
+		.conta_t_gap(conta_t_gap),
+		.fim_t_show(fim_t_show),
+		.fim_t_gap(fim_t_gap),
+		.fim_show_seq(fim_show_seq),
+		.fim_input_seq(fim_input_seq),
+		.seq_no_max(seq_no_max),
+		.seq_show_word(seq_show_word),
+		.seq_input_word(seq_input_word)
+	);
+
 	rgb_level_limit limitador_rgb_alvo (
 		.nivel(nivel),
 		.rgb_in(random),
@@ -142,9 +200,9 @@ module fluxo_dados (
 	);
 
 	color_error diff_color (
-		.R1(s_rgb_alvo[5:4]),
-		.G1(s_rgb_alvo[3:2]),
-		.B1(s_rgb_alvo[1:0]),
+		.R1(alvo_comp[5:4]),
+		.G1(alvo_comp[3:2]),
+		.B1(alvo_comp[1:0]),
 		.R2(s_rgb_jogada[5:4]),
 		.G2(s_rgb_jogada[3:2]),
 		.B2(s_rgb_jogada[1:0]),

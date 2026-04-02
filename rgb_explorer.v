@@ -31,16 +31,23 @@ module rgb_explorer (
 	wire zera_rgb_jogada, registra_jogada;
 	wire zera_rgb_alvo, registra_rgb_alvo;
 	wire zera_pontuacao, registra_pontuacao;
+	wire zera_rnd;
 	wire zera_nivel, conta_nivel;
 	wire zera_modo, conta_modo;
 	wire zera_timeout, conta_timeout;
+	wire m4_ativo, registra_seq, zera_seq_len, conta_seq_len;
+	wire zera_idx_show, conta_idx_show, zera_idx_input, conta_idx_input;
+	wire zera_t_show, conta_t_show, zera_t_gap, conta_t_gap;
+	wire mostra_seq, usa_alvo_seq;
 	wire jogada_feita, pulso_modo, confirmar, pulso_jogar;
 	wire timeout;
+	wire fim_t_show, fim_t_gap, fim_show_seq, fim_input_seq, seq_no_max;
 	wire mudar_rgb;
 	wire mostra_rgb_alvo;
 	wire enable_cod_erro;
 	wire [5:0] s_rgb_jogada;
 	wire [5:0] s_rgb_alvo;
+	wire [5:0] m4_rgb_show;
 	wire [5:0] s_rgb_alvo_vis;
 	wire [5:0] s_rgb_jogada_pwm;
 	wire [5:0] s_rgb_alvo_vis_pwm;
@@ -58,7 +65,7 @@ module rgb_explorer (
 	assign db_btn_confirma = btn_confirma;
 	assign db_btn_jogar = btn_jogar;
 
-	assign s_rgb_alvo_vis = mostra_rgb_alvo ? s_rgb_alvo : 6'b0;
+	assign s_rgb_alvo_vis = mostra_seq ? m4_rgb_show : (mostra_rgb_alvo ? s_rgb_alvo : 6'b0);
 
 	unidade_controle uc (
 		.clock(clock),
@@ -70,6 +77,11 @@ module rgb_explorer (
 		.timeout(timeout),
 		.s_modo(s_modo),
 		.erro(erro),
+		.fim_t_show(fim_t_show),
+		.fim_t_gap(fim_t_gap),
+		.fim_show_seq(fim_show_seq),
+		.fim_input_seq(fim_input_seq),
+		.seq_no_max(seq_no_max),
 		.zera_rgb_jogada(zera_rgb_jogada),
 		.zera_rgb_alvo(zera_rgb_alvo),
 		.zera_pontuacao(zera_pontuacao),
@@ -85,6 +97,20 @@ module rgb_explorer (
 		.zera_timeout(zera_timeout),
 		.conta_timeout(conta_timeout),
 		.mostra_rgb_alvo(mostra_rgb_alvo),
+		.m4_ativo(m4_ativo),
+		.registra_seq(registra_seq),
+		.zera_seq_len(zera_seq_len),
+		.conta_seq_len(conta_seq_len),
+		.zera_idx_show(zera_idx_show),
+		.conta_idx_show(conta_idx_show),
+		.zera_idx_input(zera_idx_input),
+		.conta_idx_input(conta_idx_input),
+		.zera_t_show(zera_t_show),
+		.conta_t_show(conta_t_show),
+		.zera_t_gap(zera_t_gap),
+		.conta_t_gap(conta_t_gap),
+		.mostra_seq(mostra_seq),
+		.usa_alvo_seq(usa_alvo_seq),
 		.enable_cod_erro(enable_cod_erro),
 		.db_estado(s_estado)
 	);
@@ -110,10 +136,29 @@ module rgb_explorer (
 		.zera_timeout(zera_timeout),
 		.conta_timeout(conta_timeout),
 		.enable_cod_erro(enable_cod_erro),
+		.m4_ativo(m4_ativo),
+		.registra_seq(registra_seq),
+		.zera_seq_len(zera_seq_len),
+		.conta_seq_len(conta_seq_len),
+		.zera_idx_show(zera_idx_show),
+		.conta_idx_show(conta_idx_show),
+		.zera_idx_input(zera_idx_input),
+		.conta_idx_input(conta_idx_input),
+		.zera_t_show(zera_t_show),
+		.conta_t_show(conta_t_show),
+		.zera_t_gap(zera_t_gap),
+		.conta_t_gap(conta_t_gap),
+		.usa_alvo_seq(usa_alvo_seq),
 		.pulso_modo(pulso_modo),
 		.pulso_jogar(pulso_jogar),
 		.jogada_feita(jogada_feita),
 		.confirmar(confirmar),
+		.fim_t_show(fim_t_show),
+		.fim_t_gap(fim_t_gap),
+		.fim_show_seq(fim_show_seq),
+		.fim_input_seq(fim_input_seq),
+		.seq_no_max(seq_no_max),
+		.m4_rgb_show(m4_rgb_show),
 		.s_rgb_jogada(s_rgb_jogada),
 		.s_rgb_alvo(s_rgb_alvo),
 		.s_pontuacao(s_pontuacao),
