@@ -151,43 +151,70 @@ module rgb_explorer_tb_fim_partida;
         btns_plus_rgb = 3'b111;
         btns_minus_rgb = 3'b111;
 
+        // Cenario A: encerra automaticamente ao atingir 15 pontos
         reset_dut();
-
-        // Seleciona modo 2 (reproduzir)
         press_modo();
         if (dut.s_modo !== 3'd1)
-            $fatal(1, "Modo 2 nao selecionado: s_modo=%0d", dut.s_modo);
+            $fatal(1, "Modo 2 nao selecionado no cenario A: s_modo=%0d", dut.s_modo);
 
-        // Inicia partida
         press_jogar();
+        force dut.erro = 4'd0; // 2 pontos por rodada
 
-        // Primeiras 8 jogadas: fluxo normal de fim de rodada
-        for (i = 0; i < 8; i = i + 1) begin
+        for (i = 0; i < 7; i = i + 1) begin
             press_confirma();
             wait_mode23_result();
             press_jogar();
         end
 
-        // 9a jogada completa ciclo de niveis e deve ir direto para fim_partida
+        if (dut.s_pontuacao !== 4'd14)
+            $fatal(1, "Pontuacao esperada=14 antes do teto, observada=%0d", dut.s_pontuacao);
+
         press_confirma();
         wait_state(ST_FIM_PARTIDA);
+
+        if (dut.s_pontuacao !== 4'hF)
+            $fatal(1, "Pontuacao deveria saturar em 15, observada=%0d", dut.s_pontuacao);
 
         pontuacao_final = dut.s_pontuacao;
         repeat (5) @(posedge clock);
         if (dut.s_pontuacao !== pontuacao_final)
             $fatal(1, "Pontuacao nao ficou estavel em fim_partida: esperado=%0d observado=%0d", pontuacao_final, dut.s_pontuacao);
 
-        // Em fim_partida, jogar deve reiniciar partida e zerar pontos/nivel
         press_jogar();
         repeat (5) @(posedge clock);
 
         if (dut.s_pontuacao !== 4'd0)
-            $fatal(1, "Pontuacao nao zerou apos reinicio: %0d", dut.s_pontuacao);
+            $fatal(1, "Pontuacao nao zerou apos reinicio no cenario A: %0d", dut.s_pontuacao);
 
         if (dut.fd.nivel !== 2'd0)
-            $fatal(1, "Nivel nao voltou para facil apos reinicio: %0d", dut.fd.nivel);
+            $fatal(1, "Nivel nao voltou para facil apos reinicio no cenario A: %0d", dut.fd.nivel);
 
-        $display("tb_fim_partida: OK");
+        release dut.erro;
+
+        // Cenario B: encerra no ciclo de niveis (dificil -> facil) sem atingir teto
+        reset_dut();
+        press_modo();
+        if (dut.s_modo !== 3'd1)
+            $fatal(1, "Modo 2 nao selecionado no cenario B: s_modo=%0d", dut.s_modo);
+
+        press_jogar();
+        force dut.erro = 4'd3; // 0 ponto por rodada
+
+        for (i = 0; i < 8; i = i + 1) begin
+            press_confirma();
+            wait_mode23_result();
+            press_jogar();
+        end
+
+        press_confirma();
+        wait_state(ST_FIM_PARTIDA);
+
+        if (dut.s_pontuacao !== 4'd0)
+            $fatal(1, "Pontuacao deveria permanecer 0 no cenario B, observada=%0d", dut.s_pontuacao);
+
+        release dut.erro;
+
+        $display("tb_fim_partida: OK (score cap + ciclo de niveis)");
         $finish;
     end
 

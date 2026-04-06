@@ -14,6 +14,7 @@ module unidade_controle (
 	input            fim_input_seq,
 	input            seq_no_max,
 	input            ciclo_niveis_completo,
+	input            atingiu_pontuacao_max,
 	output reg       zera_rgb_jogada,
 	output reg       zera_rgb_alvo,
 	output reg       zera_pontuacao,
@@ -140,6 +141,8 @@ always @* begin
 		compara_cor: begin
 				if (s_modo == MODO_DESAFIO)
 					Eprox = m4_next_input;
+				else if ((s_modo == MODO_REPRODUZIR || s_modo == MODO_MEMORIA) && atingiu_pontuacao_max)
+					Eprox = fim_partida;
 				else if ((s_modo == MODO_REPRODUZIR || s_modo == MODO_MEMORIA) && ciclo_niveis_completo)
 					Eprox = fim_partida;
 				else if (erro == ERRO_EXATO)

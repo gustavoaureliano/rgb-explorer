@@ -52,6 +52,7 @@ module fluxo_dados (
 	output [2:0] s_modo,
 	output [1:0] nivel_atual,
 	output       ciclo_niveis_completo,
+	output       atingiu_pontuacao_max,
 	output       timeout,
 	output [3:0] erro,
 	output [5:0] db_rgb_alvo
@@ -67,6 +68,7 @@ module fluxo_dados (
 	localparam RGB_REG_NUM_BITS = RGB_NUM_BITS*3;
 	localparam JOGADA_BITS = 6;
 	localparam PONTUACAO_NUM_BITS = 4;
+	localparam [4:0] PONTUACAO_MAX = 5'd15;
 	localparam IDX_R = 2;
 	localparam IDX_G = 1;
 	localparam IDX_B = 0;
@@ -167,7 +169,13 @@ module fluxo_dados (
 	);
 
 	wire [3:0] pontuacao;
+	wire [4:0] soma_pontuacao;
+	wire [3:0] prox_pontuacao;
 	reg [3:0] erro_latch;
+
+	assign soma_pontuacao = {1'b0, s_pontuacao} + {1'b0, pontuacao};
+	assign prox_pontuacao = (soma_pontuacao >= PONTUACAO_MAX) ? 4'hF : soma_pontuacao[3:0];
+	assign atingiu_pontuacao_max = registra_pontuacao && (soma_pontuacao >= PONTUACAO_MAX);
 
 	lfsr_random rnd (
 		.clk(clock),
@@ -351,7 +359,7 @@ module fluxo_dados (
 		.clock(clock),
 		.clear(zera_pontuacao),
 		.enable(registra_pontuacao),
-		.D(s_pontuacao + pontuacao),
+		.D(prox_pontuacao),
 		.Q(s_pontuacao)
 	);
 
