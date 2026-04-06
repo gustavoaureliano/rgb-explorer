@@ -189,7 +189,7 @@ module fluxo_dados (
 	);
 
 	mode4_seq_engine #(
-		.MAX_SEQ_LEN(4),
+		.MAX_SEQ_LEN(3),
 		.SHOW_CYCLES(SHOW_CYCLES),
 		.GAP_CYCLES(GAP_CYCLES)
 	) seq_mode4 (

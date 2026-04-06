@@ -153,7 +153,7 @@ module rgb_explorer_tb_modo4;
 
         wait_state(8'h18); // m4_round_fail
 
-        // Cenário de vitória final (MAX_SEQ_LEN=4)
+        // Cenário de vitória final (MAX_SEQ_LEN=3)
         // Acelera exibição da sequência e força acertos.
         force dut.fim_t_show = 1'b1;
         force dut.fim_t_gap = 1'b1;
@@ -161,7 +161,7 @@ module rgb_explorer_tb_modo4;
 
         press_jogar();
 
-        for (len = 1; len <= 4; len = len + 1) begin
+        for (len = 1; len <= 3; len = len + 1) begin
             wait_state(8'h12); // m4_wait_input
 
             // Confirma cada passo da sequência na rodada atual
@@ -172,7 +172,7 @@ module rgb_explorer_tb_modo4;
 
             press_confirma();
 
-            if (len < 4) begin
+            if (len < 3) begin
                 wait_state(8'h16); // m4_round_ok
                 press_jogar();
             end else begin
