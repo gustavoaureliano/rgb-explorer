@@ -53,6 +53,7 @@ module rgb_explorer (
 	wire [5:0] s_rgb_jogada_pwm;
 	wire [5:0] s_rgb_alvo_vis_pwm;
 	wire [3:0] s_pontuacao;
+	wire [3:0] modo_display;
 	wire [2:0] s_modo;
 	wire [1:0] nivel_atual;
 	wire [7:0] s_estado;
@@ -65,6 +66,7 @@ module rgb_explorer (
 	assign db_btn_modo = btn_modo;
 	assign db_btn_confirma = btn_confirma;
 	assign db_btn_jogar = btn_jogar;
+	assign modo_display = {1'b0, s_modo} + 4'd1;
 
 	assign s_rgb_alvo_vis = mostra_seq ? m4_rgb_show : (mostra_rgb_alvo ? s_rgb_alvo : 6'b0);
 
@@ -219,7 +221,7 @@ module rgb_explorer (
 	);
 
 	hexa7seg display_modo (
-		.hexa({1'b0, s_modo}),
+		.hexa(modo_display),
 		.display(hex7seg_modo)
 	);
 
