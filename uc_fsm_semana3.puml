@@ -11,6 +11,7 @@ skinparam state {
   BackgroundColor<<base>> #ECEFF1
   BackgroundColor<<m23>>  #E3F2FD
   BackgroundColor<<m3>>   #FFF3E0
+  BackgroundColor<<m4>>   #E8F5E9
   BackgroundColor<<fim>>  #FCE4EC
 }
 
@@ -30,11 +31,29 @@ state "compara cor" as compara_cor <<base>>
 state "fim exato" as fim_exato <<fim>>
 state "fim perto" as fim_perto <<fim>>
 state "fim longe" as fim_longe <<fim>>
+state "fim partida" as fim_partida <<fim>>
+
+state "m4 init jogo" as m4_game_init <<m4>>
+state "m4 adiciona passo" as m4_add_step <<m4>>
+state "m4 mostra passo" as m4_show_step <<m4>>
+state "m4 gap" as m4_show_gap <<m4>>
+state "m4 prox show" as m4_next_show <<m4>>
+state "m4 espera input" as m4_wait_input <<m4>>
+state "m4 registra RGB" as m4_reg_rgb_btn <<m4>>
+state "m4 muda RGB" as m4_muda_rgb <<m4>>
+state "m4 prox input" as m4_next_input <<m4>>
+state "m4 rodada ok" as m4_round_ok <<m4>>
+state "m4 aumenta len" as m4_add_len <<m4>>
+state "m4 rodada fail" as m4_round_fail <<m4>>
+state "m4 vitoria final" as m4_vitoria_final <<m4>>
 
 state d_modo <<choice>>
 state d_timeout <<choice>>
+state d_compara <<choice>>
+state d_end_m23 <<choice>>
 state d_erro <<choice>>
 state proxima_rodada <<choice>>
+state d_m4_input <<choice>>
 
 [*] --> inicial : reset
 inicial --> sel_modo
@@ -46,7 +65,8 @@ sel_modo --> d_modo : pulso_jogar
 d_modo --> espera_btn : s_modo = 0
 d_modo --> rst_pontos : s_modo != 0
 
-rst_pontos --> reg_cor_alvo
+rst_pontos --> reg_cor_alvo : s_modo != 3
+rst_pontos --> m4_game_init : s_modo = 3
 reg_cor_alvo --> d_timeout
 
 d_timeout --> espera_timeout : s_modo = 2
@@ -59,8 +79,18 @@ espera_btn --> reg_rgb_btn : jogada
 reg_rgb_btn --> muda_rgb
 muda_rgb --> espera_btn
 
-espera_btn --> compara_cor : confirmar
-compara_cor --> d_erro
+espera_btn -down-> compara_cor : confirmar
+m4_wait_input --> m4_reg_rgb_btn : jogada
+m4_reg_rgb_btn --> m4_muda_rgb
+m4_muda_rgb --> m4_wait_input
+m4_wait_input -down-> compara_cor : confirmar
+
+compara_cor -up-> d_compara
+d_compara -up-> m4_next_input : s_modo = 3
+d_compara -up-> d_end_m23 : s_modo != 3
+
+d_end_m23 -up-> fim_partida : (s_modo=1/2) && (atingiu_pontuacao_max || ciclo_niveis_completo)
+d_end_m23 -up-> d_erro : demais casos
 
 d_erro --> fim_exato : erro == 0
 d_erro --> fim_perto : erro < 3
@@ -70,4 +100,28 @@ fim_exato --> proxima_rodada : pulso_jogar
 fim_perto --> proxima_rodada : pulso_jogar
 fim_longe --> proxima_rodada : pulso_jogar
 proxima_rodada --> reg_cor_alvo
+fim_partida --> rst_pontos : pulso_jogar
+
+m4_game_init -down-> m4_add_step
+m4_add_step -down-> m4_show_step
+m4_show_step --> m4_show_step : fim_t_show = 0
+m4_show_step -down-> m4_show_gap : fim_t_show = 1
+m4_show_gap --> m4_show_gap : fim_t_gap = 0
+m4_show_gap -down-> m4_next_show : fim_t_gap = 1
+m4_next_show -up-> m4_show_step : fim_show_seq = 0
+m4_next_show -down-> m4_wait_input : fim_show_seq = 1
+
+m4_next_input --> d_m4_input
+d_m4_input --> m4_round_fail : erro >= 3
+d_m4_input --> m4_vitoria_final : fim_input_seq && seq_no_max
+d_m4_input --> m4_round_ok : fim_input_seq && !seq_no_max
+d_m4_input --> m4_wait_input : !fim_input_seq && erro < 3
+
+m4_round_ok -down-> m4_add_len : pulso_jogar
+m4_add_len -up-> m4_add_step
+m4_round_fail -up-> m4_game_init : pulso_jogar
+m4_vitoria_final -up-> m4_game_init : pulso_jogar
+
+reg_cor_alvo -[hidden]right-> m4_game_init
+compara_cor -[hidden]down-> fim_perto
 @enduml
