@@ -51,6 +51,7 @@ module fluxo_dados (
 	output [2:0] leds_erro,
 	output [2:0] s_modo,
 	output [1:0] nivel_atual,
+	output       ciclo_niveis_completo,
 	output       timeout,
 	output [3:0] erro,
 	output [5:0] db_rgb_alvo
@@ -238,7 +239,8 @@ module fluxo_dados (
 		.clk(clock),
 		.reset(zera_nivel),
 		.jogada(conta_nivel),
-		.level(nivel)
+		.level(nivel),
+		.ciclo_niveis_completo(ciclo_niveis_completo)
 	);
 
 	score_calc calc_pontuacao (

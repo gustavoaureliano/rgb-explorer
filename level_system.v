@@ -4,7 +4,8 @@ module level_system #(
     input            clk,
     input            reset,
     input            jogada,
-    output reg [1:0] level
+    output reg [1:0] level,
+    output           ciclo_niveis_completo
 );
     localparam [1:0] NIVEL_FACIL = 2'd0;
     localparam [1:0] NIVEL_NORMAL = 2'd1;
@@ -12,6 +13,10 @@ module level_system #(
     localparam integer COUNT_BITS = (PLAYS_PER_LEVEL > 1) ? $clog2(PLAYS_PER_LEVEL) : 1;
 
     reg [COUNT_BITS-1:0] conta_jogada;
+
+    assign ciclo_niveis_completo = jogada &&
+                                   (conta_jogada == PLAYS_PER_LEVEL-1) &&
+                                   (level == NIVEL_DIFICIL);
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin

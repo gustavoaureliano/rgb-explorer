@@ -13,6 +13,7 @@ module unidade_controle (
 	input            fim_show_seq,
 	input            fim_input_seq,
 	input            seq_no_max,
+	input            ciclo_niveis_completo,
 	output reg       zera_rgb_jogada,
 	output reg       zera_rgb_alvo,
 	output reg       zera_pontuacao,
@@ -74,6 +75,7 @@ parameter m4_round_ok = 8'h16;
 parameter m4_add_len = 8'h17;
 parameter m4_round_fail = 8'h18;
 parameter m4_vitoria_final = 8'h19;
+parameter fim_partida = 8'h1A;
 
 localparam [2:0] MODO_LIVRE = 3'd0;
 localparam [2:0] MODO_REPRODUZIR = 3'd1;
@@ -138,6 +140,8 @@ always @* begin
 		compara_cor: begin
 				if (s_modo == MODO_DESAFIO)
 					Eprox = m4_next_input;
+				else if ((s_modo == MODO_REPRODUZIR || s_modo == MODO_MEMORIA) && ciclo_niveis_completo)
+					Eprox = fim_partida;
 				else if (erro == ERRO_EXATO)
 					Eprox = fim_exato;
 				else if (erro < ERRO_PERTO_LIMITE)
@@ -159,6 +163,7 @@ always @* begin
 		m4_add_len: Eprox = m4_add_step;
 		m4_round_fail: Eprox = pulso_jogar ? m4_game_init : m4_round_fail;
 		m4_vitoria_final: Eprox = pulso_jogar ? m4_game_init : m4_vitoria_final;
+		fim_partida: Eprox = pulso_jogar ? rst_pontos : fim_partida;
 		fim_exato: Eprox = pulso_jogar ? reg_cor_alvo : fim_exato;
 		fim_perto: Eprox = pulso_jogar ? reg_cor_alvo : fim_perto;
 		fim_longe: Eprox = pulso_jogar ? reg_cor_alvo : fim_longe;
@@ -200,7 +205,8 @@ always @* begin
 	zera_erro_latch = (Eatual == inicial || Eatual == rst_pontos || Eatual == m4_game_init) ? 1'b1 : 1'b0;
 	registra_erro_latch = (Eatual == compara_cor) ? 1'b1 : 1'b0;
 	enable_cod_erro = (Eatual == fim_exato) || (Eatual == fim_perto) || (Eatual == fim_longe) ||
-	                 (Eatual == m4_round_ok) || (Eatual == m4_round_fail) || (Eatual == m4_vitoria_final);
+	                 (Eatual == m4_round_ok) || (Eatual == m4_round_fail) || (Eatual == m4_vitoria_final) ||
+	                 (Eatual == fim_partida);
 
 	case (Eatual)
 		inicial:      db_estado = 8'h0;
@@ -229,6 +235,7 @@ always @* begin
 		m4_add_len: db_estado = 8'h17;
 		m4_round_fail: db_estado = 8'h18;
 		m4_vitoria_final: db_estado = 8'h19;
+		fim_partida: db_estado = 8'h1A;
 		default: db_estado = 8'hFF;
 	endcase
 end

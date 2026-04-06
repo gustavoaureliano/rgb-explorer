@@ -42,6 +42,7 @@ module rgb_explorer (
 	wire zera_erro_latch, registra_erro_latch;
 	wire jogada_feita, pulso_modo, confirmar, pulso_jogar;
 	wire timeout;
+	wire ciclo_niveis_completo;
 	wire fim_t_show, fim_t_gap, fim_show_seq, fim_input_seq, seq_no_max;
 	wire mudar_rgb;
 	wire mostra_rgb_alvo;
@@ -86,6 +87,7 @@ module rgb_explorer (
 		.fim_show_seq(fim_show_seq),
 		.fim_input_seq(fim_input_seq),
 		.seq_no_max(seq_no_max),
+		.ciclo_niveis_completo(ciclo_niveis_completo),
 		.zera_rgb_jogada(zera_rgb_jogada),
 		.zera_rgb_alvo(zera_rgb_alvo),
 		.zera_pontuacao(zera_pontuacao),
@@ -175,6 +177,7 @@ module rgb_explorer (
 		.leds_erro(leds_erro),
 		.s_modo(s_modo),
 		.nivel_atual(nivel_atual),
+		.ciclo_niveis_completo(ciclo_niveis_completo),
 		.timeout(timeout),
 		.erro(erro)
 	);
