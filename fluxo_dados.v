@@ -32,6 +32,8 @@ module fluxo_dados (
 	input        zera_t_gap,
 	input        conta_t_gap,
 	input        usa_alvo_seq,
+	input        zera_erro_latch,
+	input        registra_erro_latch,
 	output       pulso_modo,
 	output       pulso_jogar,
 	output       jogada_feita,
@@ -164,6 +166,7 @@ module fluxo_dados (
 	);
 
 	wire [3:0] pontuacao;
+	reg [3:0] erro_latch;
 
 	lfsr_random rnd (
 		.clk(clock),
@@ -224,6 +227,13 @@ module fluxo_dados (
 		.error(erro)
 	);
 
+	always @(posedge clock) begin
+		if (zera_erro_latch)
+			erro_latch <= 4'd0;
+		else if (registra_erro_latch)
+			erro_latch <= erro;
+	end
+
 	level_system level_sys (
 		.clk(clock),
 		.reset(zera_nivel),
@@ -245,7 +255,7 @@ module fluxo_dados (
 	);
 
 	cod_erro coderro (
-		.erro(erro),
+		.erro(erro_latch),
 		.enable(enable_cod_erro),
 		.leds_erro(leds_erro)
 	);

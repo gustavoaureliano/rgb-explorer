@@ -42,6 +42,8 @@ module unidade_controle (
 	output reg       conta_t_gap,
 	output reg       mostra_seq,
 	output reg       usa_alvo_seq,
+	output reg       zera_erro_latch,
+	output reg       registra_erro_latch,
 	output reg       enable_cod_erro,
 	output reg [7:0] db_estado
 );
@@ -193,9 +195,12 @@ always @* begin
 	zera_t_gap = (Eatual != m4_show_gap) ? 1'b1 : 1'b0;
 	conta_t_gap = (Eatual == m4_show_gap) ? 1'b1 : 1'b0;
 	mostra_seq = (Eatual == m4_show_step) ? 1'b1 : 1'b0;
-	usa_alvo_seq = (Eatual == m4_wait_input || Eatual == compara_cor || Eatual == m4_next_input) ? 1'b1 : 1'b0;
+	usa_alvo_seq = (Eatual == m4_wait_input || Eatual == compara_cor || Eatual == m4_next_input ||
+	               Eatual == m4_round_ok || Eatual == m4_round_fail || Eatual == m4_vitoria_final) ? 1'b1 : 1'b0;
+	zera_erro_latch = (Eatual == inicial || Eatual == rst_pontos || Eatual == m4_game_init) ? 1'b1 : 1'b0;
+	registra_erro_latch = (Eatual == compara_cor) ? 1'b1 : 1'b0;
 	enable_cod_erro = (Eatual == fim_exato) || (Eatual == fim_perto) || (Eatual == fim_longe) ||
-	                 (Eatual == m4_round_fail) || (Eatual == m4_vitoria_final);
+	                 (Eatual == m4_round_ok) || (Eatual == m4_round_fail) || (Eatual == m4_vitoria_final);
 
 	case (Eatual)
 		inicial:      db_estado = 8'h0;

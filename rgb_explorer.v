@@ -39,6 +39,7 @@ module rgb_explorer (
 	wire zera_idx_show, conta_idx_show, zera_idx_input, conta_idx_input;
 	wire zera_t_show, conta_t_show, zera_t_gap, conta_t_gap;
 	wire mostra_seq, usa_alvo_seq;
+	wire zera_erro_latch, registra_erro_latch;
 	wire jogada_feita, pulso_modo, confirmar, pulso_jogar;
 	wire timeout;
 	wire fim_t_show, fim_t_gap, fim_show_seq, fim_input_seq, seq_no_max;
@@ -114,6 +115,8 @@ module rgb_explorer (
 		.conta_t_gap(conta_t_gap),
 		.mostra_seq(mostra_seq),
 		.usa_alvo_seq(usa_alvo_seq),
+		.zera_erro_latch(zera_erro_latch),
+		.registra_erro_latch(registra_erro_latch),
 		.enable_cod_erro(enable_cod_erro),
 		.db_estado(s_estado)
 	);
@@ -152,6 +155,8 @@ module rgb_explorer (
 		.zera_t_gap(zera_t_gap),
 		.conta_t_gap(conta_t_gap),
 		.usa_alvo_seq(usa_alvo_seq),
+		.zera_erro_latch(zera_erro_latch),
+		.registra_erro_latch(registra_erro_latch),
 		.pulso_modo(pulso_modo),
 		.pulso_jogar(pulso_jogar),
 		.jogada_feita(jogada_feita),
