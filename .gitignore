@@ -5,6 +5,7 @@ output_files/
 simulation/
 work/
 transcript
+modelsim.ini
 c5_pin_model_dump.txt
 simul-rgb-explorer.cr.mti
 rgb_explorer.qws
