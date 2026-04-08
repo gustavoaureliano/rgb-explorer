@@ -177,7 +177,7 @@ end
 always @* begin
 	zera_modo = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_rnd = (Eatual == inicial) ? 1'b1 : 1'b0;
-	zera_rgb_jogada = (Eatual == inicial) ? 1'b1 : 1'b0;
+	zera_rgb_jogada = (Eatual == inicial || Eatual == rst_pontos || Eatual == reg_cor_alvo || Eatual == m4_add_step) ? 1'b1 : 1'b0;
 	zera_rgb_alvo = (Eatual == inicial) ? 1'b1 : 1'b0;
 	zera_pontuacao = (Eatual == inicial || Eatual == rst_pontos) ? 1'b1 : 1'b0;
 	zera_nivel = (Eatual == inicial || Eatual == rst_pontos) ? 1'b1 : 1'b0;
