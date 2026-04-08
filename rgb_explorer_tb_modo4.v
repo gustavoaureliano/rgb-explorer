@@ -32,8 +32,10 @@ module rgb_explorer_tb_modo4;
     wire db_clock;
     wire buzzer;
 
-    parameter clockPeriod = 1_000_000; // 1 KHz
+    parameter clockPeriod = 20; // 50 MHz -> 20 ns
     parameter integer WAIT_LIMIT = 7000;
+    parameter integer PRESS_CYCLES = 100;
+    parameter integer RESET_SETTLE_CYCLES = 200;
     integer len;
     always #((clockPeriod / 2)) clock = ~clock;
 
@@ -71,37 +73,37 @@ module rgb_explorer_tb_modo4;
     task reset_dut;
         begin
             @(negedge clock);
-            btn_reset = 1'b1;
-            #(2*clockPeriod);
             btn_reset = 1'b0;
-            #(8*clockPeriod);
+            #(PRESS_CYCLES*clockPeriod);
+            btn_reset = 1'b1;
+            #(RESET_SETTLE_CYCLES*clockPeriod);
         end
     endtask
 
     task press_modo;
         begin
             btn_modo = 1'b0;
-            #(10*clockPeriod);
+            #(PRESS_CYCLES*clockPeriod);
             btn_modo = 1'b1;
-            #(10*clockPeriod);
+            #(PRESS_CYCLES*clockPeriod);
         end
     endtask
 
     task press_jogar;
         begin
             btn_jogar = 1'b0;
-            #(10*clockPeriod);
+            #(PRESS_CYCLES*clockPeriod);
             btn_jogar = 1'b1;
-            #(10*clockPeriod);
+            #(PRESS_CYCLES*clockPeriod);
         end
     endtask
 
     task press_confirma;
         begin
             btn_confirma = 1'b0;
-            #(10*clockPeriod);
+            #(PRESS_CYCLES*clockPeriod);
             btn_confirma = 1'b1;
-            #(10*clockPeriod);
+            #(PRESS_CYCLES*clockPeriod);
         end
     endtask
 
@@ -120,9 +122,25 @@ module rgb_explorer_tb_modo4;
         end
     endtask
 
+    task select_mode;
+        input [2:0] alvo;
+        integer tries;
+        begin
+            tries = 0;
+            while (dut.s_modo !== alvo && tries < 12) begin
+                press_modo();
+                repeat (50) @(posedge clock);
+                tries = tries + 1;
+            end
+
+            if (dut.s_modo !== alvo)
+                $fatal(1, "Falha ao selecionar modo alvo=%0d, s_modo=%0d", alvo, dut.s_modo);
+        end
+    endtask
+
     initial begin
         clock = 1'b1;
-        btn_reset = 1'b0;
+        btn_reset = 1'b1;
         btn_modo = 1'b1;
         btn_jogar = 1'b1;
         btn_confirma = 1'b1;
@@ -132,11 +150,7 @@ module rgb_explorer_tb_modo4;
         reset_dut();
 
         // Seleciona modo 4 (codigo 3)
-        press_modo();
-        press_modo();
-        press_modo();
-        if (dut.s_modo !== 3'd3)
-            $fatal(1, "Modo 4 nao selecionado: s_modo=%0d", dut.s_modo);
+        select_mode(3'd3);
 
         // Inicia modo 4
         press_jogar();

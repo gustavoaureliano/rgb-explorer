@@ -28,6 +28,8 @@ module rgb_explorer (
 	output       db_clock,
 	output       buzzer
 );
+	localparam integer PWM_MAP_PROFILE = 1; // 0=linear, 1=gamma soft, 2=gamma strong
+
 	wire zera_rgb_jogada, registra_jogada;
 	wire zera_rgb_alvo, registra_rgb_alvo;
 	wire zera_pontuacao, registra_pontuacao;
@@ -75,7 +77,7 @@ module rgb_explorer (
 
 	unidade_controle uc (
 		.clock(clock),
-		.btn_reset(btn_reset),
+		.btn_reset(~btn_reset),
 		.pulso_modo(pulso_modo),
 		.pulso_jogar(pulso_jogar),
 		.jogada(jogada_feita),
@@ -197,13 +199,17 @@ module rgb_explorer (
 		.rgb_out(s_rgb_alvo_vis_pwm)
 	);
 
-	rgb_cod cod_rgb_jogada (
+	rgb_cod #(
+		.MAP_PROFILE(PWM_MAP_PROFILE)
+	) cod_rgb_jogada (
 		.clk(clock),
 		.jogada(s_rgb_jogada_pwm),
 		.display(rgb_jogada)
 	);
 
-	rgb_cod cod_rgb_alvo (
+	rgb_cod #(
+		.MAP_PROFILE(PWM_MAP_PROFILE)
+	) cod_rgb_alvo (
 		.clk(clock),
 		.jogada(s_rgb_alvo_vis_pwm),
 		.display(rgb_alvo)

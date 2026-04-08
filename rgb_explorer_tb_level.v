@@ -32,7 +32,7 @@ module tb_rgb_explorer_level;
     wire db_clock;
     wire buzzer;
 
-    parameter clockPeriod = 1_000_000; // 1 KHz -> 1 ms
+    parameter clockPeriod = 20; // 50 MHz -> 20 ns
     always #((clockPeriod / 2)) clock = ~clock;
 
     rgb_explorer dut (
@@ -69,9 +69,9 @@ module tb_rgb_explorer_level;
     task reset_dut;
         begin
             @(negedge clock);
-            btn_reset = 1'b1;
-            #(2*clockPeriod);
             btn_reset = 1'b0;
+            #(2*clockPeriod);
+            btn_reset = 1'b1;
             #(8*clockPeriod);
         end
     endtask
@@ -160,7 +160,7 @@ module tb_rgb_explorer_level;
 
     initial begin
         clock = 1'b1;
-        btn_reset = 1'b0;
+        btn_reset = 1'b1;
         btn_modo = 1'b1;
         btn_jogar = 1'b1;
         btn_confirma = 1'b1;

@@ -59,10 +59,13 @@ module fluxo_dados (
 );
 	localparam RGB_LEDS_MODULUS = 4;
 	localparam RGB_NUM_BITS = $clog2(RGB_LEDS_MODULUS);
-	localparam DEBOUNCE_INTERVAL = 4; // 1 KHz -> 4 ms
-	// localparam DEBOUNCE_INTERVAL = 200000; // 50 MHz -> 4 ms
-	localparam TIMEOUT_CYCLES = 5000; // 1 KHz -> 5 s
-	// localparam TIMEOUT_CYCLES = 250000000; // 50 MHz -> 5 s
+	`ifdef SIM_FAST
+	localparam DEBOUNCE_INTERVAL = 4; // fast simulation profile
+	localparam TIMEOUT_CYCLES = 5000; // fast simulation profile
+	`else
+	localparam DEBOUNCE_INTERVAL = 200000; // 50 MHz -> 4 ms
+	localparam TIMEOUT_CYCLES = 250000000; // 50 MHz -> 5 s
+	`endif
 	localparam MODE_MODULUS = 4;
 	localparam MODE_COUNTER_NUM_BITS = 3;
 	localparam RGB_REG_NUM_BITS = RGB_NUM_BITS*3;
@@ -79,10 +82,13 @@ module fluxo_dados (
 	localparam [1:0] MAX_RGB_DIFICIL = 2'd3;
 	localparam [2:0] MODO_LIVRE = 3'd0;
 
-	localparam SHOW_CYCLES = 2000; // 1 KHz -> 2 s
-	// localparam SHOW_CYCLES = 100000000; // 50 MHz -> 2 s
-	localparam GAP_CYCLES = 500; // 1 KHz -> 500 ms
-	// localparam GAP_CYCLES = 25000000; // 50 MHz -> 500 ms
+	`ifdef SIM_FAST
+	localparam SHOW_CYCLES = 2000; // fast simulation profile
+	localparam GAP_CYCLES = 500; // fast simulation profile
+	`else
+	localparam SHOW_CYCLES = 100000000; // 50 MHz -> 2 s
+	localparam GAP_CYCLES = 25000000; // 50 MHz -> 500 ms
+	`endif
 
 	wire [RGB_NUM_BITS-1:0] q_led_r, q_led_g, q_led_b;
 

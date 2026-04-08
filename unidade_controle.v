@@ -164,8 +164,8 @@ always @* begin
 		end
 		m4_round_ok: Eprox = pulso_jogar ? m4_add_len : m4_round_ok;
 		m4_add_len: Eprox = m4_add_step;
-		m4_round_fail: Eprox = pulso_jogar ? m4_game_init : m4_round_fail;
-		m4_vitoria_final: Eprox = pulso_jogar ? m4_game_init : m4_vitoria_final;
+		m4_round_fail: Eprox = pulso_jogar ? rst_pontos : m4_round_fail;
+		m4_vitoria_final: Eprox = pulso_jogar ? rst_pontos : m4_vitoria_final;
 		fim_partida: Eprox = pulso_jogar ? rst_pontos : fim_partida;
 		fim_exato: Eprox = pulso_jogar ? reg_cor_alvo : fim_exato;
 		fim_perto: Eprox = pulso_jogar ? reg_cor_alvo : fim_perto;

@@ -20,16 +20,16 @@ module tb_rgb_explorer;
     wire [6:0] hex7seg_modo;
     wire buzzer;
 
-    // Clock 50 MHz (20ns período)
-    parameter clockPeriod = 1_000_000; // in ns, f=1KHz
+    // Clock 50 MHz (20 ns period)
+    parameter clockPeriod = 20;
     always #((clockPeriod / 2)) clock = ~clock;
 
 	task reset;
 		begin
 			@(negedge clock);
-			btn_reset = 1;
-			#(clockPeriod);
 			btn_reset = 0;
+			#(clockPeriod);
+			btn_reset = 1;
 			#(10*clockPeriod);
 		end
 	endtask
@@ -89,7 +89,7 @@ module tb_rgb_explorer;
     initial begin
         // Inicialização
 		clock = 1;
-        btn_reset = 0;
+        btn_reset = 1;
         btn_modo = 0;
         btn_jogar = 0;
         btn_confirma = 0;

@@ -32,7 +32,7 @@ module rgb_explorer_tb_modo3;
     wire db_clock;
     wire buzzer;
 
-    parameter clockPeriod = 1_000_000; // 1 KHz -> 1 ms
+    parameter clockPeriod = 20; // 50 MHz -> 20 ns
     always #((clockPeriod / 2)) clock = ~clock;
 
     rgb_explorer dut (
@@ -69,9 +69,9 @@ module rgb_explorer_tb_modo3;
     task reset_dut;
         begin
             @(negedge clock);
-            btn_reset = 1'b1;
-            #(2*clockPeriod);
             btn_reset = 1'b0;
+            #(2*clockPeriod);
+            btn_reset = 1'b1;
             #(8*clockPeriod);
         end
     endtask
@@ -116,7 +116,7 @@ module rgb_explorer_tb_modo3;
 
     initial begin
         clock = 1'b1;
-        btn_reset = 1'b0;
+        btn_reset = 1'b1;
         btn_modo = 1'b1;
         btn_jogar = 1'b1;
         btn_confirma = 1'b1;
@@ -128,6 +128,7 @@ module rgb_explorer_tb_modo3;
         // Seleciona modo 3 (codigo 2)
         press_modo();
         press_modo();
+        repeat (500) @(posedge clock);
         if (dut.s_modo !== 3'd2)
             $fatal(1, "Modo 3 nao selecionado: s_modo=%0d", dut.s_modo);
 
@@ -145,7 +146,7 @@ module rgb_explorer_tb_modo3;
         if (dut.s_rgb_alvo_vis !== dut.s_rgb_alvo)
             $fatal(1, "s_rgb_alvo_vis deve refletir s_rgb_alvo durante timeout");
 
-        // Aguarda timeout de 5s (5000 ciclos a 1KHz)
+        // Aguarda timeout no perfil SIM_FAST (5000 ciclos)
         repeat (5010) @(posedge clock);
         #(2*clockPeriod);
 
