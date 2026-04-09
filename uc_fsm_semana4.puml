@@ -52,7 +52,6 @@ state d_timeout <<choice>>
 state d_compara <<choice>>
 state d_end_m23 <<choice>>
 state d_erro <<choice>>
-state proxima_rodada <<choice>>
 state d_m4_input <<choice>>
 
 [*] --> inicial : reset
@@ -96,10 +95,9 @@ d_erro --> fim_exato : erro == 0
 d_erro --> fim_perto : erro < 3
 d_erro --> fim_longe : erro >= 3
 
-fim_exato --> proxima_rodada : pulso_jogar
-fim_perto --> proxima_rodada : pulso_jogar
-fim_longe --> proxima_rodada : pulso_jogar
-proxima_rodada --> reg_cor_alvo
+fim_exato --> reg_cor_alvo : timeout_resultado = 1
+fim_perto --> reg_cor_alvo : timeout_resultado = 1
+fim_longe --> reg_cor_alvo : timeout_resultado = 1
 fim_partida --> rst_pontos : pulso_jogar
 
 m4_game_init -down-> m4_add_step
@@ -117,10 +115,10 @@ d_m4_input --> m4_vitoria_final : fim_input_seq && seq_no_max
 d_m4_input --> m4_round_ok : fim_input_seq && !seq_no_max
 d_m4_input --> m4_wait_input : !fim_input_seq && erro < 3
 
-m4_round_ok -down-> m4_add_len : pulso_jogar
+m4_round_ok -down-> m4_add_len : timeout_resultado = 1
 m4_add_len -up-> m4_add_step
-m4_round_fail -up-> m4_game_init : pulso_jogar
-m4_vitoria_final -up-> m4_game_init : pulso_jogar
+m4_round_fail -up-> rst_pontos : timeout_resultado = 1
+m4_vitoria_final -up-> rst_pontos : timeout_resultado = 1
 
 reg_cor_alvo -[hidden]right-> m4_game_init
 compara_cor -[hidden]down-> fim_perto
