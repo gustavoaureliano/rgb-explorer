@@ -173,8 +173,6 @@ module rgb_explorer_tb_modo4;
         force dut.fim_t_gap = 1'b1;
         force dut.erro = 4'd0;
 
-        press_jogar();
-
         for (len = 1; len <= 3; len = len + 1) begin
             wait_state(8'h12); // m4_wait_input
 
@@ -188,7 +186,6 @@ module rgb_explorer_tb_modo4;
 
             if (len < 3) begin
                 wait_state(8'h16); // m4_round_ok
-                press_jogar();
             end else begin
                 wait_state(8'h19); // m4_vitoria_final
             end
@@ -198,8 +195,7 @@ module rgb_explorer_tb_modo4;
         release dut.fim_t_show;
         release dut.fim_t_gap;
 
-        // Reinicia após vitória final
-        press_jogar();
+        // Reinicia automaticamente após vitória final
         wait_state(8'hF); // m4_show_step
 
         $display("tb_modo4: OK");

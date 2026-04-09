@@ -37,6 +37,7 @@ module rgb_explorer (
 	wire zera_nivel, conta_nivel;
 	wire zera_modo, conta_modo;
 	wire zera_timeout, conta_timeout;
+	wire zera_timeout_resultado, conta_timeout_resultado;
 	wire m4_ativo, registra_seq, zera_seq_len, conta_seq_len;
 	wire zera_idx_show, conta_idx_show, zera_idx_input, conta_idx_input;
 	wire zera_t_show, conta_t_show, zera_t_gap, conta_t_gap;
@@ -44,6 +45,7 @@ module rgb_explorer (
 	wire zera_erro_latch, registra_erro_latch;
 	wire jogada_feita, pulso_modo, confirmar, pulso_jogar;
 	wire timeout;
+	wire timeout_resultado;
 	wire ciclo_niveis_completo;
 	wire atingiu_pontuacao_max;
 	wire fim_t_show, fim_t_gap, fim_show_seq, fim_input_seq, seq_no_max;
@@ -83,6 +85,7 @@ module rgb_explorer (
 		.jogada(jogada_feita),
 		.confirmar(confirmar),
 		.timeout(timeout),
+		.timeout_resultado(timeout_resultado),
 		.s_modo(s_modo),
 		.erro(erro),
 		.fim_t_show(fim_t_show),
@@ -106,6 +109,8 @@ module rgb_explorer (
 		.conta_modo(conta_modo),
 		.zera_timeout(zera_timeout),
 		.conta_timeout(conta_timeout),
+		.zera_timeout_resultado(zera_timeout_resultado),
+		.conta_timeout_resultado(conta_timeout_resultado),
 		.mostra_rgb_alvo(mostra_rgb_alvo),
 		.m4_ativo(m4_ativo),
 		.registra_seq(registra_seq),
@@ -147,6 +152,8 @@ module rgb_explorer (
 		.conta_modo(conta_modo),
 		.zera_timeout(zera_timeout),
 		.conta_timeout(conta_timeout),
+		.zera_timeout_resultado(zera_timeout_resultado),
+		.conta_timeout_resultado(conta_timeout_resultado),
 		.enable_cod_erro(enable_cod_erro),
 		.m4_ativo(m4_ativo),
 		.registra_seq(registra_seq),
@@ -184,6 +191,7 @@ module rgb_explorer (
 		.ciclo_niveis_completo(ciclo_niveis_completo),
 		.atingiu_pontuacao_max(atingiu_pontuacao_max),
 		.timeout(timeout),
+		.timeout_resultado(timeout_resultado),
 		.erro(erro)
 	);
 

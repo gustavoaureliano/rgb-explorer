@@ -33,7 +33,7 @@ module rgb_explorer_tb_fim_partida;
     wire buzzer;
 
     parameter clockPeriod = 20; // 50 MHz -> 20 ns
-    parameter integer WAIT_LIMIT = 300;
+    parameter integer WAIT_LIMIT = 7000;
     parameter integer PRESS_CYCLES = 100;
     parameter integer RESET_SETTLE_CYCLES = 200;
 
@@ -179,7 +179,7 @@ module rgb_explorer_tb_fim_partida;
         for (i = 0; i < 7; i = i + 1) begin
             press_confirma();
             wait_mode23_result();
-            press_jogar();
+            wait_state(8'h3); // espera_btn (proxima rodada automatica)
         end
 
         if (dut.s_pontuacao !== 4'd14)
@@ -217,7 +217,7 @@ module rgb_explorer_tb_fim_partida;
         for (i = 0; i < 8; i = i + 1) begin
             press_confirma();
             wait_mode23_result();
-            press_jogar();
+            wait_state(8'h3); // espera_btn (proxima rodada automatica)
         end
 
         press_confirma();

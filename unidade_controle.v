@@ -6,6 +6,7 @@ module unidade_controle (
 	input            jogada ,
 	input            confirmar,
 	input            timeout,
+	input            timeout_resultado,
 	input      [2:0] s_modo,
 	input      [3:0] erro,
 	input            fim_t_show,
@@ -29,6 +30,8 @@ module unidade_controle (
 	output reg       conta_modo,
 	output reg       zera_timeout,
 	output reg       conta_timeout,
+	output reg       zera_timeout_resultado,
+	output reg       conta_timeout_resultado,
 	output reg       mostra_rgb_alvo,
 	output reg       m4_ativo,
 	output reg       registra_seq,
@@ -162,14 +165,14 @@ always @* begin
 			else
 				Eprox = m4_wait_input;
 		end
-		m4_round_ok: Eprox = pulso_jogar ? m4_add_len : m4_round_ok;
+		m4_round_ok: Eprox = timeout_resultado ? m4_add_len : m4_round_ok;
 		m4_add_len: Eprox = m4_add_step;
-		m4_round_fail: Eprox = pulso_jogar ? rst_pontos : m4_round_fail;
-		m4_vitoria_final: Eprox = pulso_jogar ? rst_pontos : m4_vitoria_final;
+		m4_round_fail: Eprox = timeout_resultado ? rst_pontos : m4_round_fail;
+		m4_vitoria_final: Eprox = timeout_resultado ? rst_pontos : m4_vitoria_final;
 		fim_partida: Eprox = pulso_jogar ? rst_pontos : fim_partida;
-		fim_exato: Eprox = pulso_jogar ? reg_cor_alvo : fim_exato;
-		fim_perto: Eprox = pulso_jogar ? reg_cor_alvo : fim_perto;
-		fim_longe: Eprox = pulso_jogar ? reg_cor_alvo : fim_longe;
+		fim_exato: Eprox = timeout_resultado ? reg_cor_alvo : fim_exato;
+		fim_perto: Eprox = timeout_resultado ? reg_cor_alvo : fim_perto;
+		fim_longe: Eprox = timeout_resultado ? reg_cor_alvo : fim_longe;
 		default: Eprox = inicial;
 	endcase
 end
@@ -183,6 +186,9 @@ always @* begin
 	zera_nivel = (Eatual == inicial || Eatual == rst_pontos) ? 1'b1 : 1'b0;
 	zera_timeout = (Eatual == inicial || Eatual == rst_pontos || Eatual == reg_cor_alvo) ? 1'b1 : 1'b0;
 	conta_timeout = (Eatual == espera_timeout) ? 1'b1 : 1'b0;
+	conta_timeout_resultado = (Eatual == fim_exato || Eatual == fim_perto || Eatual == fim_longe ||
+	                         Eatual == m4_round_ok || Eatual == m4_round_fail || Eatual == m4_vitoria_final) ? 1'b1 : 1'b0;
+	zera_timeout_resultado = conta_timeout_resultado ? 1'b0 : 1'b1;
 	conta_nivel = (Eatual == compara_cor && s_modo != MODO_DESAFIO) ? 1'b1 : 1'b0;
 	conta_modo = (Eatual == reg_modo) ? 1'b1 : 1'b0;
 	registra_jogada = (Eatual == reg_rgb_btn || Eatual == m4_reg_rgb_btn) ? 1'b1 : 1'b0;

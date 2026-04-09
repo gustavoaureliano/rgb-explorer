@@ -18,6 +18,8 @@ module fluxo_dados (
 	input        conta_modo,
 	input        zera_timeout,
 	input        conta_timeout,
+	input        zera_timeout_resultado,
+	input        conta_timeout_resultado,
 	input        enable_cod_erro,
 	input        m4_ativo,
 	input        registra_seq,
@@ -54,6 +56,7 @@ module fluxo_dados (
 	output       ciclo_niveis_completo,
 	output       atingiu_pontuacao_max,
 	output       timeout,
+	output       timeout_resultado,
 	output [3:0] erro,
 	output [5:0] db_rgb_alvo
 );
@@ -268,6 +271,13 @@ module fluxo_dados (
 		.zera(zera_timeout),
 		.conta(conta_timeout),
 		.timeout(timeout)
+	);
+
+	timeout_counter #(.TIMEOUT_CYCLES(TIMEOUT_CYCLES)) counter_timeout_resultado (
+		.clock(clock),
+		.zera(zera_timeout_resultado),
+		.conta(conta_timeout_resultado),
+		.timeout(timeout_resultado)
 	);
 
 	cod_erro coderro (

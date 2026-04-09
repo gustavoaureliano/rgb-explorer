@@ -170,8 +170,9 @@ module rgb_explorer_tb_modo3;
         press_confirma();
         #(5*clockPeriod);
 
-        if (!(dut.s_estado == 8'h9 || dut.s_estado == 8'hA || dut.s_estado == 8'hB))
-            $fatal(1, "Apos confirmar, estado final esperado (9/A/B), obtido=%h", dut.s_estado);
+        if (!(dut.s_estado == 8'h9 || dut.s_estado == 8'hA || dut.s_estado == 8'hB ||
+              dut.s_estado == 8'h7 || dut.s_estado == 8'hC || dut.s_estado == 8'h3))
+            $fatal(1, "Apos confirmar, estado esperado em fim/auto-proxima rodada (9/A/B/7/C/3), obtido=%h", dut.s_estado);
 
         $display("tb_modo3: OK");
         $stop;
