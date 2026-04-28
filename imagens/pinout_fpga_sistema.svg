@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3500" height="1120" viewBox="0 0 3500 1120">
+<style>
+.title{font:700 34px DejaVu Sans,Arial,sans-serif;fill:#111827}
+.sub{font:500 18px DejaVu Sans,Arial,sans-serif;fill:#334155}
+.hdr{font:700 26px DejaVu Sans,Arial,sans-serif;fill:#1f2937}
+.small{font:600 16px DejaVu Sans Mono,monospace;fill:#111827}
+.pin{font:700 16px DejaVu Sans,Arial,sans-serif;fill:#1d4ed8}
+.sys{font:700 17px DejaVu Sans,Arial,sans-serif;fill:#0f766e}
+.power{font:700 17px DejaVu Sans,Arial,sans-serif;fill:#b91c1c}
+.ground{font:700 17px DejaVu Sans,Arial,sans-serif;fill:#374151}
+.n{font:700 18px DejaVu Sans,Arial,sans-serif;fill:#facc15}
+</style>
+<rect x="0" y="0" width="3500" height="1120" fill="#f3f4f6"/>
+<text x="40" y="55" class="title">Pinout FPGA + sinais do sistema</text>
+<text x="720" y="110" class="hdr">(GPIO 0)</text>
+<text x="740" y="134" class="hdr">JP1</text>
+<rect x="700" y="140" width="120" height="860" rx="10" fill="#111827" stroke="#374151" stroke-width="3"/>
+<circle cx="738" cy="170" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="170" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="176" class="n">1</text>
+<text x="776" y="176" class="n">2</text>
+<circle cx="738" cy="211" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="211" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="217" class="n">3</text>
+<text x="776" y="217" class="n">4</text>
+<circle cx="738" cy="252" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="252" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="258" class="n">5</text>
+<text x="776" y="258" class="n">6</text>
+<circle cx="738" cy="293" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="293" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="299" class="n">7</text>
+<text x="776" y="299" class="n">8</text>
+<circle cx="738" cy="334" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="334" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="340" class="n">9</text>
+<text x="776" y="340" class="n">10</text>
+<circle cx="738" cy="375" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="375" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="381" class="n">11</text>
+<text x="776" y="381" class="n">12</text>
+<circle cx="738" cy="416" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="416" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="422" class="n">13</text>
+<text x="776" y="422" class="n">14</text>
+<circle cx="738" cy="457" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="457" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="463" class="n">15</text>
+<text x="776" y="463" class="n">16</text>
+<circle cx="738" cy="498" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="498" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="504" class="n">17</text>
+<text x="776" y="504" class="n">18</text>
+<circle cx="738" cy="539" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="539" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="545" class="n">19</text>
+<text x="776" y="545" class="n">20</text>
+<circle cx="738" cy="580" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="580" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="586" class="n">21</text>
+<text x="776" y="586" class="n">22</text>
+<circle cx="738" cy="621" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="621" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="627" class="n">23</text>
+<text x="776" y="627" class="n">24</text>
+<circle cx="738" cy="662" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="662" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="668" class="n">25</text>
+<text x="776" y="668" class="n">26</text>
+<circle cx="738" cy="703" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="703" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="709" class="n">27</text>
+<text x="776" y="709" class="n">28</text>
+<circle cx="738" cy="744" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="744" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="750" class="n">29</text>
+<text x="776" y="750" class="n">30</text>
+<circle cx="738" cy="785" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="785" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="791" class="n">31</text>
+<text x="776" y="791" class="n">32</text>
+<circle cx="738" cy="826" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="826" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="832" class="n">33</text>
+<text x="776" y="832" class="n">34</text>
+<circle cx="738" cy="867" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="867" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="873" class="n">35</text>
+<text x="776" y="873" class="n">36</text>
+<circle cx="738" cy="908" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="908" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="914" class="n">37</text>
+<text x="776" y="914" class="n">38</text>
+<circle cx="738" cy="949" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="782" cy="949" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="732" y="955" class="n">39</text>
+<text x="776" y="955" class="n">40</text>
+<text x="2600" y="110" class="hdr">(GPIO 1)</text>
+<text x="2620" y="134" class="hdr">JP2</text>
+<rect x="2580" y="140" width="120" height="860" rx="10" fill="#111827" stroke="#374151" stroke-width="3"/>
+<circle cx="2618" cy="170" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="170" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="176" class="n">1</text>
+<text x="2656" y="176" class="n">2</text>
+<circle cx="2618" cy="211" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="211" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="217" class="n">3</text>
+<text x="2656" y="217" class="n">4</text>
+<circle cx="2618" cy="252" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="252" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="258" class="n">5</text>
+<text x="2656" y="258" class="n">6</text>
+<circle cx="2618" cy="293" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="293" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="299" class="n">7</text>
+<text x="2656" y="299" class="n">8</text>
+<circle cx="2618" cy="334" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="334" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="340" class="n">9</text>
+<text x="2656" y="340" class="n">10</text>
+<circle cx="2618" cy="375" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="375" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="381" class="n">11</text>
+<text x="2656" y="381" class="n">12</text>
+<circle cx="2618" cy="416" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="416" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="422" class="n">13</text>
+<text x="2656" y="422" class="n">14</text>
+<circle cx="2618" cy="457" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="457" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="463" class="n">15</text>
+<text x="2656" y="463" class="n">16</text>
+<circle cx="2618" cy="498" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="498" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="504" class="n">17</text>
+<text x="2656" y="504" class="n">18</text>
+<circle cx="2618" cy="539" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="539" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="545" class="n">19</text>
+<text x="2656" y="545" class="n">20</text>
+<circle cx="2618" cy="580" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="580" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="586" class="n">21</text>
+<text x="2656" y="586" class="n">22</text>
+<circle cx="2618" cy="621" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="621" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="627" class="n">23</text>
+<text x="2656" y="627" class="n">24</text>
+<circle cx="2618" cy="662" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="662" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="668" class="n">25</text>
+<text x="2656" y="668" class="n">26</text>
+<circle cx="2618" cy="703" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="703" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="709" class="n">27</text>
+<text x="2656" y="709" class="n">28</text>
+<circle cx="2618" cy="744" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="744" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="750" class="n">29</text>
+<text x="2656" y="750" class="n">30</text>
+<circle cx="2618" cy="785" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="785" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="791" class="n">31</text>
+<text x="2656" y="791" class="n">32</text>
+<circle cx="2618" cy="826" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="826" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="832" class="n">33</text>
+<text x="2656" y="832" class="n">34</text>
+<circle cx="2618" cy="867" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="867" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="873" class="n">35</text>
+<text x="2656" y="873" class="n">36</text>
+<circle cx="2618" cy="908" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="908" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="914" class="n">37</text>
+<text x="2656" y="914" class="n">38</text>
+<circle cx="2618" cy="949" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<circle cx="2662" cy="949" r="12" fill="#3f3f46" stroke="#d4a72c" stroke-width="2"/>
+<text x="2612" y="955" class="n">39</text>
+<text x="2656" y="955" class="n">40</text>
+<line x1="185" y1="170" x2="700" y2="170" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="175" class="small">GPIO_0_D0</text>
+<text x="190" y="175" class="pin">N16</text>
+<text x="20" y="175" class="sys">btn_modo</text>
+<line x1="820" y1="170" x2="1280" y2="170" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="175" class="small">GPIO_0_D1</text>
+<text x="1240" y="175" class="pin">B16</text>
+<line x1="185" y1="211" x2="700" y2="211" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="216" class="small">GPIO_0_D2</text>
+<text x="190" y="216" class="pin">M16</text>
+<text x="20" y="216" class="sys">btns_plus_rgb[0]</text>
+<line x1="820" y1="211" x2="1280" y2="211" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="216" class="small">GPIO_0_D3</text>
+<text x="1240" y="216" class="pin">C16</text>
+<line x1="185" y1="252" x2="700" y2="252" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="257" class="small">GPIO_0_D4</text>
+<text x="190" y="257" class="pin">D17</text>
+<text x="20" y="257" class="sys">btns_plus_rgb[1]</text>
+<line x1="820" y1="252" x2="1280" y2="252" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="257" class="small">GPIO_0_D5</text>
+<text x="1240" y="257" class="pin">K20</text>
+<text x="1295" y="257" class="sys">btn_jogar</text>
+<line x1="185" y1="293" x2="700" y2="293" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="298" class="small">GPIO_0_D6</text>
+<text x="190" y="298" class="pin">K21</text>
+<text x="20" y="298" class="sys">btns_plus_rgb[2]</text>
+<line x1="820" y1="293" x2="1280" y2="293" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="298" class="small">GPIO_0_D7</text>
+<text x="1240" y="298" class="pin">K22</text>
+<text x="1295" y="298" class="sys">btn_confirma</text>
+<line x1="185" y1="334" x2="700" y2="334" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="339" class="small">GPIO_0_D8</text>
+<text x="190" y="339" class="pin">M20</text>
+<line x1="820" y1="334" x2="1280" y2="334" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="339" class="small">GPIO_0_D9</text>
+<text x="1240" y="339" class="pin">M21</text>
+<text x="1295" y="339" class="sys">btns_minus_rgb[0]</text>
+<line x1="185" y1="375" x2="700" y2="375" stroke="#ef4444" stroke-width="3"/>
+<text x="20" y="380" class="power">VCC5</text>
+<line x1="820" y1="375" x2="1280" y2="375" stroke="#ef4444" stroke-width="3"/>
+<text x="1295" y="380" class="ground">GND</text>
+<line x1="185" y1="416" x2="700" y2="416" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="421" class="small">GPIO_0_D10</text>
+<text x="190" y="421" class="pin">N21</text>
+<line x1="820" y1="416" x2="1280" y2="416" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="421" class="small">GPIO_0_D11</text>
+<text x="1240" y="421" class="pin">R22</text>
+<text x="1295" y="421" class="sys">btns_minus_rgb[1]</text>
+<line x1="185" y1="457" x2="700" y2="457" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="462" class="small">GPIO_0_D12</text>
+<text x="190" y="462" class="pin">R21</text>
+<line x1="820" y1="457" x2="1280" y2="457" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="462" class="small">GPIO_0_D13</text>
+<text x="1240" y="462" class="pin">T22</text>
+<text x="1295" y="462" class="sys">btns_minus_rgb[2]</text>
+<line x1="185" y1="498" x2="700" y2="498" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="503" class="small">GPIO_0_D14</text>
+<text x="190" y="503" class="pin">N20</text>
+<line x1="820" y1="498" x2="1280" y2="498" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="503" class="small">GPIO_0_D15</text>
+<text x="1240" y="503" class="pin">N19</text>
+<text x="1295" y="503" class="sys">intensidade_r[0]</text>
+<line x1="185" y1="539" x2="700" y2="539" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="544" class="small">GPIO_0_D16</text>
+<text x="190" y="544" class="pin">M22</text>
+<line x1="820" y1="539" x2="1280" y2="539" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="544" class="small">GPIO_0_D17</text>
+<text x="1240" y="544" class="pin">P19</text>
+<text x="1295" y="544" class="sys">intensidade_r[1]</text>
+<line x1="185" y1="580" x2="700" y2="580" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="585" class="small">GPIO_0_D18</text>
+<text x="190" y="585" class="pin">L22</text>
+<line x1="820" y1="580" x2="1280" y2="580" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="585" class="small">GPIO_0_D19</text>
+<text x="1240" y="585" class="pin">P17</text>
+<text x="1295" y="585" class="sys">intensidade_r[2]</text>
+<line x1="185" y1="621" x2="700" y2="621" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="626" class="small">GPIO_0_D20</text>
+<text x="190" y="626" class="pin">P16</text>
+<line x1="820" y1="621" x2="1280" y2="621" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="626" class="small">GPIO_0_D21</text>
+<text x="1240" y="626" class="pin">M18</text>
+<text x="1295" y="626" class="sys">intensidade_r[3]</text>
+<line x1="185" y1="662" x2="700" y2="662" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="667" class="small">GPIO_0_D22</text>
+<text x="190" y="667" class="pin">L18</text>
+<line x1="820" y1="662" x2="1280" y2="662" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="667" class="small">GPIO_0_D23</text>
+<text x="1240" y="667" class="pin">L17</text>
+<text x="1295" y="667" class="sys">intensidade_g[0]</text>
+<line x1="185" y1="703" x2="700" y2="703" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="708" class="small">GPIO_0_D24</text>
+<text x="190" y="708" class="pin">L19</text>
+<line x1="820" y1="703" x2="1280" y2="703" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="708" class="small">GPIO_0_D25</text>
+<text x="1240" y="708" class="pin">K17</text>
+<text x="1295" y="708" class="sys">intensidade_g[1]</text>
+<line x1="185" y1="744" x2="700" y2="744" stroke="#ef4444" stroke-width="3"/>
+<text x="20" y="749" class="power">VCC3P3</text>
+<line x1="820" y1="744" x2="1280" y2="744" stroke="#ef4444" stroke-width="3"/>
+<text x="1295" y="749" class="ground">GND</text>
+<line x1="185" y1="785" x2="700" y2="785" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="790" class="small">GPIO_0_D26</text>
+<text x="190" y="790" class="pin">K19</text>
+<line x1="820" y1="785" x2="1280" y2="785" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="790" class="small">GPIO_0_D27</text>
+<text x="1240" y="790" class="pin">P18</text>
+<text x="1295" y="790" class="sys">intensidade_g[2]</text>
+<line x1="185" y1="826" x2="700" y2="826" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="831" class="small">GPIO_0_D28</text>
+<text x="190" y="831" class="pin">R15</text>
+<line x1="820" y1="826" x2="1280" y2="826" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="831" class="small">GPIO_0_D29</text>
+<text x="1240" y="831" class="pin">R17</text>
+<text x="1295" y="831" class="sys">intensidade_g[3]</text>
+<line x1="185" y1="867" x2="700" y2="867" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="872" class="small">GPIO_0_D30</text>
+<text x="190" y="872" class="pin">R16</text>
+<line x1="820" y1="867" x2="1280" y2="867" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="872" class="small">GPIO_0_D31</text>
+<text x="1240" y="872" class="pin">T20</text>
+<text x="1295" y="872" class="sys">intensidade_b[0]</text>
+<line x1="185" y1="908" x2="700" y2="908" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="913" class="small">GPIO_0_D32</text>
+<text x="190" y="913" class="pin">T19</text>
+<line x1="820" y1="908" x2="1280" y2="908" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="913" class="small">GPIO_0_D33</text>
+<text x="1240" y="913" class="pin">T18</text>
+<text x="1295" y="913" class="sys">intensidade_b[1]</text>
+<line x1="185" y1="949" x2="700" y2="949" stroke="#ef4444" stroke-width="3"/>
+<text x="285" y="954" class="small">GPIO_0_D34</text>
+<text x="190" y="954" class="pin">T17</text>
+<text x="20" y="954" class="sys">intensidade_b[3]</text>
+<line x1="820" y1="949" x2="1280" y2="949" stroke="#ef4444" stroke-width="3"/>
+<text x="1100" y="954" class="small">GPIO_0_D35</text>
+<text x="1240" y="954" class="pin">T15</text>
+<text x="1295" y="954" class="sys">intensidade_b[2]</text>
+<line x1="1880" y1="170" x2="2580" y2="170" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="175" class="small">GPIO_1_D0</text>
+<text x="1890" y="175" class="pin">H16</text>
+<text x="1650" y="175" class="sys">hex7seg_pontuacao[0]</text>
+<line x1="2700" y1="170" x2="3220" y2="170" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="175" class="small">GPIO_1_D1</text>
+<text x="3180" y="175" class="pin">A12</text>
+<text x="3240" y="175" class="sys">hex7seg_modo[0]</text>
+<line x1="1880" y1="211" x2="2580" y2="211" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="216" class="small">GPIO_1_D2</text>
+<text x="1890" y="216" class="pin">H15</text>
+<text x="1650" y="216" class="sys">hex7seg_pontuacao[1]</text>
+<line x1="2700" y1="211" x2="3220" y2="211" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="216" class="small">GPIO_1_D3</text>
+<text x="3180" y="216" class="pin">B12</text>
+<text x="3240" y="216" class="sys">hex7seg_modo[1]</text>
+<line x1="1880" y1="252" x2="2580" y2="252" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="257" class="small">GPIO_1_D4</text>
+<text x="1890" y="257" class="pin">A13</text>
+<text x="1650" y="257" class="sys">hex7seg_pontuacao[2]</text>
+<line x1="2700" y1="252" x2="3220" y2="252" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="257" class="small">GPIO_1_D5</text>
+<text x="3180" y="257" class="pin">B13</text>
+<text x="3240" y="257" class="sys">hex7seg_modo[2]</text>
+<line x1="1880" y1="293" x2="2580" y2="293" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="298" class="small">GPIO_1_D6</text>
+<text x="1890" y="298" class="pin">C13</text>
+<text x="1650" y="298" class="sys">hex7seg_pontuacao[3]</text>
+<line x1="2700" y1="293" x2="3220" y2="293" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="298" class="small">GPIO_1_D7</text>
+<text x="3180" y="298" class="pin">D13</text>
+<text x="3240" y="298" class="sys">hex7seg_modo[3]</text>
+<line x1="1880" y1="334" x2="2580" y2="334" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="339" class="small">GPIO_1_D8</text>
+<text x="1890" y="339" class="pin">G18</text>
+<text x="1650" y="339" class="sys">hex7seg_pontuacao[4]</text>
+<line x1="2700" y1="334" x2="3220" y2="334" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="339" class="small">GPIO_1_D9</text>
+<text x="3180" y="339" class="pin">G17</text>
+<text x="3240" y="339" class="sys">hex7seg_modo[4]</text>
+<line x1="1880" y1="375" x2="2580" y2="375" stroke="#ef4444" stroke-width="3"/>
+<text x="1650" y="380" class="power">VCC5</text>
+<line x1="2700" y1="375" x2="3220" y2="375" stroke="#ef4444" stroke-width="3"/>
+<text x="3240" y="380" class="ground">GND</text>
+<line x1="1880" y1="416" x2="2580" y2="416" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="421" class="small">GPIO_1_D10</text>
+<text x="1890" y="421" class="pin">H18</text>
+<text x="1650" y="421" class="sys">hex7seg_pontuacao[5]</text>
+<line x1="2700" y1="416" x2="3220" y2="416" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="421" class="small">GPIO_1_D11</text>
+<text x="3180" y="421" class="pin">J18</text>
+<text x="3240" y="421" class="sys">hex7seg_modo[5]</text>
+<line x1="1880" y1="457" x2="2580" y2="457" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="462" class="small">GPIO_1_D12</text>
+<text x="1890" y="462" class="pin">J19</text>
+<text x="1650" y="462" class="sys">hex7seg_pontuacao[6]</text>
+<line x1="2700" y1="457" x2="3220" y2="457" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="462" class="small">GPIO_1_D13</text>
+<text x="3180" y="462" class="pin">G11</text>
+<text x="3240" y="462" class="sys">hex7seg_modo[6]</text>
+<line x1="1880" y1="498" x2="2580" y2="498" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="503" class="small">GPIO_1_D14</text>
+<text x="1890" y="503" class="pin">H10</text>
+<line x1="2700" y1="498" x2="3220" y2="498" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="503" class="small">GPIO_1_D15</text>
+<text x="3180" y="503" class="pin">J11</text>
+<text x="3240" y="503" class="sys">rgb_jogada[0]</text>
+<line x1="1880" y1="539" x2="2580" y2="539" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="544" class="small">GPIO_1_D16</text>
+<text x="1890" y="544" class="pin">H14</text>
+<line x1="2700" y1="539" x2="3220" y2="539" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="544" class="small">GPIO_1_D17</text>
+<text x="3180" y="544" class="pin">A15</text>
+<text x="3240" y="544" class="sys">rgb_jogada[1]</text>
+<line x1="1880" y1="580" x2="2580" y2="580" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="585" class="small">GPIO_1_D18</text>
+<text x="1890" y="585" class="pin">J13</text>
+<line x1="2700" y1="580" x2="3220" y2="580" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="585" class="small">GPIO_1_D19</text>
+<text x="3180" y="585" class="pin">L8</text>
+<text x="3240" y="585" class="sys">rgb_jogada[2]</text>
+<line x1="1880" y1="621" x2="2580" y2="621" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="626" class="small">GPIO_1_D20</text>
+<text x="1890" y="626" class="pin">A14</text>
+<line x1="2700" y1="621" x2="3220" y2="621" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="626" class="small">GPIO_1_D21</text>
+<text x="3180" y="626" class="pin">B15</text>
+<text x="3240" y="626" class="sys">rgb_alvo[0]</text>
+<line x1="1880" y1="662" x2="2580" y2="662" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="667" class="small">GPIO_1_D22</text>
+<text x="1890" y="667" class="pin">C15</text>
+<line x1="2700" y1="662" x2="3220" y2="662" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="667" class="small">GPIO_1_D23</text>
+<text x="3180" y="667" class="pin">E14</text>
+<text x="3240" y="667" class="sys">rgb_alvo[1]</text>
+<line x1="1880" y1="703" x2="2580" y2="703" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="708" class="small">GPIO_1_D24</text>
+<text x="1890" y="708" class="pin">E15</text>
+<line x1="2700" y1="703" x2="3220" y2="703" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="708" class="small">GPIO_1_D25</text>
+<text x="3180" y="708" class="pin">E16</text>
+<text x="3240" y="708" class="sys">rgb_alvo[2]</text>
+<line x1="1880" y1="744" x2="2580" y2="744" stroke="#ef4444" stroke-width="3"/>
+<text x="1650" y="749" class="power">VCC3P3</text>
+<line x1="2700" y1="744" x2="3220" y2="744" stroke="#ef4444" stroke-width="3"/>
+<text x="3240" y="749" class="ground">GND</text>
+<line x1="1880" y1="785" x2="2580" y2="785" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="790" class="small">GPIO_1_D26</text>
+<text x="1890" y="790" class="pin">F14</text>
+<line x1="2700" y1="785" x2="3220" y2="785" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="790" class="small">GPIO_1_D27</text>
+<text x="3180" y="790" class="pin">F15</text>
+<text x="3240" y="790" class="sys">leds_erro[0]</text>
+<line x1="1880" y1="826" x2="2580" y2="826" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="831" class="small">GPIO_1_D28</text>
+<text x="1890" y="831" class="pin">F13</text>
+<line x1="2700" y1="826" x2="3220" y2="826" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="831" class="small">GPIO_1_D29</text>
+<text x="3180" y="831" class="pin">F12</text>
+<text x="3240" y="831" class="sys">leds_erro[1]</text>
+<line x1="1880" y1="867" x2="2580" y2="867" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="872" class="small">GPIO_1_D30</text>
+<text x="1890" y="872" class="pin">G16</text>
+<line x1="2700" y1="867" x2="3220" y2="867" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="872" class="small">GPIO_1_D31</text>
+<text x="3180" y="872" class="pin">G15</text>
+<text x="3240" y="872" class="sys">leds_erro[2]</text>
+<line x1="1880" y1="908" x2="2580" y2="908" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="913" class="small">GPIO_1_D32</text>
+<text x="1890" y="913" class="pin">G13</text>
+<line x1="2700" y1="908" x2="3220" y2="908" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="913" class="small">GPIO_1_D33</text>
+<text x="3180" y="913" class="pin">G12</text>
+<text x="3240" y="913" class="sys">leds_nivel[0]</text>
+<line x1="1880" y1="949" x2="2580" y2="949" stroke="#ef4444" stroke-width="3"/>
+<text x="1970" y="954" class="small">GPIO_1_D34</text>
+<text x="1890" y="954" class="pin">J17</text>
+<text x="1650" y="954" class="sys">leds_nivel[2]</text>
+<line x1="2700" y1="949" x2="3220" y2="949" stroke="#ef4444" stroke-width="3"/>
+<text x="3000" y="954" class="small">GPIO_1_D35</text>
+<text x="3180" y="954" class="pin">K16</text>
+<text x="3240" y="954" class="sys">leds_nivel[1]</text>
+</svg>

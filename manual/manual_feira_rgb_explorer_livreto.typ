@@ -53,41 +53,41 @@
 #rect(
   width: 100%,
   radius: 10pt,
-  inset: 10pt,
+  inset: 8pt,
   fill: rgb("#E3F2FD"),
   stroke: (paint: azul, thickness: 1.2pt),
   [
-    #align(center)[#image("../imagens/rgb-explorer-logo-light.svg", width: 88%)]
-    #v(5pt)
-    #align(center)[#text(size: 16pt, weight: "bold", fill: azul)[Manual do Usuario]]
-    #align(center)[#text(size: 11pt, style: "italic")[Versao mini-livreto]]
-    #v(4pt)
+    #align(center)[#image("../imagens/rgb-explorer-logo-light.svg", height: 38mm)]
+    #v(2pt)
+    #align(center)[#text(size: 16pt, weight: "bold", fill: azul)[Manual do Usuário]]
+    #align(center)[#text(size: 11pt, style: "italic")[Versão mini-livreto]]
+    #v(2pt)
     #align(center)[
-      #chip("Leitura rapida", fill: rgb("#BBDEFB")) #h(4pt)
-      #chip("Publico final", fill: rgb("#C8E6C9")) #h(4pt)
-      #chip("Nao tecnico", fill: rgb("#FFE0B2"))
+      #chip("Leitura rápida", fill: rgb("#BBDEFB")) #h(4pt)
+      #chip("Público final", fill: rgb("#C8E6C9")) #h(4pt)
+      #chip("Não técnico", fill: rgb("#FFE0B2"))
     ]
   ],
 )
 
-#v(8pt)
+#v(5pt)
 
 #secao([Comece em 5 passos], ciano, [
-  1. Escolha o modo com o botao *Modo*.
+  1. Escolha o modo com o botão *Modo*.
   2. Pressione *Jogar* para iniciar.
-  3. Ajuste R, G e B com os botoes + e -.
+  3. Ajuste R, G e B com os botões + e -.
   4. Pressione *Confirmar* para validar.
-  5. Pressione *Jogar* para proxima rodada ou reinicio.
+  5. Pressione *Jogar* para próxima rodada ou reinício.
 ])
 
-#v(7pt)
+#v(5pt)
 
 #secao([Controles e sinais visuais], azul, [
   - *Modo* troca entre 1, 2, 3 e 4.
-  - *Jogar* inicia, avanca ou reinicia.
+  - *Jogar* inicia, avança ou reinicia.
   - *Confirmar* envia sua resposta.
-  - LED RGB alvo e LED RGB jogada mostram referencia e tentativa.
-  - Display de pontuacao mostra de *0 ate F*.
+  - LED RGB alvo e LED RGB jogada mostram referência e tentativa.
+  - Display de pontuação mostra de *0 até F*.
 ])
 
 #pagebreak()
@@ -96,27 +96,27 @@
 
 = Modos de jogo (parte 1)
 
-#secao([Modo 1 - Exploracao livre], azul, [
-  Neste modo voce explora as cores sem pressao.
-  Ajuste livremente os canais R, G e B para aprender as combinacoes.
+#secao([Modo 1 - Exploração livre], azul, [
+  Neste modo você explora as cores sem pressão.
+  Ajuste livremente os canais R, G e B para aprender as combinações.
 
   #v(4pt)
   #chip("Treino ideal", fill: rgb("#E1F5FE")) #h(4pt)
-  #chip("Sem alvo obrigatorio", fill: rgb("#B3E5FC"))
+  #chip("Sem alvo obrigatório", fill: rgb("#B3E5FC"))
 ])
 
 #v(8pt)
 
 #secao([Modo 2 - Reproduzir cor], verde, [
-  O sistema mostra uma cor alvo e voce tenta reproduzir a mesma cor.
+  O sistema mostra uma cor alvo e você tenta reproduzir a mesma cor.
 
-  Fluxo rapido:
+  Fluxo rápido:
   - observar o alvo,
   - ajustar a jogada,
   - confirmar e ver o feedback.
 
   A partida termina quando:
-  - a pontuacao chega a 15, ou
+  - a pontuação chega a 15, ou
   - o fim da partida for indicado pelo sistema.
 ])
 
@@ -124,7 +124,7 @@
 
 #dica([
   Comece pelo Modo 1 para se familiarizar com os controles.
-  Depois tente uma rodada no Modo 2 para praticar alvo e confirmacao.
+  Depois tente uma rodada no Modo 2 para praticar alvo e confirmação.
 ])
 
 #pagebreak()
@@ -133,37 +133,37 @@
 
 = Modos de jogo (parte 2)
 
-#secao([Modo 3 - Memoria de cor], laranja, [
+#secao([Modo 3 - Memória de cor], laranja, [
   A cor alvo aparece por tempo limitado e depois some.
-  Voce precisa reproduzir a cor de memoria.
+  Você precisa reproduzir a cor de memória.
 
-  A partida tambem encerra em:
+  A partida também encerra em:
   - 15 pontos, ou
-  - fechamento do ciclo de niveis.
+  - fechamento do ciclo de níveis.
 ])
 
 #v(8pt)
 
-#secao([Modo 4 - Desafio rapido], roxo, [
-  Reproduza uma sequencia de cores na ordem certa.
+#secao([Modo 4 - Desafio rápido], roxo, [
+  Reproduza uma sequência de cores na ordem certa.
 
   - Se errar forte, a rodada falha.
-  - Se acertar, avanca para a proxima rodada.
-  - Sequencia maxima: *3 passos*.
+  - Se acertar, avança para a próxima rodada.
+  - Sequência máxima: *3 passos*.
 
   #v(4pt)
   #chip("Dinamicidade", fill: rgb("#E1BEE7")) #h(4pt)
-  #chip("Memoria + atencao", fill: rgb("#CE93D8"))
+  #chip("Memória + atenção", fill: rgb("#CE93D8"))
 ])
 
 #v(8pt)
 
-#secao([Pontuacao simples], ciano, [
+#secao([Pontuação simples], ciano, [
   - Erro = 0 -> *+2 pontos*
   - Erro < 3 -> *+1 ponto*
   - Erro >= 3 -> *+0 ponto*
 
-  O placar vai de *0 ate F*.
+  O placar vai de *0 até F*.
   Ao chegar em *F (15)*, o valor fica limitado (sem estouro).
 ])
 
@@ -173,37 +173,31 @@
 
 = FAQ e checklist de uso
 
-#secao([FAQ rapido], azul, [
-  *"Apertei e nao mudou"*
+#secao([FAQ rápido], azul, [
+  *"Apertei e não mudou"*
   -> Pressione firme e solte.
 
-  *"Pontuacao travou em F"*
-  -> Comportamento esperado: F e o limite maximo (15).
+  *"Pontuação travou em F"*
+  -> Comportamento esperado: F é o limite máximo (15).
 
-  *"Nao estou vendo alvo"*
-  -> No Modo 3 o alvo some apos o tempo de exibicao.
+  *"Não estou vendo alvo"*
+  -> No Modo 3 o alvo some após o tempo de exibição.
 ])
 
 #v(8pt)
 
-#secao([Checklist rapido], verde, [
+#secao([Checklist rápido], verde, [
   1. Escolha o modo com *Modo*.
   2. Inicie com *Jogar*.
-  3. Ajuste as cores com os botoes + e -.
+  3. Ajuste as cores com os botões + e -.
   4. Confirme a jogada em *Confirmar*.
   5. Continue ou reinicie com *Jogar*.
 ])
 
 #v(8pt)
 
-#dica([
-  Deixe este livreto junto ao sistema e use a versao pocket para consulta rapida.
-])
-
-#v(8pt)
-
 #align(center)[
   #text(size: 8.5pt, fill: rgb("#546E7A"))[
-    PCS3635 - RGB Explorer | Material para usuarios finais
+    PCS3635 - RGB Explorer | Material para usuários finais
   ]
 ]

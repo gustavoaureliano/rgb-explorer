@@ -49,7 +49,7 @@
 )
 
 = RGB Explorer
-#text(size: 11pt, style: "italic", fill: preto)[Manual do usuario]
+#text(size: 11pt, style: "italic", fill: preto)[Manual do usuário]
 
 #v(4pt)
 
@@ -70,12 +70,12 @@
     [
       #text(size: 10pt, weight: "bold", fill: azul)[Bem-vindo!]
       #v(3pt)
-      O _RGB Explorer_ e um jogo interativo para aprender cores, testar memoria visual
-      e se divertir. Este guia foi feito para leitura rapida e uso no dia a dia.
+      O _RGB Explorer_ é um jogo interativo para aprender cores, testar memória visual
+      e se divertir. Este guia foi feito para leitura rápida e uso no dia a dia.
 
       #v(6pt)
-      #tag("Publico: usuarios finais", fill: rgb("#BBDEFB")) #h(4pt)
-      #tag("Nao tecnico", fill: rgb("#C8E6C9")) #h(4pt)
+      #tag("Público: usuários finais", fill: rgb("#BBDEFB")) #h(4pt)
+      #tag("Não técnico", fill: rgb("#C8E6C9")) #h(4pt)
       #tag("Leitura: 2 min", fill: rgb("#FFE0B2"))
     ],
   )
@@ -86,41 +86,41 @@
 #grid(columns: (1fr, 1fr), gutter: 8pt)[
   #card([1) Controles], azul, [
     - *Modo:* troca entre os modos 1 a 4.
-    - *Jogar:* inicia, avanca rodada ou reinicia.
+    - *Jogar:* inicia, avança rodada ou reinicia.
     - *Confirmar:* valida sua tentativa.
     - *+R/-R, +G/-G, +B/-B:* ajustam a cor da jogada.
-    - *Reset:* reinicio geral do sistema.
+    - *Reset:* reinício geral do sistema.
   ])
 ][
-  #card([2) O que voce ve], verde, [
-    - LED RGB alvo (quando o modo usa referencia).
+  #card([2) O que você vê], verde, [
+    - LED RGB alvo (quando o modo usa referência).
     - LED RGB jogada (sua cor atual).
     - Display de modo (1, 2, 3 ou 4).
-    - Display de pontuacao (0 ate F).
-    - LEDs de erro e LEDs de nivel.
+    - Display de pontuação (0 até F).
+    - LEDs de erro e LEDs de nível.
     - Barras de intensidade R/G/B.
   ])
 ]
 
 #v(6pt)
-#dica([Comece no Modo 1 para se acostumar com os botoes. Depois va para os modos 2, 3 e 4.])
+#dica([Comece no Modo 1 para se acostumar com os botões. Depois vá para os modos 2, 3 e 4.])
 
 #pagebreak()
 
 = Como jogar
 
 #grid(columns: (1fr, 1fr), gutter: 8pt)[
-  #card([Modo 1 - Exploracao livre], azul, [
+  #card([Modo 1 - Exploração livre], azul, [
     Ajuste as cores livremente.
-    Nao ha alvo obrigatorio nem objetivo de acerto.
+    Não há alvo obrigatório nem objetivo de acerto.
 
     #v(4pt)
-    #tag("Treino rapido", fill: rgb("#E1F5FE"))
+    #tag("Treino rápido", fill: rgb("#E1F5FE"))
   ])
 ][
   #card([Modo 2 - Reproduzir cor], verde, [
     O sistema mostra uma cor alvo.
-    Voce monta sua cor e confirma.
+    Você monta sua cor e confirma.
 
     Encerramento da partida:
     - ao atingir 15 pontos, ou
@@ -131,19 +131,19 @@
 #v(6pt)
 
 #grid(columns: (1fr, 1fr), gutter: 8pt)[
-  #card([Modo 3 - Memoria de cor], laranja, [
+  #card([Modo 3 - Memória de cor], laranja, [
     A cor alvo aparece por tempo limitado e some.
-    Voce reproduz de memoria e confirma.
+    Você reproduz de memória e confirma.
 
     Encerramento igual ao Modo 2.
   ])
 ][
-  #card([Modo 4 - Desafio rapido], roxo, [
-    Reproduza a sequencia de cores na ordem correta.
+  #card([Modo 4 - Desafio rápido], roxo, [
+    Reproduza a sequência de cores na ordem correta.
     Se errar forte, a rodada falha.
-    Se acertar, a sequencia cresce.
+    Se acertar, a sequência cresce.
 
-    Sequencia maxima: *3 passos*.
+    Sequência máxima: *3 passos*.
   ])
 ]
 
@@ -156,7 +156,7 @@
   fill: rgb("#F3E5F5"),
   stroke: (paint: roxo, thickness: 0.9pt),
   [
-    #text(weight: "bold", fill: roxo)[Pontuacao (simples)]
+    #text(weight: "bold", fill: roxo)[Pontuação (simples)]
     #v(3pt)
     #grid(columns: (1.2fr, 1fr, 1.2fr), gutter: 6pt)[
       #tag("Erro = 0", fill: rgb("#E8F5E9"))
@@ -170,7 +170,7 @@
     ][
       #align(center)[#text(weight: "bold")[+1 ponto]]
     ][
-      Acerto proximo
+      Acerto próximo
     ]
     #grid(columns: (1.2fr, 1fr, 1.2fr), gutter: 6pt)[
       #tag("Erro >= 3", fill: rgb("#FFEBEE"))
@@ -181,18 +181,18 @@
     ]
 
     #v(4pt)
-    Display de pontuacao: *0 ate F*.
-    O sistema limita em *15 (F)* para nao estourar.
+    Display de pontuação: *0 até F*.
+    O sistema limita em *15 (F)* para não estourar.
   ],
 )
 
 #v(6pt)
 
 #grid(columns: (1fr, 1fr), gutter: 8pt)[
-  #card([FAQ rapido], azul, [
-    - *"Apertei e nao mudou"* -> pressione firme e solte.
-    - *"A pontuacao travou em F"* -> comportamento esperado (maximo 15).
-    - *"Nao vejo o alvo"* -> no Modo 3 ele some apos o tempo de exibicao.
+  #card([FAQ rápido], azul, [
+    - *"Apertei e não mudou"* -> pressione firme e solte.
+    - *"A pontuação travou em F"* -> comportamento esperado (máximo 15).
+    - *"Não vejo o alvo"* -> no Modo 3 ele some após o tempo de exibição.
   ])
 ][
   #card([Cola final], verde, [
@@ -200,7 +200,7 @@
     2. Inicie com *Jogar*.
     3. Ajuste RGB com + e -.
     4. Valide com *Confirmar*.
-    5. Use *Jogar* para proxima rodada/reinicio.
+    5. Use *Jogar* para próxima rodada/reinício.
   ])
 ]
 

@@ -107,7 +107,7 @@ set_location_assignment PIN_J11 -to rgb_jogada[0]
 set_location_assignment PIN_A15 -to rgb_jogada[1]
 set_location_assignment PIN_L8 -to rgb_jogada[2]
 set_location_assignment PIN_N16 -to btn_modo
-set_location_assignment PIN_M6 -to btn_reset
+set_location_assignment PIN_U7 -to btn_reset
 set_location_assignment PIN_K20 -to btn_jogar
 set_location_assignment PIN_L1 -to db_clock
 set_location_assignment PIN_M9 -to clock
